@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import JobCard from "../../components/JobCard";
@@ -9,8 +9,8 @@ export const Container = styled.div`
   padding: 40px 0;
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const job = {
@@ -31,14 +31,27 @@ const job = {
 };
 
 const JobsPage = () => {
+  const [jobs, setJobs] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const apiUrl1 = "https://prasanth-277.github.io/jobs.json";
+  const apiUrl2 = "http://localhost:8080/api/jobs";
+
+  useEffect(() => {
+    setLoader(true);
+    fetch(apiUrl2)
+      .then((response) => response.json())
+      .then((data) => {
+        setJobs(data);
+        setLoader(false);
+      });
+  }, []);
+
   return (
-    <MainContainer loadingStatus={200}>
+    <MainContainer loadingStatus={loader ? 100 : 200}>
       <Container>
-        <JobCard job={job} />
-        <JobCard job={job} />
-        <JobCard job={job}  />
-        <JobCard job={job} />
-        <JobCard job={job} />
+        {jobs.map((job) => (
+          <JobCard key={job.ref} job={job} />
+        ))}
       </Container>
     </MainContainer>
   );

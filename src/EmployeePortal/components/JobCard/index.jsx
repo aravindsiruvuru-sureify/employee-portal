@@ -29,9 +29,11 @@ const useStyles = makeStyles({
     color: "#1B496B",
     marginLeft: "16px",
     textTransform: "none",
+    fontSize:'14px',
   },
   applyButton: {
     backgroundColor: "#009933",
+    fontSize:'14px',
     "&:focus": {
       backgroundColor: "#336600",
     },

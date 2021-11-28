@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import "./css/animate.css";
 import "./css/bootstrap.css";
@@ -293,9 +293,9 @@ const HomePage = () => {
             <JobCard job={job}/>
             <JobCard job={job}/>
             <div class="pricing">
-              <a href="" class="btn btn-send" onClick={handleJobsShowMore}>
+              <Link href="" class="btn btn-send" onClick={handleJobsShowMore}>
                 Show more
-              </a>
+              </Link>
             </div>
           </div>
         </div>
