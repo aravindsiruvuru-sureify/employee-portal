@@ -41,7 +41,7 @@ const JobsPage = () => {
     fetch(apiUrl2)
       .then((response) => response.json())
       .then((data) => {
-        setJobs(data);
+        setJobs(data.content);
         setLoader(false);
       });
   }, []);
