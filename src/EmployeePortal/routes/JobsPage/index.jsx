@@ -34,7 +34,7 @@ const JobsPage = () => {
   const [jobs, setJobs] = useState([]);
   const [loader, setLoader] = useState(false);
   const apiUrl1 = "https://prasanth-277.github.io/jobs.json";
-  const apiUrl2 = "http://localhost:8080/api/jobs";
+  const apiUrl2 = "http://localhost:8080/api/jobs/spdesc/0/10/primarySkill";
 
   useEffect(() => {
     setLoader(true);
