@@ -1,12 +1,11 @@
 import React from "react";
-import "./App.css";
 
-import JobsPage from "./EmployeePortal/routes/JobsPage";
+import EmployeePortal from './EmployeePortal/'
 
 function App() {
   return (
     <div className="App">
-      <JobsPage />
+      <EmployeePortal />
     </div>
   );
 }

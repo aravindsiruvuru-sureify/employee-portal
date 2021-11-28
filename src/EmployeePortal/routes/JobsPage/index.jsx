@@ -36,7 +36,7 @@ const JobsPage = () => {
       <Container>
         <JobCard job={job} />
         <JobCard job={job} />
-        <JobCard job={job} />
+        <JobCard job={job}  />
         <JobCard job={job} />
         <JobCard job={job} />
       </Container>
