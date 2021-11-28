@@ -5,10 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { get } from 'lodash';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { UploadTypes } from '../../EmployeePortal/constants';
-import { uploadFileToFirebase } from '../../firebase/FirebaseUtils';
+// import { uploadFileToFirebase } from '../../firebase/FirebaseUtils';
 import UploadSvg from './styles';
 import colors from '../../EmployeePortal/themes/colors';
-import { setUploadImageStatus } from '../../EmployeePortal/stores/actions';
+// import { setUploadImageStatus } from '../../EmployeePortal/stores/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,28 +54,30 @@ const UploadButton = ({
   prevUrl = null,
 }) => {
   const classes = useStyles();
-  const isUploading = useSelector((state) =>
-    get(state, 'employeePortalStore.isUploadInProgress', false)
-  );
+  // const isUploading = useSelector((state) =>
+  //   get(state, 'employeePortalStore.isUploadInProgress', false)
+  // );
 
-  const dispatch = useDispatch();
+  const isUploading = false;
+
+  // const dispatch = useDispatch();
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      dispatch(setUploadImageStatus(true));
-    }
-    uploadFileToFirebase({
-      file: file,
-      setUrl: (url) => {
-        dispatch(setUploadImageStatus(false));
-        setUrl(url, id);
-      },
-      onFail: () => {
-        dispatch(setUploadImageStatus(false));
-      },
-      dir: dir,
-      prevUrl: prevUrl,
-    });
+    // if (file) {
+    //   // dispatch(setUploadImageStatus(true));
+    // }
+    // uploadFileToFirebase({
+    //   file: file,
+    //   setUrl: (url) => {
+    //     // dispatch(setUploadImageStatus(false));
+    //     setUrl(url, id);
+    //   },
+    //   onFail: () => {
+    //     // dispatch(setUploadImageStatus(false));
+    //   },
+    //   dir: dir,
+    //   prevUrl: prevUrl,
+    // });
   };
   return (
     <label
