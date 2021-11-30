@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import JobCard from "../../components/JobCard";
-
 import MainContainer from "../../components/MainContainer";
+
+import Table from "../../../CommonComponents/Table";
 
 export const Container = styled.div`
   padding: 40px 0;
@@ -31,17 +31,17 @@ const job = {
 };
 
 const JobsPage = () => {
-  const [jobs, setJobs] = useState([]);
+  const [jobsData, setJobsData] = useState([]);
   const [loader, setLoader] = useState(false);
   const apiUrl1 = "https://prasanth-277.github.io/jobs.json";
   const apiUrl2 = "http://localhost:8080/api/jobs/spdesc/0/10/primarySkill";
 
   useEffect(() => {
     setLoader(true);
-    fetch(apiUrl2)
+    fetch(apiUrl1)
       .then((response) => response.json())
       .then((data) => {
-        setJobs(data.content);
+        setJobsData(data);
         setLoader(false);
       });
   }, []);
@@ -49,9 +49,21 @@ const JobsPage = () => {
   return (
     <MainContainer loadingStatus={loader ? 100 : 200}>
       <Container>
-        {jobs.map((job) => (
-          <JobCard key={job.ref} job={job} />
-        ))}
+        <Table
+          data={jobsData.content}
+          columnKeys={[
+            "title",
+            "experience",
+            "experienceLevel",
+            "location",
+            "postedOn",
+            "primarySkill",
+            "apply"
+          ]}
+          rowsPerPage={jobsData.numberOfElements}
+          count={jobsData.totalPages}
+          totalElements={jobsData.totalElements}
+        />
       </Container>
     </MainContainer>
   );
