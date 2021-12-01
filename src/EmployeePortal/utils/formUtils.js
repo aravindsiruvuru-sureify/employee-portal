@@ -5,9 +5,9 @@ import {
   BANK_DETAILS,
   DOCUMENTS_DETAILS,
   PERFORMANCE_REVIEW_FIELDS,
-  REFERRAL_IDS,
+  JOB_APPLICATION_IDS,
   REFERRAL_FEEDBACK_FIELDS,
-} from '../constants';
+} from "../constants";
 
 const {
   firstName,
@@ -29,13 +29,8 @@ const {
   slack,
 } = PERSONAL_DETAILS;
 
-const {
-  bankName,
-  accountHolderName,
-  accountNumber,
-  branchName,
-  ifscCode,
-} = BANK_DETAILS;
+const { bankName, accountHolderName, accountNumber, branchName, ifscCode } =
+  BANK_DETAILS;
 
 const { aadhaarNum, panNumber, driveUrl } = DOCUMENTS_DETAILS;
 
@@ -52,40 +47,32 @@ const {
   team,
 } = PROFESSIONAL_DETAILS;
 
-const {
-  result,
-  factorsHelped,
-  factorsHindered,
-  selfRating,
-} = PERFORMANCE_REVIEW_FIELDS.employee;
+const { result, factorsHelped, factorsHindered, selfRating } =
+  PERFORMANCE_REVIEW_FIELDS.employee;
 
-const {
-  managerName,
-  howToImprove,
-  furtherObjectives,
-  rating,
-} = PERFORMANCE_REVIEW_FIELDS.manager;
-const { fullname, link, experience, contactNumber } = REFERRAL_IDS;
+const { managerName, howToImprove, furtherObjectives, rating } =
+  PERFORMANCE_REVIEW_FIELDS.manager;
+const { fullname, link, experience, contactNumber } = JOB_APPLICATION_IDS;
 
 const { feedback, feedbackBy, feedbackRating } = REFERRAL_FEEDBACK_FIELDS;
 
 export const isSureifyEmail = (value) => {
-  return value.includes('@sureify.com') && value.length > 14;
+  return value.includes("@sureify.com") && value.length > 14;
 };
 
 export const isLinkedinUrl = (value) =>
-  value.includes('linkedin.com') && value.length > 12;
+  value.includes("linkedin.com") && value.length > 12;
 
 export const isTwitterUrl = (value) =>
-  value.includes('twitter.com') && value.length > 12;
+  value.includes("twitter.com") && value.length > 12;
 
 export const isGithubUrl = (value) =>
-  value.includes('github.com') && value.length > 12;
+  value.includes("github.com") && value.length > 12;
 
 export const isSlackUrl = (value) =>
-  value.includes('slack.com') && value.length > 8;
+  value.includes("slack.com") && value.length > 8;
 
-export const isEmail = (value) => value.includes('.com') && value.length > 6;
+export const isEmail = (value) => value.includes(".com") && value.length > 6;
 
 export const checkExperiance = (value) => value > 0 && value <= 50;
 
@@ -124,7 +111,7 @@ export const handleHasError = (id, value) => {
     case branchName:
     case fullname:
     case link:
-    case 'profile_pic_url':
+    case "profile_pic_url":
     case profilePicUrl:
       hasError = !verifyMinLength3(value);
       break;
@@ -137,9 +124,9 @@ export const handleHasError = (id, value) => {
     case aadhaarNum:
     case driveUrl:
     case accountNumber:
-    case 'ff1':
-    case 'ff2':
-    case 'ff3':
+    case "ff1":
+    case "ff2":
+    case "ff3":
       hasError = !verifyMinLength10(value);
       break;
     case hobbies:
@@ -176,7 +163,7 @@ export const handleHasError = (id, value) => {
       break;
     case dob:
     case joiningDate:
-      hasError = value.toString() === 'Invalid Date';
+      hasError = value.toString() === "Invalid Date";
       break;
     case phone:
     case contactNumber:

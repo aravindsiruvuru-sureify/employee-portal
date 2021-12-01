@@ -1,12 +1,16 @@
 import React from "react";
+import { Provider } from "react-redux";
 
-import EmployeePortal from './EmployeePortal/'
+import store from "./EmployeePortal/store";
+import EmployeePortal from "./EmployeePortal/";
 
 function App() {
   return (
-    <div className="App">
-      <EmployeePortal />
-    </div>
+    <>
+      <Provider store={store}>
+        <EmployeePortal />
+      </Provider>
+    </>
   );
 }
 

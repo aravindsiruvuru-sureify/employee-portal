@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link } from "react-router-dom";
 
 import "./css/animate.css";
 import "./css/bootstrap.css";
@@ -11,9 +11,7 @@ import "./css/style.css";
 import headerBG from "./img/backgrounds/headerbg1.jpg";
 import headerBG2 from "./img/backgrounds/headerbg2.jpg";
 
-import JobCard from "../../components/JobCard"
-
-
+import JobCard from "../../components/JobCard";
 
 const HomePage = () => {
   const history = useHistory();
@@ -34,10 +32,10 @@ const HomePage = () => {
     location: "Bangalore",
     publish: true,
   };
-  const handleJobsShowMore=()=>{
-      history.push('/jobs');
-  }
-  
+  const handleJobsShowMore = () => {
+    history.push("/jobs");
+  };
+
   return (
     <div>
       <Helmet></Helmet>
@@ -289,9 +287,8 @@ const HomePage = () => {
             </div>
           </div>
           <div class="center-container">
-            <JobCard job={job}/>
-            <JobCard job={job}/>
-            <JobCard job={job}/>
+            <JobCard job={job} />
+            <JobCard job={job} />
             <div class="pricing">
               <Link href="" class="btn btn-send" onClick={handleJobsShowMore}>
                 Show more

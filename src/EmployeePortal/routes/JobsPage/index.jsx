@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { get } from "lodash";
 
 import MainContainer from "../../components/MainContainer";
 
 import Table from "../../../CommonComponents/Table";
+
+import { getJobsList } from "../../store/employeeStore/actions";
 
 export const Container = styled.div`
   padding: 40px 0;
@@ -13,39 +17,19 @@ export const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-const job = {
-  title: "Java – 7 – 12 Yrs – Bangalore",
-  description:
-    "Expertise in Performance Testing tools like Jmeter|Expertise in Programming/Scripting in C,C++,Java etc|Knowledge of Agile and Dev-Ops methodologies|Nice to have knowledge/experience on container-based applications|Design and Execute Load Tests as per plan and provide detailed feedback after Analysis and look into Infrastructure and Application Metrics to identify potential bottlenecks|Strong background in developing Performance Testing frameworks|utilities, assets & accelerators on various platforms|Knowledge of Performance monitoring tools like (AppDynamisc / Grafana etc)|Knowledge of Performance troubleshooting (heap dump & thread dump analysis) is preferred|Ability to Work with teams to monitor and suggest solutions, test environment-related, monitoring related & load balancing related|Excellent communication skills and ability to work with multiple teams and Clients/ stakeholders in a dynamic environment|",
-  primarySkill: "JAVA",
-  secondarySkill: "ReactJS",
-  salary: "10k - 20k pm",
-  ref: 10126,
-  postedOn: "November 10, 2021",
-  experienceLevel: "Experienced",
-  experience: "2-4 years",
-  contractType: "Permanent",
-  contractDuration: "6 months",
-  location: "Bangalore",
-  publish: true,
-};
-
 const JobsPage = () => {
-  const [jobsData, setJobsData] = useState([]);
+  const dispatch = useDispatch();
+  // const [jobsData, setJobsData] = useState([]);
   const [loader, setLoader] = useState(false);
-  const apiUrl1 = "https://prasanth-277.github.io/jobs.json";
-  const apiUrl2 = "http://localhost:8080/api/jobs/spdesc/0/10/primarySkill";
-
+  const store = useSelector((state) => get(state, ["employeeStore"], {}));
+  const jobsData = get(store, "jobsData", {});
   useEffect(() => {
     setLoader(true);
-    fetch(apiUrl1)
-      .then((response) => response.json())
-      .then((data) => {
-        setJobsData(data);
-        setLoader(false);
-      });
+    dispatch(getJobsList());
+    setLoader(false);
   }, []);
 
+  console.log("++++", jobsData);
   return (
     <MainContainer loadingStatus={loader ? 100 : 200}>
       <Container>
@@ -58,7 +42,6 @@ const JobsPage = () => {
             "location",
             "postedOn",
             "primarySkill",
-            "apply"
           ]}
           rowsPerPage={jobsData.numberOfElements}
           count={jobsData.totalPages}

@@ -7,10 +7,10 @@ import { PropTypes } from "prop-types";
 
 import { handleButtonIsDisabled, handleHasError } from "../../utils/formUtils";
 import {
-  referralConstants,
+  jobApplicationConstants,
   ROLE,
   ROLES,
-  REFERRAL_IDS,
+  JOB_APPLICATION_IDS,
   UploadTypes,
 } from "../../constants";
 import { Fields, YourReferralText } from "./styles";
@@ -26,10 +26,14 @@ const useStyles = makeStyles({
     margin: "15px 0",
     width: "100%",
     "& .MuiFilledInput-root ": {
+      fontSize: "14px",
       background: `#F0F0F0`,
     },
     "& .MuiList-root ": {
       "z-index": 1000001,
+    },
+    "& .MuiInputLabel-filled": {
+      fontSize: "14px",
     },
   },
   root: {
@@ -41,12 +45,13 @@ const useStyles = makeStyles({
   button: {
     marginTop: "15px",
     width: "90px",
+    fontSize: "14px",
   },
 });
 
-const { fullname, email, experience, contactNumber, link } = REFERRAL_IDS;
+const { firstName, lastName, emailId, phoneNo, link } = JOB_APPLICATION_IDS;
 
-const ReferralForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
+const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
   const classes = useStyles();
   const [error, setError] = useState({});
   const [data, setData] = useState({});
@@ -66,6 +71,8 @@ const ReferralForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
   const handleChange = (e) => {
     const { id, name, value } = e.target;
     const key = id || name;
+    console.log("====", key, value);
+
     handleError(key, value);
     setData({
       ...data,
@@ -95,31 +102,31 @@ const ReferralForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
       <YourReferralText>Fill your job application</YourReferralText>
       <TextInput
-        id={fullname}
-        label={referralConstants.name}
+        id={firstName}
+        label={jobApplicationConstants.firstName}
         onChange={handleChange}
-        error={error[fullname]}
+        error={error[firstName]}
         cssClass={classes.field}
       />
       <TextInput
-        id={experience}
-        label={referralConstants.experience}
+        id={lastName}
+        label={jobApplicationConstants.lastName}
         onChange={handleChange}
-        error={error[experience]}
+        error={error[lastName]}
         cssClass={classes.field}
       />
       <TextInput
-        id={email}
-        label={referralConstants.email}
+        id={emailId}
+        label={jobApplicationConstants.email}
         onChange={handleChange}
-        error={error[email]}
+        error={error[emailId]}
         cssClass={classes.field}
       />
       <TextInput
-        id={contactNumber}
-        label={referralConstants.number}
+        id={phoneNo}
+        label={jobApplicationConstants.number}
         onChange={handleChange}
-        error={error[contactNumber]}
+        error={error[phoneNo]}
         cssClass={classes.field}
       />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -149,9 +156,9 @@ const ReferralForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
   );
 };
 
-ReferralForm.propTypes = {
+JobApplicationForm.propTypes = {
   onClickCrossIcon: PropTypes.func.isRequired,
   onClickSubmitButton: PropTypes.func.isRequired,
   referral: PropTypes.object.isRequired,
 };
-export default ReferralForm;
+export default JobApplicationForm;
