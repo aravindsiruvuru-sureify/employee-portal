@@ -274,7 +274,6 @@ fieldset[disabled] .btn-xl.active {
 
 @media (min-width: 768px) {
   .navbar-default {
-    background-color: transparent;
     padding: 12px 0;
     -webkit-transition: padding .3s;
     -moz-transition: padding .3s;
@@ -327,10 +326,6 @@ fieldset[disabled] .btn-xl.active {
     display: block !important; } }
 
 /* 3.0 ========   HEADER  =========*/
-#header {
-  position: relative;
-  color: #fff;
-  height: 100%; }
 
 .intro-text {
   padding-bottom: 35px;

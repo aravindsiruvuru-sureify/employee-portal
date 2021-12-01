@@ -15,6 +15,8 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  box-shadow: none !important;
+  margin-bottom: unset !important;
 `;
 
 const JobsPage = () => {
@@ -32,7 +34,7 @@ const JobsPage = () => {
   console.log("++++", jobsData);
   return (
     <MainContainer loadingStatus={loader ? 100 : 200}>
-      <Container>
+      <Container id="asdf">
         <Table
           data={jobsData.content}
           columnKeys={[
