@@ -1,0 +1,16 @@
+.MuiTablePagination-selectLabel {
+  font-size: 14px !important;
+}
+
+.MuiTablePagination-displayedRows {
+  font-size: 14px !important;
+}
+
+.MuiTablePagination-actions {
+  font-size: 14px !important;
+}
+
+.MuiSvgIcon-root {
+  height: 25px !important;
+  width: 25px !important;
+}

@@ -226,7 +226,6 @@ const HomePage = () => {
           <div class="center-container">
             <JobCard job={job} />
             <JobCard job={job} />
-            <JobCard job={job} />
             <div class="pricing">
               <Link href="" class="btn btn-send" onClick={handleJobsShowMore}>
                 Show more
@@ -1053,7 +1052,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
       <div class="scroll-up">
         <a href="#header" class="page-scroll">
           <i class="fa fa-angle-up"></i>

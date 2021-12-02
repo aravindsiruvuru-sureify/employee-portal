@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@mui/material/Paper";
 import { Table as MuiTable } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
@@ -11,10 +12,18 @@ import TableRow from "@mui/material/TableRow";
 import JobDetailsApplicationForm from "../../EmployeePortal/components/JobDetailsApplicationForm";
 
 import Modal from "../Modal";
+import "./style.css";
 
-const Table = ({ data=[], columnKeys, rowsPerPage, count }) => {
+const useStyles = makeStyles((theme) => ({
+  selectLabel: {
+    fontSize: "14px",
+  },
+}));
+
+const Table = ({ data = [], columnKeys, rowsPerPage, count }) => {
   const [page, setPage] = useState(0);
   const [selectedJob, setSelectedJob] = useState(null);
+  const classes = useStyles();
   const columns = columnKeys.map((ck) => {
     return {
       id: ck,
@@ -109,6 +118,7 @@ const Table = ({ data=[], columnKeys, rowsPerPage, count }) => {
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          className={classes.selectLabel}
         />
       </Paper>
     </>

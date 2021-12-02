@@ -71,14 +71,13 @@ const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
   const handleChange = (e) => {
     const { id, name, value } = e.target;
     const key = id || name;
-    console.log("====", key, value);
-
     handleError(key, value);
     setData({
       ...data,
       [key]: value,
     });
   };
+
   const setUrl = (url) => {
     setResumeUrl(url);
     handleChange({

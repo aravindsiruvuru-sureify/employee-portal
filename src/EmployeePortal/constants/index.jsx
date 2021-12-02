@@ -72,8 +72,8 @@ export const PROFESSIONAL_DETAILS = {
 // ids for personal details fields
 
 export const PERSONAL_DETAILS = {
-  firstName: "first_name",
-  lastName: "last_name",
+  firstName: "firstName",
+  lastName: "lastName",
   dob: "dob",
   gender: "gender",
   hobbies: "hobbies",
@@ -92,6 +92,7 @@ export const PERSONAL_DETAILS = {
   twitter: "twitter",
   linkedIn: "linkedin",
   url: "url",
+  emailId: "emailId",
 };
 
 export const ROLES = [

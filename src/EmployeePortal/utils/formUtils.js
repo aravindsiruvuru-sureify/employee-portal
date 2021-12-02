@@ -27,6 +27,7 @@ const {
   phone,
   profilePicUrl,
   slack,
+  emailId,
 } = PERSONAL_DETAILS;
 
 const { bankName, accountHolderName, accountNumber, branchName, ifscCode } =
@@ -139,6 +140,9 @@ export const handleHasError = (id, value) => {
       hasError = !isSureifyEmail(value);
       break;
     case personalEmail:
+      hasError = !isEmail(value);
+      break;
+    case emailId:
       hasError = !isEmail(value);
       break;
     case linkedIn:

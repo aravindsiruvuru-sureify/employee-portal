@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { JobDetailsShort } from "../JobCard/shared";
 import JobApplicationForm from "../JobApplicationForm";
 import { PrimaryButton } from "../../../CommonComponents";
+import completed from "../../../assets/svgs/completed.svg";
 
 import {
   Container,
@@ -65,6 +66,7 @@ const JobDetailsJobApplicationForm = (props) => {
   const { jobDetails, onClickCrossIcon } = props;
   const classes = useStyles();
   const [showApplication, setShowApplication] = useState(false);
+  const [successAPI, setSuccessAPI] = useState(false);
 
   const description = jobDetails.description
     .split("|")
@@ -115,10 +117,27 @@ const JobDetailsJobApplicationForm = (props) => {
   };
 
   const getJobApplicationForm = () => {
-    return (
+    return successAPI ? (
+      <div
+        style={{
+          height: "450px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <img src={completed} alt="complete" style={{ height: "200px" }} />
+        <span style={{ marginTop: "14px", fontSize: "16px" }}>
+          You application has been successfully submitted
+        </span>
+      </div>
+    ) : (
       <JobApplicationForm
         onClickCrossIcon={onClickCrossIcon}
-        onClickSubmitButton={() => {}}
+        onClickSubmitButton={() => {
+          setSuccessAPI(true);
+        }}
         referral={jobDetails}
       />
     );
