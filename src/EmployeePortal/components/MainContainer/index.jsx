@@ -5,12 +5,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { ReactComponent as Api } from '../../../assets/svgs/api.svg';
 
+import Header from '../Header'
+
 import {
   API_FAILED,
   API_FETCHING,
   API_SUCCESS,
 } from '../../services/APIConstants';
 import colors from '../../themes/colors';
+import Footer from '../Footer';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -24,7 +27,7 @@ const Container = styled.div`
   background: #e5e5e5;
   height: 100vh;
   padding: ${(props) =>
-    props.type === 'secondary' ? '0px' : '64px 0px 40px 0'};
+    props.type === 'secondary' ? '0px' : '64px 0px 0px 0'};
   overflow: ${(props) => (props.isScrollable ? 'auto' : 'hidden')};
 `;
 
@@ -77,7 +80,9 @@ const MainContainer = (props) => {
       className={className}
       isScrollable={!noScroll}
     >
+      <Header />
       {renderContent()}
+      <Footer />
     </Container>
   );
 };

@@ -12,6 +12,8 @@ import headerBG from "./img/backgrounds/headerbg1.jpg";
 import headerBG2 from "./img/backgrounds/headerbg2.jpg";
 
 import JobCard from "../../components/JobCard";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 
 const HomePage = () => {
   const history = useHistory();
@@ -39,72 +41,7 @@ const HomePage = () => {
   return (
     <div>
       <Helmet></Helmet>
-      <header id="header">
-        <nav class="navbar navbar-default navbar-fixed-top">
-          <div class="container-fluid top-nav">
-            <div class="navbar-header page-scroll">
-              <button
-                type="button"
-                class="navbar-toggle"
-                data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
-              >
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span> <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand logo-top page-scroll" href="#header">
-                <i class="h4 fa fa-vk"></i>
-              </a>
-            </div>
-            <div
-              class="collapse navbar-collapse"
-              id="bs-example-navbar-collapse-1"
-            >
-              <ul class="nav navbar-nav navbar-right">
-                <li class="hidden nav-buttons">
-                  <a href="#page-top"></a>
-                </li>
-                <li>
-                  <a class="page-scroll" href="#services">
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a class="page-scroll" href="#consulting">
-                    Consulting
-                  </a>
-                </li>
-                <li>
-                  <a class="page-scroll" href="#products">
-                    Products
-                  </a>
-                </li>
-                <li>
-                  <a class="page-scroll" href="#employees">
-                    Employees
-                  </a>
-                </li>
-                <li>
-                  <a class="page-scroll" href="#clients">
-                    Clients
-                  </a>
-                </li>
-                <li>
-                  <a class="page-scroll" href="#testimonial">
-                    Testimonial
-                  </a>
-                </li>
-                <li>
-                  <a class="page-scroll" href="#contact">
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header />
       <section id="slider">
         <div id="myCarousel-one" class="carousel slide">
           <ol class="carousel-indicators">
@@ -287,6 +224,7 @@ const HomePage = () => {
             </div>
           </div>
           <div class="center-container">
+            <JobCard job={job} />
             <JobCard job={job} />
             <JobCard job={job} />
             <div class="pricing">
@@ -1115,164 +1053,11 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <footer>
-        <div class="container-fluid wrapper">
-          <div class="col-lg-12 footer-info">
-            <a class="footer-logo" href="#header">
-              <i class="h4 fa fa-vk"></i>
-            </a>
-            <p class="footer-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit.
-            </p>
-          </div>
-          <div class="col-sm-6 col-md-12 social-icons-footer">
-            <ul class="list-inline social-buttons">
-              <li>
-                <a href="#">
-                  <i class="fa fa-twitter"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa fa-facebook"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa fa-behance"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa fa-pinterest"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa fa-google"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm-12 col-md-12 col-lg-12 copyright-bottom">
-            <span class="copyright">Copyright &copy; Vinnotech 2021</span>
-          </div>
-        </div>
-      </footer>
+      <Footer/>
       <div class="scroll-up">
         <a href="#header" class="page-scroll">
           <i class="fa fa-angle-up"></i>
         </a>
-      </div>
-      <div
-        class="portfolio-modal modal fade"
-        id="portfolioModal1"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div class="modal-content">
-          <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-              <div class="rl"></div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-8 col-lg-offset-2">
-                <div class="modal-body">
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">
-                    Lorem ipsum dolor sit amet consectetur.
-                  </p>
-                  <img
-                    class="img-responsive img-centered"
-                    src="./img/portfolio/flattastic-free.jpg"
-                    alt="modal"
-                  />
-                  <p>
-                    Use this area to describe your project. Lorem ipsum dolor
-                    sit amet, consectetur adipisicing elit. Est blanditiis
-                    dolorem culpa incidunt minus dignissimos deserunt repellat
-                    aperiam quasi sunt officia expedita beatae cupiditate,
-                    maiores repudiandae, nostrum, reiciendis facere nemo!
-                  </p>
-                  <p>
-                    <strong>Want this UI kit sample?</strong>You can download it
-                    for free, courtesy of <a href="#">edubd.net</a>, or you can
-                    download it <a href="#">here</a>.
-                  </p>
-                  <ul class="list-inline">
-                    <li>Date: November 04, 2021</li>
-                    <li>Client: Web Designer Depot</li>
-                    <li>Category: Graphic Design</li>
-                  </ul>
-                  <button type="button" class="btn btn-xl" data-dismiss="modal">
-                    <i class="fa fa-times"></i> Close Project
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="portfolio-modal modal fade"
-        id="portfolioModal2"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div class="modal-content">
-          <div class="close-modal" data-dismiss="modal">
-            <div class="lr">
-              <div class="rl"></div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-8 col-lg-offset-2">
-                <div class="modal-body">
-                  <h2>Project Name</h2>
-                  <p class="item-intro text-muted">
-                    Lorem ipsum dolor sit amet consectetur.
-                  </p>
-                  <img
-                    class="img-responsive img-centered"
-                    src="./img/portfolio/flat.jpg"
-                    alt="modal"
-                  />
-                  <p>
-                    Use this area to describe your project. Lorem ipsum dolor
-                    sit amet, consectetur adipisicing elit. Est blanditiis
-                    dolorem culpa incidunt minus dignissimos deserunt repellat
-                    aperiam quasi sunt officia expedita beatae cupiditate,
-                    maiores repudiandae, nostrum, reiciendis facere nemo!
-                  </p>
-                  <p>
-                    <strong>Want this flat style illustrations? </strong>You can
-                    download it for free, courtesy of <a href="#">edubd.net</a>,
-                    or you can download it <a href="#">here</a>.
-                  </p>
-                  <ul class="list-inline">
-                    <li>Date: November 03, 2021</li>
-                    <li>Client: Web Designer Depot</li>
-                    <li>Category: Graphic Design</li>
-                  </ul>
-                  <button type="button" class="btn btn-xl" data-dismiss="modal">
-                    <i class="fa fa-times"></i> Close Project
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
