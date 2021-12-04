@@ -716,7 +716,6 @@ section#team {
 
 .social-buttons {
   text-align: center;
-  float: left;
   padding-top: 15px; }
 
 .text-muted-role {
@@ -803,7 +802,7 @@ section#team {
   .social-buttons {
     padding-left: 0px;
     margin: 0 auto;
-    float: left; }
+   }
   .team-member img {
     width: 100%;
     padding-top: 50px; } }
@@ -1397,6 +1396,9 @@ footer span.copyright {
   float: left;
   margin-top: 20px;
   font-size: 12px; }
+
+  ul.social-buttons li {
+    margin-right: 5px; }
 
 ul.social-buttons {
   margin-bottom: 0; }

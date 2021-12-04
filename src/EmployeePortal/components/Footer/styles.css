@@ -56,14 +56,14 @@
 
 .block-2__header {
   color: white;
-  margin-bottom: 8rem; }
+  margin-bottom: 1rem; }
 
 .block-2__icons {
   position: relative; }
   .block-2__icons::after {
     content: "";
     position: absolute;
-    top: 200%;
+    top: 165%;
     left: 50%;
     width: 2px;
     height: 5rem;
