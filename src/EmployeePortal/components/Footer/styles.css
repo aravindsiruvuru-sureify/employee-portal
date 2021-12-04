@@ -1,3 +1,4 @@
 footer {
-    z-index: unset !important;
+  z-index: unset !important;
+  width: auto !important;
 }

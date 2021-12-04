@@ -12,6 +12,7 @@ import { getJobsList } from "../../store/employeeStore/actions";
 export const Container = styled.div`
   padding: 40px 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -21,7 +22,7 @@ export const Container = styled.div`
 
 const JobsPage = () => {
   const dispatch = useDispatch();
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(true);
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const jobsData = get(store, "jobsData", {});
   useEffect(() => {
@@ -31,8 +32,19 @@ const JobsPage = () => {
   }, []);
 
   return (
-    <MainContainer loadingStatus={loader ? 100 : 200}>
+    <MainContainer loadingStatus={200}>
       <Container>
+        <div style={{ width: "90%", display: "flex" }}>
+          <h1
+            style={{
+              marginLeft: "18px",
+              marginBottom: "18px",
+              fontFamily: "Roboto",
+            }}
+          >
+            Jobs
+          </h1>
+        </div>
         <Table
           data={jobsData.content}
           columnKeys={[

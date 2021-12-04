@@ -1,25 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
-import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import React from "react";
+import styled from "styled-components";
+import { makeStyles } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-import { ReactComponent as Api } from '../../../assets/svgs/api.svg';
+import { ReactComponent as Api } from "../../../assets/svgs/api.svg";
 
-import Header from '../Header'
+import Header from "../Header";
 
 import {
   API_FAILED,
   API_FETCHING,
   API_SUCCESS,
-} from '../../services/APIConstants';
-import colors from '../../themes/colors';
-import Footer from '../Footer';
+} from "../../services/APIConstants";
+import colors from "../../themes/colors";
+import Footer from "../Footer";
 
 const useStyles = makeStyles(() => ({
   root: {
     color: colors.primary,
-    width: '60px !important',
-    height: '60px !important',
+    width: "60px !important",
+    height: "60px !important",
   },
 }));
 
@@ -27,8 +27,8 @@ const Container = styled.div`
   background: #e5e5e5;
   height: 100vh;
   padding: ${(props) =>
-    props.type === 'secondary' ? '0px' : '64px 0px 0px 0'};
-  overflow: ${(props) => (props.isScrollable ? 'auto' : 'hidden')};
+    props.type === "secondary" ? "0px" : "64px 0px 0px 0"};
+  overflow: ${(props) => (props.isScrollable ? "auto" : "hidden")};
 `;
 
 const LoaderContainer = styled.div`
@@ -56,7 +56,7 @@ const MainContainer = (props) => {
     //TODO: need to a function to get error message from error object
     return (
       <LoaderContainer>
-        <Api style={{ height: '350px' }} />
+        <Api style={{ height: "350px" }} />
       </LoaderContainer>
     );
   };

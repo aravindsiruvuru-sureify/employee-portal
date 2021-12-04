@@ -6,22 +6,18 @@ import { JobDetailsShort } from "../JobCard/shared";
 import JobApplicationForm from "../JobApplicationForm";
 import { PrimaryButton } from "../../../CommonComponents";
 import completed from "../../../assets/svgs/completed.svg";
+import { getJobsList } from "../../store/employeeStore/actions";
+
+import FormLoader from "../../../CommonComponents/FormLoader";
+import { useDispatch } from "react-redux";
 
 import {
   Container,
   BasicDetails,
-  ProfileImage,
   ProfileDetails,
   HeadingOne,
   Label,
   RowContainer,
-  AboutMeText,
-  ColumnContainer,
-  Skills,
-  Hobbies,
-  ListContainer,
-  Hobby,
-  ProjectContainer,
   ProjectTitle,
   Heading,
   Icon,
@@ -63,8 +59,11 @@ const useStyles = makeStyles({
 });
 
 const JobDetailsJobApplicationForm = (props) => {
+  const dispatch = useDispatch();
+
   const { jobDetails, onClickCrossIcon } = props;
   const classes = useStyles();
+  const [loader, setLoader] = useState(false);
   const [showApplication, setShowApplication] = useState(false);
   const [successAPI, setSuccessAPI] = useState(false);
 
@@ -125,8 +124,16 @@ const JobDetailsJobApplicationForm = (props) => {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
+          position: "relative",
+        }}
+        onBlur={() => {
+          onClickCrossIcon();
         }}
       >
+        <CloseOutlinedIcon
+          className={classes.root}
+          onClick={onClickCrossIcon}
+        />
         <img src={completed} alt="complete" style={{ height: "200px" }} />
         <span style={{ marginTop: "14px", fontSize: "16px" }}>
           You application has been successfully submitted
@@ -136,6 +143,9 @@ const JobDetailsJobApplicationForm = (props) => {
       <JobApplicationForm
         onClickCrossIcon={onClickCrossIcon}
         onClickSubmitButton={() => {
+          setLoader(true);
+          dispatch(getJobsList());
+          setLoader(false);
           setSuccessAPI(true);
         }}
         referral={jobDetails}
@@ -143,7 +153,12 @@ const JobDetailsJobApplicationForm = (props) => {
     );
   };
 
-  return showApplication ? getJobApplicationForm() : getJobDetails();
+  return (
+    <>
+      {loader && <FormLoader />}
+      {showApplication ? getJobApplicationForm() : getJobDetails()}
+    </>
+  );
 };
 
 export default JobDetailsJobApplicationForm;
