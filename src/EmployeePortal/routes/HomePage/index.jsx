@@ -14,6 +14,7 @@ import headerBG2 from "./img/backgrounds/headerbg2.jpg";
 import JobCard from "../../components/JobCard";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import CorouselItem from "../../components/CorouselItem";
 
 const HomePage = () => {
   const history = useHistory();
@@ -36,7 +37,7 @@ const HomePage = () => {
   };
   const handleJobsShowMore = () => {
     history.push("/jobs");
-  }; 
+  };
   const handleCoursesShowMore = () => {
     history.push("/courses");
   };
@@ -231,7 +232,7 @@ const HomePage = () => {
               <JobCard job={job} />
               <JobCard job={job} />
             </div>
-            <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <Link href="" class="btn btn-send" onClick={handleJobsShowMore}>
                 Show more
               </Link>
@@ -239,147 +240,40 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section id="courses">
-        <div class="container-fluid wrapper ">
-          <div class="row">
-            <div class="col-lg-12 text-left">
-              <h2 class="section-heading">Courses</h2>
-              <h3 class="section-subheading">
-                Lorem ipsum dolor sit amet consectetur.
-              </h3>
-            </div>
-          </div>
-          <div>
-            <div class="center-container">
-              <JobCard job={job} />
-              <JobCard job={job} />
-            </div>
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-              <Link href="" class="btn btn-send" onClick={handleCoursesShowMore}>
-                Show more
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       <section id="products">
         <div class="container-fluid wrapper">
           <div class="row">
             <div class="col-lg-12 text-center">
-              <h2 class="section-heading">Our Product Portfolio</h2>
+              <h2 class="section-heading">Our Courses</h2>
               <h3 class="section-subheading text-muted">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </h3>
             </div>
           </div>
           <div id="myCarousel-two" class="carousel slide">
             <div class="carousel-inner team-wrapper">
-              <div class="item active">
-                <div class="col-xs-12 col-sm-4 col-md-4 team-member">
-                  <img src="./img/team/david.png" alt="team-member-img1" />
-                </div>
-                <div class="col-xs-12 col-sm-8 col-md-8 team-member-bio">
-                  <h3 class="team-member-name">Some Website1</h3>
-                  <p class="text-muted-role">This is a ____ website</p>
-                  <p class="team-text-short">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+              <CorouselItem
+                title="node JS for begginers"
+                subtitle="covers all the concepts of node deep dive in to the topic"
+                description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur.
-                  </p>
-                  <ul class="list-inline social-buttons">
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-linkedin"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="item">
-                <div class="col-xs-12 col-sm-4 col-md-4 team-member">
-                  <img src="./img/team/jenna.png" alt="team-member-img1" />
-                </div>
-                <div class="col-xs-12 col-sm-8 col-md-8 team-member-bio">
-                  <h3 class="team-member-name">Some Website2</h3>
-                  <p class="text-muted-role">A _____ website</p>
-                  <p class="team-text-short">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    esse cillum dolore eu fugiat nulla pariatur."
+                active
+              />
+              <CorouselItem
+                title="MongoDB for begginers"
+                subtitle="covers all the concepts of node deep dive in to the topic"
+                description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur.
-                  </p>
-                  <ul class="list-inline social-buttons">
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-linkedin"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="item">
-                <div class="col-xs-12 col-sm-4 col-md-4 team-member">
-                  <img src="./img/team/nicole.png" alt="team-member-img1" />
-                </div>
-                <div class="col-xs-12 col-sm-8 col-md-8 team-member-bio">
-                  <h3 class="team-member-name">Some Website 3</h3>
-                  <p class="text-muted-role">This is a Design Website</p>
-                  <p class="team-text-short">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur.
-                  </p>
-                  <ul class="list-inline social-buttons">
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-linkedin"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                    esse cillum dolore eu fugiat nulla pariatur."
+              />
             </div>
             <a
               class="left carousel-control"
@@ -405,6 +299,15 @@ const HomePage = () => {
               <li data-target="#myCarousel-two" data-slide-to="2"></li>
             </ol>
           </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+              <Link
+                href=""
+                class="btn btn-send"
+                onClick={handleCoursesShowMore}
+              >
+                Show more
+              </Link>
+            </div>
         </div>
       </section>
       <section id="consulting">
