@@ -41,7 +41,7 @@ const LoaderContainer = styled.div`
 
 const MainContainer = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { children, loadingStatus, className, noScroll } = props;
+  const { children, loadingStatus, className, noScroll, isDashboard } = props;
   const classes = useStyles();
 
   const displayLoader = () => {
@@ -80,9 +80,9 @@ const MainContainer = (props) => {
       className={className}
       isScrollable={!noScroll}
     >
-      <Header isDashboard/>
+      <Header isDashboard={isDashboard} />
       {renderContent()}
-      <Footer />
+      {isDashboard && <Footer />}
     </Container>
   );
 };

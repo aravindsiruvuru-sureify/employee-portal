@@ -32,7 +32,7 @@ const JobsPage = () => {
   }, []);
 
   return (
-    <MainContainer loadingStatus={200}>
+    <MainContainer isDashboard={false} loadingStatus={200}>
       <Container>
         <div style={{ width: "90%", display: "flex" }}>
           <h1
