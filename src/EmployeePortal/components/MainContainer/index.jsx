@@ -80,7 +80,7 @@ const MainContainer = (props) => {
       className={className}
       isScrollable={!noScroll}
     >
-      <Header />
+      <Header isDashboard/>
       {renderContent()}
       <Footer />
     </Container>
