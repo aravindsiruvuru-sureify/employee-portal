@@ -51,7 +51,11 @@ const useStyles = makeStyles({
 
 const { firstName, lastName, emailId, phoneNo, link } = JOB_APPLICATION_IDS;
 
-const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
+const JobApplicationForm = ({
+  onClickCrossIcon,
+  onClickSubmitButton,
+  dashboard = false,
+}) => {
   const classes = useStyles();
   const [error, setError] = useState({});
   const [data, setData] = useState({});

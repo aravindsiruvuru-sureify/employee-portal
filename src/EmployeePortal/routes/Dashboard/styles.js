@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import {
   font12PrimaryRoboto,
   font16PrimaryLightRoboto,
-} from '../../themes/typos';
+} from "../../themes/typos";
 
 export const RightContentContainer = styled.div`
   flex-grow: 1;
@@ -21,7 +21,7 @@ export const SelectEmployeeDesc = styled(font12PrimaryRoboto)`
 `;
 
 export const LeftContentContainer = styled.div`
-  background: #f1f1f1;
+  background-color: #058bce;
   min-width: 350px;
   padding-top: 50px;
   @media (max-width: 1300px) {
@@ -32,11 +32,26 @@ export const LeftContentContainer = styled.div`
 export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   max-width: 300px;
   margin: 0px auto;
   @media (max-width: 1300px) {
     max-width: 220px;
+  }
+`;
+
+export const TabItemContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  height: 50px;
+  margin: 3px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: ${(props) => (props.selected ? "#057bb7" : "#058bce")};
+
+  &:hover {
+    background-color: #057bb7;
   }
 `;
 

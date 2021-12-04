@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { MenuItem, Menu, makeStyles } from "@material-ui/core";
 import Paper from "@mui/material/Paper";
 import { Table as MuiTable } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
@@ -8,6 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import JobDetailsApplicationForm from "../../EmployeePortal/components/JobDetailsApplicationForm";
 
@@ -18,19 +19,36 @@ const useStyles = makeStyles((theme) => ({
   selectLabel: {
     fontSize: "14px",
   },
+  menuItem: {
+    fontSize: "14px",
+  },
 }));
 
-const Table = ({ data = [], columnKeys, rowsPerPage, count }) => {
+const Table = ({
+  data = [],
+  columnKeys,
+  rowsPerPage,
+  count,
+  dashboard = false,
+  onSelectMenuItem,
+  menuItems = [],
+}) => {
   const [page, setPage] = useState(0);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const classes = useStyles();
-  const columns = columnKeys.map((ck) => {
-    return {
-      id: ck,
-      label: ck,
-      align: "center",
-    };
-  });
+  const columns = [
+    ...columnKeys.map((ck) => {
+      return {
+        id: ck,
+        label: ck,
+        align: "center",
+      };
+    }),
+    ...(dashboard ? [{ id: "more", label: "", align: "center" }] : []),
+  ];
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -54,6 +72,59 @@ const Table = ({ data = [], columnKeys, rowsPerPage, count }) => {
         />
       )
     );
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const renderMenu = ({ job }) => {
+    return (
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        {menuItems.map((item) => (
+          <MenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              onSelectMenuItem({ menu: item, job });
+              handleClose();
+            }}
+            className={classes.menuItem}
+          >
+            {item}
+          </MenuItem>
+        ))}
+      </Menu>
+    );
+  };
+
+  const getColumnValue = ({ row, column }) => {
+    const value = row[column.id];
+    if (column.id === "more") {
+      return (
+        <>
+          <MoreVertIcon
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              handleClick(e);
+            }}
+          />
+          {renderMenu({ job: row })}
+        </>
+      );
+    }
+    return value === "number" ? column.format(value) : value;
   };
 
   return (
@@ -93,14 +164,13 @@ const Table = ({ data = [], columnKeys, rowsPerPage, count }) => {
                       style={{ cursor: "pointer" }}
                     >
                       {columns.map((column) => {
-                        const value = row[column.id];
                         return (
                           <TableCell
                             key={column.id}
                             align={column.align}
                             style={{ minWidth: 100, fontSize: 14 }}
                           >
-                            {value === "number" ? column.format(value) : value}
+                            {getColumnValue({ row, column })}
                           </TableCell>
                         );
                       })}
