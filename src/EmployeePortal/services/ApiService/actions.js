@@ -8,3 +8,13 @@ export const getJobsList = () => {
       return response.data;
     });
 };
+
+
+
+export const getCoursesList = () => {
+  return api
+    .get("https://prasanth-277.github.io/courses.json")
+    .then((response) => {
+      return response.data;
+    });
+};

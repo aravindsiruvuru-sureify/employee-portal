@@ -24,7 +24,11 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    boxShadow: "0 0px 24px rgb(0 0 0 / 16%)" 
+    boxShadow: "0 0px 24px rgb(0 0 0 / 16%)",
+    transition: "all .2s ease-in-out",
+    "&:hover": {
+      transform: "scale(1.03)",
+    },
   },
   learnMoreButton: {
     color: "#1B496B",

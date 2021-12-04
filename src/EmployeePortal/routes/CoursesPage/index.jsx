@@ -7,7 +7,7 @@ import MainContainer from "../../components/MainContainer";
 
 import Table from "../../../CommonComponents/Table";
 
-import { getJobsList } from "../../store/employeeStore/actions";
+import { getCoursesList } from "../../store/actions";
 
 export const Container = styled.div`
   padding: 40px 0;
@@ -20,20 +20,16 @@ export const Container = styled.div`
   margin-bottom: unset !important;
 `;
 
-const JobsPage = () => {
+const CoursesPage = () => {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(true);
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
-  const jobsData = get(store, "jobsData", {});
+  const coursesData = get(store, "coursesData", {});
   useEffect(() => {
     setLoader(true);
-    dispatch(getJobsList());
+    dispatch(getCoursesList());
     setLoader(false);
   }, []);
-
-  const onJobSelected = () => {
-
-  }
 
   return (
     <MainContainer isDashboard={false} loadingStatus={200}>
@@ -46,27 +42,26 @@ const JobsPage = () => {
               fontFamily: "Roboto",
             }}
           >
-            Jobs
+            Courses
           </h1>
         </div>
         <Table
-          data={jobsData.content}
+          data={coursesData.content}
           columnKeys={[
-            "title",
-            "experience",
-            "experienceLevel",
-            "location",
-            "postedOn",
-            "primarySkill",
+            "courseName",
+            "courseCode",
+            "type",
+            "duration",
+            "regEndDate",
+            "fee",
           ]}
-          rowsPerPage={jobsData.numberOfElements}
-          count={jobsData.totalPages}
-          totalElements={jobsData.totalElements}
-          onRowClick={onJobSelected}
+          rowsPerPage={coursesData.numberOfElements}
+          count={coursesData.totalPages}
+          totalElements={coursesData.totalElements}
         />
       </Container>
     </MainContainer>
   );
 };
 
-export default JobsPage;
+export default CoursesPage;

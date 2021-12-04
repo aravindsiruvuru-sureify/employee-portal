@@ -34,7 +34,7 @@ const Table = ({
   menuItems = [],
 }) => {
   const [page, setPage] = useState(0);
-  const [selectedJob, setSelectedJob] = useState(null);
+  const [selected, setSelected] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const classes = useStyles();
@@ -58,16 +58,16 @@ const Table = ({
   };
 
   const handleRowClick = (row) => () => {
-    setSelectedJob(row);
+    setSelected(row);
   };
 
   const getModalContent = () => {
     return (
-      selectedJob && (
+      selected && (
         <JobDetailsApplicationForm
-          jobDetails={selectedJob}
+          jobDetails={selected}
           onClickCrossIcon={() => {
-            setSelectedJob(null);
+            setSelected(null);
           }}
         />
       )
@@ -129,8 +129,8 @@ const Table = ({
 
   return (
     <>
-      <Modal open={!!selectedJob} handleClose={() => {}}>
-        {selectedJob && getModalContent()}
+      <Modal open={!!selected} handleClose={() => {}}>
+        {selected && getModalContent()}
       </Modal>
       <Paper sx={{ width: "90%", overflow: "hidden" }}>
         <TableContainer>

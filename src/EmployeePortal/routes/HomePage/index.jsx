@@ -36,6 +36,9 @@ const HomePage = () => {
   };
   const handleJobsShowMore = () => {
     history.push("/jobs");
+  }; 
+  const handleCoursesShowMore = () => {
+    history.push("/courses");
   };
 
   return (
@@ -213,7 +216,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section id="pricing">
+      <section id="jobs">
         <div class="container-fluid wrapper ">
           <div class="row">
             <div class="col-lg-12 text-left">
@@ -236,6 +239,30 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <section id="courses">
+        <div class="container-fluid wrapper ">
+          <div class="row">
+            <div class="col-lg-12 text-left">
+              <h2 class="section-heading">Courses</h2>
+              <h3 class="section-subheading">
+                Lorem ipsum dolor sit amet consectetur.
+              </h3>
+            </div>
+          </div>
+          <div>
+            <div class="center-container">
+              <JobCard job={job} />
+              <JobCard job={job} />
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              <Link href="" class="btn btn-send" onClick={handleCoursesShowMore}>
+                Show more
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       <section id="products">
         <div class="container-fluid wrapper">
           <div class="row">
