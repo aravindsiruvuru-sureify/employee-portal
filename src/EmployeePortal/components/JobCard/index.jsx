@@ -24,6 +24,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "flex-start",
+    boxShadow: "0 0px 24px rgb(0 0 0 / 16%)" 
   },
   learnMoreButton: {
     color: "#1B496B",

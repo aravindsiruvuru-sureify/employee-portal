@@ -223,10 +223,12 @@ const HomePage = () => {
               </h3>
             </div>
           </div>
-          <div class="center-container">
-            <JobCard job={job} />
-            <JobCard job={job} />
-            <div class="pricing">
+          <div>
+            <div class="center-container">
+              <JobCard job={job} />
+              <JobCard job={job} />
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
               <Link href="" class="btn btn-send" onClick={handleJobsShowMore}>
                 Show more
               </Link>

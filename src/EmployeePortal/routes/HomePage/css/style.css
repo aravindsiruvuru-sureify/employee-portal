@@ -1097,7 +1097,7 @@ body {
 
 /* 9.0 ============  PRICING  = */
 #pricing {
-  background-color: #FEFEFE;
+  background-color: #eeeeeeb0;
   padding-bottom: 120px; }
 
 .pricing-title {
@@ -1147,16 +1147,20 @@ body {
   font-size: 15px;
   font-family: "source sans pro"; }
 
-.pricing a.btn-send {
+.btn-send {
+  text-align: center;
+  display: inline-block;
   text-transform: uppercase;
-  margin-bottom: 20px;
-  padding: 15px 60px;
+  padding: 10px 20px;
+  margin-top: 40px;
   background-color: #058BCE;
   border-radius: 0;
   color: #fff;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 15px;
-  font-weight: 500; }
+  font-weight: 500;
+  width: 180px;
+}
 
 .center-container {
   display: flex;

@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
     userSelect: "none",
   },
   popOver: {
-    marginTop: "45px",
+    marginTop: "50px",
   },
 }));
 
