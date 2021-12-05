@@ -13,7 +13,7 @@ const axiosConfig = {
 
 const axiosInstance = axios.create();
 
-// axiosConfig.crossdomain = true;
+axiosConfig.crossdomain = true;
 
 // axiosInstance.interceptors.request.use(function (request) {
 //   if (!window.navigator.onLine) {
