@@ -1,21 +1,24 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import SearchIcon from '@material-ui/icons/Search';
-import { PropTypes } from 'prop-types';
-import colors from '../../EmployeePortal/themes/colors';
+import React from "react";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+import { PropTypes } from "prop-types";
+import colors from "../../EmployeePortal/themes/colors";
 
 const useStyles = makeStyles((theme) => ({
   field: {
-    width: '100%',
-    marginBottom: '5px',
+    width: "100%",
+    marginBottom: "5px",
     minWidth: 260,
-    height: '60px',
+    height: "60px",
     animation: `$myEffect 1500ms ${theme.transitions.easing.easeInOut}`,
-    '& .MuiFilledInput-root:after ': {
+    "& .MuiFilledInput-root:after ": {
       borderColor: `${colors.primary} !important`,
     },
+  },
+  multiline: {
+    height: "auto",
   },
   inputLabel: {
     color: `${colors.primary} !important`,
@@ -23,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
   animatedItem: {
     animation: `$myEffect 3000ms easeInOut`,
   },
-  '@keyframes myEffect': {
-    '0%': {
+  "@keyframes myEffect": {
+    "0%": {
       opacity: 0,
     },
-    '100%': {
+    "100%": {
       opacity: 1,
     },
   },
@@ -43,13 +46,13 @@ const TextInput = ({
   label,
   defaultValue,
   cssClass,
-  type = 'text',
+  type = "text",
   isDisabled = false,
   isMultiline = false,
   fullWidth = false,
   value,
   hasIcon = false,
-  placeholder = '',
+  placeholder = "",
 }) => {
   const classes = useStyles();
 
@@ -59,7 +62,9 @@ const TextInput = ({
       key={id}
       disabled={isDisabled}
       type={type}
-      className={`${classes.field} ${cssClass} ${classes.animatedItem}`}
+      className={`${classes.field} ${cssClass} ${classes.animatedItem} ${
+        isMultiline && classes.multiline
+      }`}
       label={label}
       variant="filled"
       defaultValue={defaultValue}
@@ -77,13 +82,13 @@ const TextInput = ({
       }}
       onKeyPress={onKeyDown}
       error={error}
-      helperText={error ? helperText : ''}
+      helperText={error ? helperText : ""}
       fullWidth={fullWidth}
       InputProps={
         hasIcon && {
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon style={{ marginBottom: '12px' }} />
+              <SearchIcon style={{ marginBottom: "12px" }} />
             </InputAdornment>
           ),
         }

@@ -10,8 +10,7 @@ import Table from "../../../CommonComponents/Table";
 import Modal from "../../../CommonComponents/Modal";
 import PrimaryButton from "../../../CommonComponents/PrimaryButton";
 
-import { getJobsList } from "../../store/employeeStore/actions";
-import HRJobApplicationForm from "../HRJobApplicationForm";
+import { getCoursesList } from "../../store/employeeStore/actions";
 import colors from "../../themes/colors";
 
 export const Container = styled.div`
@@ -39,18 +38,18 @@ const useStyles = makeStyles({
   },
 });
 
-const DashboardJobsView = () => {
+const DashboardCoursesView = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [loader, setLoader] = useState(true);
   const [menuItem, setMenuItem] = useState(null);
-  const [selectedJob, setSelectedJob] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
-  const jobsData = get(store, "jobsData", {});
+  const coursesData = get(store, "coursesData", {});
   useEffect(() => {
     setLoader(true);
-    dispatch(getJobsList());
+    dispatch(getCoursesList());
     setLoader(false);
   }, []);
 
@@ -58,15 +57,7 @@ const DashboardJobsView = () => {
     switch (menuItem) {
       case "Edit":
       case "Add":
-        return (
-          <HRJobApplicationForm
-            onClickCrossIcon={() => {
-              setMenuItem(null);
-            }}
-            onClickSubmitButton={() => {}}
-            applicationData={selectedJob}
-          />
-        );
+        return <h1>Add</h1>;
       default:
         break;
     }
@@ -95,28 +86,21 @@ const DashboardJobsView = () => {
         />
       </div>
       <Table
-        dashboard
-        data={jobsData.content}
+        data={coursesData.content}
         columnKeys={[
-          "ref",
-          "title",
-          "experience",
-          "experienceLevel",
-          "location",
-          "postedOn",
-          "primarySkill",
+          "courseName",
+          "courseCode",
+          "type",
+          "duration",
+          "regEndDate",
+          "fee",
         ]}
-        rowsPerPage={jobsData.numberOfElements}
-        count={jobsData.totalPages}
-        totalElements={jobsData.totalElements}
-        menuItems={["Edit", "Delete", "Publish"]}
-        onSelectMenuItem={({ menu, job }) => {
-          setMenuItem(menu);
-          setSelectedJob(job);
-        }}
+        rowsPerPage={coursesData.numberOfElements}
+        count={coursesData.totalPages}
+        totalElements={coursesData.totalElements}
       />
     </Container>
   );
 };
 
-export default DashboardJobsView;
+export default DashboardCoursesView;

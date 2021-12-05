@@ -82,7 +82,7 @@ const MainContainer = (props) => {
     >
       <Header isDashboard={isDashboard} />
       {renderContent()}
-      {isDashboard && <Footer />}
+      {!isDashboard && <Footer />}
     </Container>
   );
 };

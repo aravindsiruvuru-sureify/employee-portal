@@ -2,24 +2,28 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
+import { isEmpty } from "lodash";
 
 import { PropTypes } from "prop-types";
 
 import { handleButtonIsDisabled, handleHasError } from "../../utils/formUtils";
+
 import {
-  jobApplicationConstants,
-  ROLE,
-  ROLES,
-  JOB_APPLICATION_IDS,
-  UploadTypes,
+  hrJobApplicationConstants,
+  HR_JOB_APPLICATION,
+  MIN10CHARS_ERROR_TEXT,
 } from "../../constants";
 import { Fields, YourReferralText } from "./styles";
 import {
   TextInput,
   PrimaryButton,
   UploadButton,
+  Dropdown,
 } from "../../../CommonComponents";
 import colors from "../../themes/colors";
+import { TimeToLeave } from "@material-ui/icons";
+
+const experienceLevelOptions = ["Experienced", "Fresher"];
 
 const useStyles = makeStyles({
   field: {
@@ -49,14 +53,29 @@ const useStyles = makeStyles({
   },
 });
 
-const { firstName, lastName, emailId, phoneNo, link } = JOB_APPLICATION_IDS;
+const {
+  title,
+  description,
+  primarySkill,
+  secondarySkill,
+  salary,
+  ref,
+  experienceLevel,
+  experience,
+  contractType,
+  contractDuration,
+  location,
+} = HR_JOB_APPLICATION;
 
-const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
+const HRJobApplicationForm = ({
+  onClickCrossIcon,
+  onClickSubmitButton,
+  applicationData = {},
+}) => {
   const classes = useStyles();
   const [error, setError] = useState({});
   const [data, setData] = useState({});
   const [isDisabled, setIsDisabled] = useState(true);
-  const [resumeUrl, setResumeUrl] = useState("");
 
   const handleError = (id, value) => {
     const hasError = handleHasError(id, value);
@@ -77,17 +96,7 @@ const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
       [key]: value,
     });
   };
-
-  const setUrl = (url) => {
-    setResumeUrl(url);
-    handleChange({
-      target: {
-        id: link,
-        value: url,
-      },
-    });
-  };
-
+  console.log("----", data);
   useEffect(() => {
     setIsDisabled(handleButtonIsDisabled(error, 3));
   }, [error]);
@@ -99,52 +108,77 @@ const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
   return (
     <Fields>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>Fill your job application</YourReferralText>
+      <YourReferralText>
+        {isEmpty(applicationData)
+          ? "Fill your job application"
+          : "Edit job application"}
+      </YourReferralText>
       <TextInput
-        id={firstName}
-        label={jobApplicationConstants.firstName}
+        id={title}
+        label={hrJobApplicationConstants.title}
         onChange={handleChange}
-        error={error[firstName]}
+        error={error[title]}
         cssClass={classes.field}
       />
       <TextInput
-        id={lastName}
-        label={jobApplicationConstants.lastName}
+        id={description}
+        label={hrJobApplicationConstants.description}
         onChange={handleChange}
-        error={error[lastName]}
+        error={error[description]}
+        helperText={MIN10CHARS_ERROR_TEXT}
+        // defaultValue={(defaultVals && defaultVals.about_me) || ""}
+        cssClass={classes.field}
+        isMultiline
+      />
+      <TextInput
+        id={salary}
+        label={hrJobApplicationConstants.salary}
+        onChange={handleChange}
+        error={error[salary]}
+        cssClass={classes.field}
+      />
+      {/* <Dropdown
+        id={experienceLevel}
+        inputLabel={hrJobApplicationConstants.experienceLevel}
+        name={experienceLevel}
+        onChange={handleChange}
+        menuItems={experienceLevelOptions}
+      /> */}
+      <TextInput
+        id={experienceLevel}
+        label={hrJobApplicationConstants.experienceLevel}
+        onChange={handleChange}
+        error={error[experienceLevel]}
         cssClass={classes.field}
       />
       <TextInput
-        id={emailId}
-        label={jobApplicationConstants.email}
+        id={experience}
+        label={hrJobApplicationConstants.experience}
         onChange={handleChange}
-        error={error[emailId]}
+        error={error[experience]}
         cssClass={classes.field}
       />
       <TextInput
-        id={phoneNo}
-        label={jobApplicationConstants.number}
+        id={contractType}
+        label={hrJobApplicationConstants.contractType}
         onChange={handleChange}
-        error={error[phoneNo]}
+        error={error[contractType]}
         cssClass={classes.field}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <UploadButton
-          label="Upload Resume"
-          setUrl={setUrl}
-          dir="referral"
-          type={UploadTypes.file}
-          prevUrl={resumeUrl}
-        />
-        {resumeUrl && (
-          <PrimaryButton
-            handleClick={() => {
-              window.open(resumeUrl);
-            }}
-            label="View"
-          />
-        )}
-      </div>
+      <TextInput
+        id={contractDuration}
+        label={hrJobApplicationConstants.contractDuration}
+        onChange={handleChange}
+        error={error[contractDuration]}
+        cssClass={classes.field}
+      />
+      <TextInput
+        id={location}
+        label={hrJobApplicationConstants.location}
+        onChange={handleChange}
+        error={error[location]}
+        cssClass={classes.field}
+      />
       <PrimaryButton
         handleClick={handleClick}
         cssClass={classes.button}
@@ -155,9 +189,9 @@ const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
   );
 };
 
-JobApplicationForm.propTypes = {
+HRJobApplicationForm.propTypes = {
   onClickCrossIcon: PropTypes.func.isRequired,
   onClickSubmitButton: PropTypes.func.isRequired,
-  referral: PropTypes.object.isRequired,
+  applicationData: PropTypes.object.isRequired,
 };
-export default JobApplicationForm;
+export default HRJobApplicationForm;

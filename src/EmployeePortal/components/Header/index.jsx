@@ -40,6 +40,9 @@ const useStyles = makeStyles(() => ({
   popOver: {
     marginTop: "50px",
   },
+  option: {
+    fontSize: "16px",
+  },
 }));
 
 const StyledButton = withStyles({
@@ -68,6 +71,10 @@ const Header = ({ isDashboard = false }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const can_access_dashboard = true;
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   const renderMenu = () => (
     <Menu
       id="simple-menu"
@@ -79,11 +86,9 @@ const Header = ({ isDashboard = false }) => {
       }}
       className={classes.popOver}
     >
-      <MenuItem>Onboarding Details</MenuItem>
-      <MenuItem>Performance Reviews</MenuItem>
-      {can_access_dashboard && <MenuItem>Dashboard</MenuItem>}
-
-      <MenuItem>Logout</MenuItem>
+      <MenuItem className={classes.option}>Profile details</MenuItem>
+      <MenuItem className={classes.option}>option-2</MenuItem>
+      <MenuItem className={classes.option}>Logout</MenuItem>
     </Menu>
   );
 
@@ -138,6 +143,11 @@ const Header = ({ isDashboard = false }) => {
           color="inherit"
           aria-label="menu"
           className={classes.menu}
+          onClick={(e) => {
+            e && e.stopPropagation();
+            e && e.preventDefault();
+            handleClick(e);
+          }}
         >
           {isDashboard && (
             <>

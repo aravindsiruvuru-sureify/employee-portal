@@ -78,7 +78,9 @@ const Table = ({
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e && e.stopPropagation();
+    e && e && e.preventDefault();
     setAnchorEl(null);
   };
 
@@ -89,13 +91,13 @@ const Table = ({
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={(e) => handleClose(e)}
       >
         {menuItems.map((item) => (
           <MenuItem
             onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
+              e && e.stopPropagation();
+              e && e.preventDefault();
               onSelectMenuItem({ menu: item, job });
               handleClose();
             }}
@@ -115,8 +117,8 @@ const Table = ({
         <>
           <MoreVertIcon
             onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
+              e && e.stopPropagation();
+              e && e.preventDefault();
               handleClick(e);
             }}
           />

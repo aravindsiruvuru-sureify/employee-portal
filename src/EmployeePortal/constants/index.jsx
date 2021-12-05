@@ -207,6 +207,7 @@ export const REFERRAL_STAGES = [
   "Selected",
   "Rejected",
 ];
+
 export const jobApplicationConstants = {
   firstName: "First name",
   lastName: "Last name",
@@ -215,12 +216,40 @@ export const jobApplicationConstants = {
   link: "Resume Link",
 };
 
+export const hrJobApplicationConstants = {
+  title: "Title",
+  description: "Description",
+  primarySkill: "Primary skill",
+  secondarySkill: "Secondary skill",
+  salary: "Salary",
+  ref: "Job code",
+  experienceLevel: "Experience level",
+  experience: "Experience",
+  contractType: "Contract type",
+  contractDuration: "Contract duration",
+  location: "Location",
+};
+
 export const JOB_APPLICATION_IDS = {
   firstName: "firstName",
   lastName: "lastName",
   emailId: "emailId",
   phoneNo: "phoneNo",
   link: "resume_url",
+};
+
+export const HR_JOB_APPLICATION = {
+  title: "title",
+  description: "description",
+  primarySkill: "primarySkill",
+  secondarySkill: "secondarySkill",
+  salary: "salary",
+  ref: "ref",
+  experienceLevel: "experienceLevel",
+  experience: "experience",
+  contractType: "contractType",
+  contractDuration: "contractDuration",
+  location: "contractDuration",
 };
 
 export const QUARTER_CYCLES = {

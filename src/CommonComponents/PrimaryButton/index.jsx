@@ -1,19 +1,20 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import colors from '../../EmployeePortal/themes/colors';
+import React from "react";
+import { PropTypes } from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import colors from "../../EmployeePortal/themes/colors";
 
 const useStyles = makeStyles({
   loginButton: {
+    fontSize: "14px",
     backgroundColor: colors.primary,
-    '&:focus': {
-      backgroundColor: '#234e6e',
+    "&:focus": {
+      backgroundColor: "#234e6e",
     },
-    '&:hover': {
-      backgroundColor: '#1b496b',
+    "&:hover": {
+      backgroundColor: "#1b496b",
     },
-    textTransform: 'none',
+    textTransform: "none",
   },
 });
 
@@ -38,13 +39,13 @@ PrimaryButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['large', 'medium', 'small']),
+  size: PropTypes.oneOf(["large", "medium", "small"]),
   cssClass: PropTypes.string,
 };
 
 PrimaryButton.defaultProps = {
-  size: 'medium',
-  cssClass: '',
+  size: "medium",
+  cssClass: "",
 };
 
 export default PrimaryButton;

@@ -8,6 +8,7 @@ import { Font25PrimaryRobotoMedium } from "../../themes/typos";
 import MainContainer from "../../components/MainContainer";
 
 import DashboardJobsView from "../../components/DashboardJobsView";
+import DashboardCoursesView from "../../components/DashboardCoursesView";
 
 import {
   RightContentContainer,
@@ -44,10 +45,10 @@ const Dashboard = () => {
     switch (selectedTab) {
       case "job-details":
         return <DashboardJobsView />;
-      case "employee-list":
-        return renderEmptyView();
       case "careers-details":
-        return renderEmptyView();
+        return <DashboardCoursesView />;
+      case "employee-list":
+      case "profile-details":
       case "request-for-quote-details":
         return renderEmptyView();
       default:
@@ -71,7 +72,13 @@ const Dashboard = () => {
                 setSelectedTab(header.id);
               }}
             >
-              <span style={{ marginLeft: "6px", fontSize: "16px" }}>
+              <span
+                style={{
+                  marginLeft: "6px",
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                }}
+              >
                 {header.label}
               </span>
             </TabItemContainer>
@@ -82,7 +89,7 @@ const Dashboard = () => {
   };
 
   return (
-    <MainContainer loadingStatus={200} noScroll>
+    <MainContainer loadingStatus={200} noScroll isDashboard>
       <div style={{ display: "flex" }}>
         {renderLeftContent()}
         {renderRightContent()}

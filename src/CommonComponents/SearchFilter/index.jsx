@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { BsX, BsSearch, BsTrash } from 'react-icons/bs';
-import { PropTypes } from 'prop-types';
+import React, { useState, useEffect } from "react";
+import { BsX, BsSearch, BsTrash } from "react-icons/bs";
+import { PropTypes } from "prop-types";
 
-import { Button } from '@material-ui/core';
-import { SearchBarContainer, SearchBar, SearchInput, Search } from './styles';
-import colors from '../../EmployeePortal/themes/colors';
-import ToggleMenu from '../ToggleMenu';
+import { Button } from "@material-ui/core";
+import { SearchBarContainer, SearchBar, SearchInput, Search } from "./styles";
+import colors from "../../EmployeePortal/themes/colors";
+import ToggleMenu from "../ToggleMenu";
 
 const SearchFilter = ({
   onSearchValueChange,
@@ -21,20 +21,21 @@ const SearchFilter = ({
   }, [selectedValues]);
   return (
     <SearchBarContainer>
-      <SearchBar width={open ? '400px' : '55px'}>
+      <SearchBar width={open ? "400px" : "55px"}>
         {open ? (
           <>
             <BsX
               size="33px"
               color={colors.primary}
               onClick={(e) => {
-                e.preventDefault();
-                onSearchValueChange('');
+                e && e.preventDefault();
+                e && e.stopPropagation();
+                onSearchValueChange("");
                 setSelectedValues([]);
                 setOpen(!open);
               }}
               style={{
-                marginTop: '2px',
+                marginTop: "2px",
               }}
             />
             <Search>
@@ -50,10 +51,10 @@ const SearchFilter = ({
                 fontSize="20px"
                 color={colors.primary}
                 style={{
-                  position: 'absolute',
-                  right: '10px',
-                  top: '5px',
-                  backgroundColor: 'white',
+                  position: "absolute",
+                  right: "10px",
+                  top: "5px",
+                  backgroundColor: "white",
                 }}
               />
             </Search>
@@ -67,10 +68,10 @@ const SearchFilter = ({
               fontSize="20px"
               color={colors.primary}
               style={{
-                margin: '5px 10px 0px 10px',
+                margin: "5px 10px 0px 10px",
               }}
               onClick={() => {
-                onSearchValueChange('');
+                onSearchValueChange("");
                 setSelectedValues([]);
               }}
             />
@@ -78,10 +79,11 @@ const SearchFilter = ({
         ) : (
           <Button
             onClick={(e) => {
-              e.preventDefault();
+              e && e.preventDefault();
+              e && e.stopPropagation();
               setOpen(!open);
             }}
-            style={{ margin: '-3px 0px 0px -14px ', height: '42px' }}
+            style={{ margin: "-3px 0px 0px -14px ", height: "42px" }}
           >
             <BsSearch size="30px" color={colors.primary} />
           </Button>
