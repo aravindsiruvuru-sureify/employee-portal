@@ -69,6 +69,7 @@ const Table = ({
           onClickCrossIcon={() => {
             setSelected(null);
           }}
+          dashboard={dashboard}
         />
       )
     );

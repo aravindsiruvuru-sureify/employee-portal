@@ -95,22 +95,24 @@ const JobDetailsJobApplicationForm = (props) => {
             ))}
           </ul>
         </RowContainer>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <PrimaryButton
-            handleClick={() => {
-              setShowApplication(true);
+        {!props.dashboard && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
             }}
-            label="Apply"
-            cssClass={classes.applyButton}
-          />
-          <i>*click here to apply</i>
-        </div>
+          >
+            <PrimaryButton
+              handleClick={() => {
+                setShowApplication(true);
+              }}
+              label="Apply"
+              cssClass={classes.applyButton}
+            />
+            <i>*click here to apply</i>
+          </div>
+        )}
       </Container>
     );
   };
