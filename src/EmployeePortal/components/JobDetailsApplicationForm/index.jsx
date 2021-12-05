@@ -6,7 +6,6 @@ import { JobDetailsShort } from "../JobCard/shared";
 import JobApplicationForm from "../JobApplicationForm";
 import { PrimaryButton } from "../../../CommonComponents";
 import completed from "../../../assets/svgs/completed.svg";
-import { getJobsList } from "../../store/employeeStore/actions";
 
 import FormLoader from "../../../CommonComponents/FormLoader";
 import { useDispatch } from "react-redux";
@@ -146,7 +145,6 @@ const JobDetailsJobApplicationForm = (props) => {
         onClickCrossIcon={onClickCrossIcon}
         onClickSubmitButton={() => {
           setLoader(true);
-          dispatch(getJobsList());
           setLoader(false);
           setSuccessAPI(true);
         }}

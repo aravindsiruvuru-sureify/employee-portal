@@ -12,11 +12,10 @@ export const setCourses = (value) => ({
   payload: value,
 });
 
-
-export const getJobsList = () => {
+export const getHomePageJobsList = () => {
   return (dispatch) => {
     return serviceActions
-      .getJobsList()
+      .getHomePageJobsList()
       .then((res) => {
         dispatch(setJobs(res));
         return res;
@@ -27,10 +26,38 @@ export const getJobsList = () => {
   };
 };
 
-export const getCoursesList = () => {
+export const getDashboardPageJobsList = () => {
   return (dispatch) => {
     return serviceActions
-      .getCoursesList()
+      .getDashboardPageJobsList()
+      .then((res) => {
+        dispatch(setJobs(res));
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+};
+
+export const getHomePageCoursesList = () => {
+  return (dispatch) => {
+    return serviceActions
+      .getHomePageCoursesList()
+      .then((res) => {
+        dispatch(setCourses(res));
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+};
+
+export const getDashboardPageCoursesList = () => {
+  return (dispatch) => {
+    return serviceActions
+      .getDashboardPageCoursesList()
       .then((res) => {
         dispatch(setCourses(res));
         return res;

@@ -151,6 +151,34 @@ export const TEAMS = {
   hr: "Human Resource",
 };
 
+export const COURSE_APPLICATION_IDS = {
+  courseName: "courseName",
+  courseContent: "courseContent",
+  courseCode: "courseCode",
+  trainer: "trainer",
+  type: "type",
+  mode: "mode",
+  startDate: "startDate",
+  regEndDate: "regEndDate",
+  timings: "timings",
+  duration: "duration",
+  fee: "fee",
+};
+
+export const courseApplicationConstants = {
+  courseName: "Course Name",
+  courseContent: "Course Content",
+  courseCode: "Course Code",
+  trainer: "Trainer",
+  type: "Type",
+  mode: "Mode",
+  startDate: "Start Date",
+  regEndDate: "Reg End Date",
+  timings: "Timings",
+  duration: "Duration",
+  fee: "Fee",
+};
+
 export const PERFORMANCE_REVIEW_FIELDS = {
   employee: {
     result: {

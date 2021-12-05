@@ -10,9 +10,6 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-import JobDetailsApplicationForm from "../../EmployeePortal/components/JobDetailsApplicationForm";
-
-import Modal from "../Modal";
 import "./style.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,11 +29,10 @@ const Table = ({
   dashboard = false,
   onSelectMenuItem,
   menuItems = [],
+  onSelectTableRow = () => {},
 }) => {
   const [page, setPage] = useState(0);
-  const [selected, setSelected] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
-
   const classes = useStyles();
   const columns = [
     ...columnKeys.map((ck) => {
@@ -57,22 +53,8 @@ const Table = ({
     setPage(0);
   };
 
-  const handleRowClick = (row) => () => {
-    setSelected(row);
-  };
-
-  const getModalContent = () => {
-    return (
-      selected && (
-        <JobDetailsApplicationForm
-          jobDetails={selected}
-          onClickCrossIcon={() => {
-            setSelected(null);
-          }}
-          dashboard={dashboard}
-        />
-      )
-    );
+  const handleRowClick = (row) => {
+    onSelectTableRow(row);
   };
 
   const handleClick = (event) => {
@@ -92,7 +74,11 @@ const Table = ({
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={(e) => handleClose(e)}
+        onClose={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          handleClose(e);
+        }}
       >
         {menuItems.map((item) => (
           <MenuItem
@@ -100,7 +86,7 @@ const Table = ({
               e && e.stopPropagation();
               e && e.preventDefault();
               onSelectMenuItem({ menu: item, job });
-              handleClose();
+              handleClose(e);
             }}
             className={classes.menuItem}
           >
@@ -132,9 +118,6 @@ const Table = ({
 
   return (
     <>
-      <Modal open={!!selected} handleClose={() => {}}>
-        {selected && getModalContent()}
-      </Modal>
       <Paper sx={{ width: "90%", overflow: "hidden" }}>
         <TableContainer>
           <MuiTable stickyHeader aria-label="sticky table">
@@ -163,7 +146,11 @@ const Table = ({
                       role="checkbox"
                       tabIndex={-1}
                       key={row.ref}
-                      onClick={handleRowClick(row)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        handleRowClick(row);
+                      }}
                       style={{ cursor: "pointer" }}
                     >
                       {columns.map((column) => {

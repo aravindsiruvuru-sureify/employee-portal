@@ -6,8 +6,11 @@ import { get } from "lodash";
 import MainContainer from "../../components/MainContainer";
 
 import Table from "../../../CommonComponents/Table";
+import Modal from "../../../CommonComponents/Modal";
 
-import { getJobsList } from "../../store/employeeStore/actions";
+import { getHomePageJobsList } from "../../store/employeeStore/actions";
+
+import JobDetailsApplicationForm from "../../components/JobDetailsApplicationForm";
 
 export const Container = styled.div`
   padding: 40px 0;
@@ -23,20 +26,40 @@ export const Container = styled.div`
 const JobsPage = () => {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(true);
+  const [selected, setSelected] = useState(null);
+
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const jobsData = get(store, "jobsData", {});
+
+  const getJobs = async () => {
+    await dispatch(getHomePageJobsList());
+  };
   useEffect(() => {
     setLoader(true);
-    dispatch(getJobsList());
+    getJobs();
     setLoader(false);
   }, []);
 
-  const onJobSelected = () => {
+  const onJobSelected = () => {};
 
-  }
+  const getModalContent = () => {
+    return (
+      selected && (
+        <JobDetailsApplicationForm
+          jobDetails={selected}
+          onClickCrossIcon={() => {
+            setSelected(null);
+          }}
+        />
+      )
+    );
+  };
 
   return (
     <MainContainer isDashboard={false} loadingStatus={200}>
+      <Modal open={!!selected} handleClose={() => {}}>
+        {selected && getModalContent()}
+      </Modal>
       <Container>
         <div style={{ width: "90%", display: "flex" }}>
           <h1
@@ -63,6 +86,9 @@ const JobsPage = () => {
           count={jobsData.totalPages}
           totalElements={jobsData.totalElements}
           onRowClick={onJobSelected}
+          onSelectTableRow={(row) => {
+            setSelected(row);
+          }}
         />
       </Container>
     </MainContainer>

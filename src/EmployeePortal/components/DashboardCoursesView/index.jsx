@@ -10,8 +10,11 @@ import Table from "../../../CommonComponents/Table";
 import Modal from "../../../CommonComponents/Modal";
 import PrimaryButton from "../../../CommonComponents/PrimaryButton";
 
-import { getCoursesList } from "../../store/employeeStore/actions";
+import { getDashboardPageCoursesList } from "../../store/employeeStore/actions";
 import colors from "../../themes/colors";
+
+import CourseApplicationForm from "../CourseApplicationForm";
+import { createCourse } from "../../services/ApiService/actions";
 
 export const Container = styled.div`
   padding: 40px 0;
@@ -49,24 +52,61 @@ const DashboardCoursesView = () => {
   const coursesData = get(store, "coursesData", {});
   useEffect(() => {
     setLoader(true);
-    dispatch(getCoursesList());
+    dispatch(getDashboardPageCoursesList());
     setLoader(false);
   }, []);
 
-  const getModalContent = () => {
+  const resetModal = () => {
+    setMenuItem(null);
+    setSelectedCourse(null);
+  };
+
+  const getMenuModalContent = () => {
     switch (menuItem) {
       case "Edit":
       case "Add":
-        return <h1>Add</h1>;
+        return (
+          <CourseApplicationForm
+            onClickSubmitButton={(data) => {
+              console.log(data);
+            }}
+            onClickCrossIcon={() => {
+              resetModal();
+            }}
+          />
+        );
       default:
         break;
     }
     return <h1>{menuItem}</h1>;
   };
 
+  const getCourseDetailsModalContent = () => {
+    return <h1>Course details</h1>;
+  };
+
+  const getModalContent = () => {
+    console.log(menuItem, selectedCourse);
+    if (menuItem && selectedCourse) {
+      return getMenuModalContent();
+    }
+    if (selectedCourse) {
+      return getCourseDetailsModalContent();
+    }
+    return null;
+  };
+
+  const createCourseData = async (data) => {
+    await createCourse(data);
+  };
+
+  const getMenuItem = () => {
+    return ["Edit", "Delete", "Publish"];
+  };
+
   return (
     <Container>
-      <Modal open={!!menuItem} handleClose={() => {}}>
+      <Modal open={!!(menuItem || selectedCourse)} handleClose={() => {}}>
         {getModalContent()}
       </Modal>
       <div
@@ -81,12 +121,14 @@ const DashboardCoursesView = () => {
           className={classes.root}
           handleClick={() => {
             setMenuItem("Add");
+            setSelectedCourse({});
           }}
           label="Add"
         />
       </div>
       <Table
         data={coursesData.content}
+        dashboard
         columnKeys={[
           "courseName",
           "courseCode",
@@ -96,8 +138,21 @@ const DashboardCoursesView = () => {
           "fee",
         ]}
         rowsPerPage={coursesData.numberOfElements}
+        menuItems={getMenuItem()}
         count={coursesData.totalPages}
         totalElements={coursesData.totalElements}
+        onSelectMenuItem={({ menu, course }) => {
+          if (menu === "Publish") {
+            console.log("Publish");
+            createCourseData({ ...course, publish: true });
+          } else {
+            setMenuItem(menu);
+            setSelectedCourse(course);
+          }
+        }}
+        onSelectTableRow={(row) => {
+          setSelectedCourse(row);
+        }}
       />
     </Container>
   );

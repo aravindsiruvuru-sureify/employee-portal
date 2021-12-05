@@ -7,7 +7,7 @@ import MainContainer from "../../components/MainContainer";
 
 import Table from "../../../CommonComponents/Table";
 
-import { getCoursesList } from "../../store/actions";
+import { getHomePageCoursesList } from "../../store/actions";
 
 export const Container = styled.div`
   padding: 40px 0;
@@ -25,9 +25,14 @@ const CoursesPage = () => {
   const [loader, setLoader] = useState(true);
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const coursesData = get(store, "coursesData", {});
+
+  const getCourses = async () => {
+    await dispatch(getHomePageCoursesList());
+  };
+
   useEffect(() => {
     setLoader(true);
-    dispatch(getCoursesList());
+    getCourses();
     setLoader(false);
   }, []);
 

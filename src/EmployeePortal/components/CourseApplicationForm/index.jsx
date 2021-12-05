@@ -2,28 +2,21 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
-import { isEmpty } from "lodash";
 
 import { PropTypes } from "prop-types";
 
 import { handleButtonIsDisabled, handleHasError } from "../../utils/formUtils";
-
 import {
-  hrJobApplicationConstants,
-  HR_JOB_APPLICATION,
-  MIN10CHARS_ERROR_TEXT,
+  courseApplicationConstants,
+  COURSE_APPLICATION_IDS,
 } from "../../constants";
 import { Fields, YourReferralText } from "./styles";
 import {
   TextInput,
   PrimaryButton,
   UploadButton,
-  Dropdown,
 } from "../../../CommonComponents";
 import colors from "../../themes/colors";
-import { TimeToLeave } from "@material-ui/icons";
-
-const experienceLevelOptions = ["Experienced", "Fresher"];
 
 const useStyles = makeStyles({
   field: {
@@ -54,28 +47,28 @@ const useStyles = makeStyles({
 });
 
 const {
-  title,
-  description,
-  primarySkill,
-  secondarySkill,
-  salary,
-  ref,
-  experienceLevel,
-  experience,
-  contractType,
-  contractDuration,
-  location,
-} = HR_JOB_APPLICATION;
+  courseName,
+  courseContent,
+  courseCode,
+  trainer,
+  type,
+  mode,
+  startDate,
+  regEndDate,
+  timings,
+  duration,
+  fee,
+} = COURSE_APPLICATION_IDS;
 
-const HRJobApplicationForm = ({
+const CourseApplicationForm = ({
   onClickCrossIcon,
-  onClickSubmitButton,
-  applicationData = {},
+  onClickSubmitButton = () => {},
 }) => {
   const classes = useStyles();
   const [error, setError] = useState({});
   const [data, setData] = useState({});
   const [isDisabled, setIsDisabled] = useState(true);
+  const [resumeUrl, setResumeUrl] = useState("");
 
   const handleError = (id, value) => {
     const hasError = handleHasError(id, value);
@@ -108,75 +101,82 @@ const HRJobApplicationForm = ({
   return (
     <Fields>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>
-        {isEmpty(applicationData)
-          ? "Fill your job application"
-          : "Edit job application"}
-      </YourReferralText>
+      <YourReferralText>Fill your course application</YourReferralText>
       <TextInput
-        id={title}
-        label={hrJobApplicationConstants.title}
+        id={courseName}
+        label={courseApplicationConstants.courseName}
         onChange={handleChange}
-        error={error[title]}
+        error={error[courseName]}
         cssClass={classes.field}
       />
       <TextInput
-        id={description}
-        label={hrJobApplicationConstants.description}
+        id={courseContent}
+        label={courseApplicationConstants.courseContent}
         onChange={handleChange}
-        error={error[description]}
-        helperText={MIN10CHARS_ERROR_TEXT}
-        // defaultValue={(defaultVals && defaultVals.about_me) || ""}
-        cssClass={classes.field}
-        isMultiline
-      />
-      <TextInput
-        id={salary}
-        label={hrJobApplicationConstants.salary}
-        onChange={handleChange}
-        error={error[salary]}
-        cssClass={classes.field}
-      />
-      {/* <Dropdown
-        id={experienceLevel}
-        inputLabel={hrJobApplicationConstants.experienceLevel}
-        name={experienceLevel}
-        onChange={handleChange}
-        menuItems={experienceLevelOptions}
-      /> */}
-      <TextInput
-        id={experienceLevel}
-        label={hrJobApplicationConstants.experienceLevel}
-        onChange={handleChange}
-        error={error[experienceLevel]}
+        error={error[courseContent]}
         cssClass={classes.field}
       />
       <TextInput
-        id={experience}
-        label={hrJobApplicationConstants.experience}
+        id={courseCode}
+        label={courseApplicationConstants.courseCode}
         onChange={handleChange}
-        error={error[experience]}
+        error={error[courseCode]}
         cssClass={classes.field}
       />
       <TextInput
-        id={contractType}
-        label={hrJobApplicationConstants.contractType}
+        id={trainer}
+        label={courseApplicationConstants.trainer}
         onChange={handleChange}
-        error={error[contractType]}
+        error={error[trainer]}
         cssClass={classes.field}
       />
       <TextInput
-        id={contractDuration}
-        label={hrJobApplicationConstants.contractDuration}
+        id={type}
+        label={courseApplicationConstants.type}
         onChange={handleChange}
-        error={error[contractDuration]}
+        error={error[type]}
         cssClass={classes.field}
       />
       <TextInput
-        id={location}
-        label={hrJobApplicationConstants.location}
+        id={mode}
+        label={courseApplicationConstants.mode}
         onChange={handleChange}
-        error={error[location]}
+        error={error[mode]}
+        cssClass={classes.field}
+      />
+      <TextInput
+        id={startDate}
+        label={courseApplicationConstants.startDate}
+        onChange={handleChange}
+        error={error[startDate]}
+        cssClass={classes.field}
+      />
+      <TextInput
+        id={regEndDate}
+        label={courseApplicationConstants.regEndDate}
+        onChange={handleChange}
+        error={error[regEndDate]}
+        cssClass={classes.field}
+      />
+      <TextInput
+        id={timings}
+        label={courseApplicationConstants.timings}
+        onChange={handleChange}
+        error={error[timings]}
+        cssClass={classes.field}
+      />
+      <TextInput
+        id={duration}
+        label={courseApplicationConstants.duration}
+        onChange={handleChange}
+        error={error[duration]}
+        cssClass={classes.field}
+      />
+      <TextInput
+        id={fee}
+        label={courseApplicationConstants.fee}
+        onChange={handleChange}
+        error={error[fee]}
         cssClass={classes.field}
       />
       <PrimaryButton
@@ -188,9 +188,9 @@ const HRJobApplicationForm = ({
   );
 };
 
-HRJobApplicationForm.propTypes = {
+CourseApplicationForm.propTypes = {
   onClickCrossIcon: PropTypes.func.isRequired,
   onClickSubmitButton: PropTypes.func.isRequired,
-  applicationData: PropTypes.object.isRequired,
+  referral: PropTypes.object.isRequired,
 };
-export default HRJobApplicationForm;
+export default CourseApplicationForm;

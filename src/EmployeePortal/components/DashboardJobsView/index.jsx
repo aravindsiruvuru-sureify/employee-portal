@@ -10,9 +10,12 @@ import Table from "../../../CommonComponents/Table";
 import Modal from "../../../CommonComponents/Modal";
 import PrimaryButton from "../../../CommonComponents/PrimaryButton";
 
-import { getJobsList } from "../../store/employeeStore/actions";
+import { getDashboardPageJobsList } from "../../store/employeeStore/actions";
 import HRJobApplicationForm from "../HRJobApplicationForm";
-import colors from "../../themes/colors";
+
+import JobDetailsApplicationForm from "../JobDetailsApplicationForm";
+
+import { createJob } from "../../services/ApiService/actions";
 
 export const Container = styled.div`
   padding: 40px 0;
@@ -50,21 +53,28 @@ const DashboardJobsView = () => {
   const jobsData = get(store, "jobsData", {});
   useEffect(() => {
     setLoader(true);
-    dispatch(getJobsList());
+    dispatch(getDashboardPageJobsList());
     setLoader(false);
   }, []);
 
-  const getModalContent = () => {
+  const resetModal = () => {
+    setMenuItem(null);
+    setSelectedJob(null);
+  };
+
+  const getMenuModalContent = () => {
     switch (menuItem) {
       case "Edit":
       case "Add":
         return (
           <HRJobApplicationForm
             onClickCrossIcon={() => {
-              setMenuItem(null);
+              resetModal();
             }}
-            onClickSubmitButton={() => {}}
-            applicationData={selectedJob}
+            onClickSubmitButton={(data) => {
+              console.log(data);
+            }}
+            // applicationData={selectedJob}
           />
         );
       default:
@@ -73,9 +83,39 @@ const DashboardJobsView = () => {
     return <h1>{menuItem}</h1>;
   };
 
+  const getJobDetailsModalContent = () => {
+    return (
+      <JobDetailsApplicationForm
+        jobDetails={selectedJob}
+        onClickCrossIcon={() => {
+          resetModal();
+        }}
+        dashboard
+      />
+    );
+  };
+
+  const getModalContent = () => {
+    if (menuItem && selectedJob) {
+      return getMenuModalContent();
+    }
+    if (selectedJob) {
+      return getJobDetailsModalContent();
+    }
+    return null;
+  };
+
+  const createJobData = async (data) => {
+    await createJob(data);
+  };
   return (
     <Container>
-      <Modal open={!!menuItem} handleClose={() => {}}>
+      <Modal
+        open={!!(menuItem || selectedJob)}
+        handleClose={() => {
+          resetModal();
+        }}
+      >
         {getModalContent()}
       </Modal>
       <div
@@ -90,6 +130,7 @@ const DashboardJobsView = () => {
           className={classes.root}
           handleClick={() => {
             setMenuItem("Add");
+            setSelectedJob({});
           }}
           label="Add"
         />
@@ -111,8 +152,17 @@ const DashboardJobsView = () => {
         totalElements={jobsData.totalElements}
         menuItems={["Edit", "Delete", "Publish"]}
         onSelectMenuItem={({ menu, job }) => {
-          setMenuItem(menu);
-          setSelectedJob(job);
+          if (menu === "Publish") {
+            console.log("Publish");
+            createJobData({ ...job, publish: true });
+          } else {
+            setMenuItem(menu);
+            setSelectedJob(job);
+          }
+        }}
+        onSelectTableRow={(row) => {
+          console.log("oooo", row);
+          setSelectedJob(row);
         }}
       />
     </Container>

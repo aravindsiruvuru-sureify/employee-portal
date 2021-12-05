@@ -57,12 +57,14 @@ const StyledButton = withStyles({
 })(AppBar);
 
 const headerLabels = [
-  "SERVICES",
-  "CONSULTING",
-  "PRODUCTS",
+  "ABOUT US",
+  "IT SERVICES",
+  "SOLUTIONS",
+  "CAREERS",
+  "TRAINING",
   "EMPLOYEES",
-  "CLIENTS",
-  "TESTIMONIAL",
+  "CUSTOMERS",
+  "BLOGS",
   "CONTACT US",
 ];
 
