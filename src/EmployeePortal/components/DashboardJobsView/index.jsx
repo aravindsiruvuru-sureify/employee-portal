@@ -74,6 +74,7 @@ const DashboardJobsView = () => {
             onClickSubmitButton={(data) => {
               console.log(data);
               createJobData({ ...data, publish: false, empId: "1" });
+              dispatch(getDashboardPageJobsList());
             }}
             // applicationData={selectedJob}
           />
@@ -109,6 +110,12 @@ const DashboardJobsView = () => {
   const createJobData = async (data) => {
     await createJob(data);
   };
+
+  const updateJob = async (job) => {
+    await createJobData({ ...job });
+    await dispatch(getDashboardPageJobsList());
+  };
+
   return (
     <Container>
       <Modal
@@ -154,7 +161,7 @@ const DashboardJobsView = () => {
         onSelectMenuItem={({ menu, job }) => {
           if (menu === "Publish" || menu === "Hide") {
             console.log("Publish");
-            createJobData({ ...job, publish: !job.publish });
+            updateJob({ ...job, publish: !job.publish });
           } else {
             setMenuItem(menu);
             setSelectedJob(job);

@@ -99,6 +99,12 @@ const DashboardCoursesView = () => {
 
   const createCourseData = async (data) => {
     await createCourse(data);
+    await dispatch(getDashboardPageCoursesList());
+  };
+
+  const updateCourse = async (course) => {
+    await createCourseData({ ...course });
+    await dispatch(getDashboardPageCoursesList());
   };
 
   return (
@@ -140,7 +146,7 @@ const DashboardCoursesView = () => {
         onSelectMenuItem={({ menu, course }) => {
           if (menu === "Publish" || menu === "Hide") {
             console.log("Publish");
-            createCourseData({ ...course, publish: true });
+            updateCourse({ ...course, publish: course.publish });
           } else {
             setMenuItem(menu);
             setSelectedCourse(course);

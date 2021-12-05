@@ -7,6 +7,8 @@ import {
   MenuItem,
   Menu,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
@@ -71,6 +73,8 @@ const headerLabels = [
 const Header = ({ isDashboard = false }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+  const history = useHistory();
+
   const can_access_dashboard = true;
 
   const handleClick = (event) => {
@@ -122,9 +126,11 @@ const Header = ({ isDashboard = false }) => {
         variant="subtitle1"
         className={classes.label}
         key={label}
-        // onClick={() => {
-        //   onClickHeaderLabel(label);
-        // }}
+        onClick={() => {
+          if (label === "EMPLOYEES") {
+            history.push("/dashboard");
+          }
+        }}
       >
         {label}
       </Typography>
