@@ -75,6 +75,7 @@ const DashboardJobsView = () => {
               console.log(data);
               createJobData({ ...data, publish: false, empId: "1" });
               dispatch(getDashboardPageJobsList());
+              resetModal();
             }}
             // applicationData={selectedJob}
           />
