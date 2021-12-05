@@ -73,6 +73,7 @@ const DashboardJobsView = () => {
             }}
             onClickSubmitButton={(data) => {
               console.log(data);
+              createJobData({ ...data, publish: false });
             }}
             // applicationData={selectedJob}
           />

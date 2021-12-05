@@ -69,6 +69,7 @@ const DashboardCoursesView = () => {
           <CourseApplicationForm
             onClickSubmitButton={(data) => {
               console.log(data);
+              createCourseData({ ...data, publish: false });
             }}
             onClickCrossIcon={() => {
               resetModal();
