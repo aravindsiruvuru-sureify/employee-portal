@@ -102,7 +102,7 @@ const HRJobApplicationForm = ({
   }, [error]);
 
   const handleClick = () => {
-    onClickSubmitButton({ ...data, publish: false });
+    onClickSubmitButton({ ...data, publish: false, endDate: "2022-01-29" });
   };
 
   return (
@@ -126,7 +126,6 @@ const HRJobApplicationForm = ({
         onChange={handleChange}
         error={error[description]}
         helperText={MIN10CHARS_ERROR_TEXT}
-        // defaultValue={(defaultVals && defaultVals.about_me) || ""}
         cssClass={classes.field}
         isMultiline
       />
@@ -137,16 +136,23 @@ const HRJobApplicationForm = ({
         error={error[salary]}
         cssClass={classes.field}
       />
-      {/* <Dropdown
-        id={experienceLevel}
-        inputLabel={hrJobApplicationConstants.experienceLevel}
-        name={experienceLevel}
-        onChange={handleChange}
-        menuItems={experienceLevelOptions}
-      /> */}
       <TextInput
         id={experienceLevel}
         label={hrJobApplicationConstants.experienceLevel}
+        onChange={handleChange}
+        error={error[experienceLevel]}
+        cssClass={classes.field}
+      />
+      <TextInput
+        id={primarySkill}
+        label={hrJobApplicationConstants.primarySkill}
+        onChange={handleChange}
+        error={error[primarySkill]}
+        cssClass={classes.field}
+      />
+      <TextInput
+        id={secondarySkill}
+        label={hrJobApplicationConstants.secondarySkill}
         onChange={handleChange}
         error={error[experienceLevel]}
         cssClass={classes.field}

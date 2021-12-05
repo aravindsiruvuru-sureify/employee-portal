@@ -73,7 +73,7 @@ const DashboardJobsView = () => {
             }}
             onClickSubmitButton={(data) => {
               console.log(data);
-              createJobData({ ...data, publish: false });
+              createJobData({ ...data, publish: false, empId: "1" });
             }}
             // applicationData={selectedJob}
           />
@@ -151,11 +151,10 @@ const DashboardJobsView = () => {
         rowsPerPage={jobsData.numberOfElements}
         count={jobsData.totalPages}
         totalElements={jobsData.totalElements}
-        menuItems={["Edit", "Delete", "Publish"]}
         onSelectMenuItem={({ menu, job }) => {
-          if (menu === "Publish") {
+          if (menu === "Publish" || menu === "Hide") {
             console.log("Publish");
-            createJobData({ ...job, publish: true });
+            createJobData({ ...job, publish: !job.publish });
           } else {
             setMenuItem(menu);
             setSelectedJob(job);

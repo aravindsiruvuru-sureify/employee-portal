@@ -13,32 +13,32 @@ const localApiEndpoints = {
 };
 
 export const getHomePageJobsList = () => {
-  return api.get(apiEndpoints.home_page_jobs).then((response) => {
+  return api.get(localApiEndpoints.home_page_jobs).then((response) => {
     return response.data;
   });
 };
 
 export const getDashboardPageJobsList = () => {
-  return api.get(apiEndpoints.hr_page_jobs).then((response) => {
+  return api.get(localApiEndpoints.hr_page_jobs).then((response) => {
     return response.data;
   });
 };
 
 export const getHomePageCoursesList = () => {
-  return api.get(apiEndpoints.home_page_courses).then((response) => {
+  return api.get(localApiEndpoints.home_page_courses).then((response) => {
     return response.data;
   });
 };
 
 export const getDashboardPageCoursesList = () => {
-  return api.get(apiEndpoints.hr_page_courses).then((response) => {
+  return api.get(localApiEndpoints.hr_page_courses).then((response) => {
     return response.data;
   });
 };
 
 export const createJob = (body) => {
   return api
-    .put(apiEndpoints.hr_create_and_update_job, body)
+    .put(localApiEndpoints.hr_create_and_update_job, body)
     .then((response) => {
       return;
     });
@@ -46,7 +46,7 @@ export const createJob = (body) => {
 
 export const createCourse = (body) => {
   return api
-    .put(apiEndpoints.hr_create_and_update_course, body)
+    .put(localApiEndpoints.hr_create_and_update_course, body)
     .then((response) => {
       return;
     });

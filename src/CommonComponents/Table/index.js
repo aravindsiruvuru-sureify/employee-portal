@@ -28,7 +28,6 @@ const Table = ({
   count,
   dashboard = false,
   onSelectMenuItem,
-  menuItems = [],
   onSelectTableRow = () => {},
 }) => {
   const [page, setPage] = useState(0);
@@ -68,6 +67,13 @@ const Table = ({
   };
 
   const renderMenu = ({ job }) => {
+    let menuItems = [];
+
+    if (job.publish) {
+      menuItems = ["Edit", "Delete", "Hide"];
+    } else {
+      menuItems = ["Edit", "Delete", "Publish"];
+    }
     return (
       <Menu
         id="simple-menu"
@@ -80,19 +86,21 @@ const Table = ({
           handleClose(e);
         }}
       >
-        {menuItems.map((item) => (
-          <MenuItem
-            onClick={(e) => {
-              e && e.stopPropagation();
-              e && e.preventDefault();
-              onSelectMenuItem({ menu: item, job });
-              handleClose(e);
-            }}
-            className={classes.menuItem}
-          >
-            {item}
-          </MenuItem>
-        ))}
+        {menuItems.map((item) => {
+          return (
+            <MenuItem
+              onClick={(e) => {
+                e && e.stopPropagation();
+                e && e.preventDefault();
+                onSelectMenuItem({ menu: item, job });
+                handleClose(e);
+              }}
+              className={classes.menuItem}
+            >
+              {item}
+            </MenuItem>
+          );
+        })}
       </Menu>
     );
   };

@@ -69,7 +69,7 @@ const DashboardCoursesView = () => {
           <CourseApplicationForm
             onClickSubmitButton={(data) => {
               console.log(data);
-              createCourseData({ ...data, publish: false });
+              createCourseData({ ...data, publish: false, empId: "1" });
             }}
             onClickCrossIcon={() => {
               resetModal();
@@ -99,10 +99,6 @@ const DashboardCoursesView = () => {
 
   const createCourseData = async (data) => {
     await createCourse(data);
-  };
-
-  const getMenuItem = () => {
-    return ["Edit", "Delete", "Publish"];
   };
 
   return (
@@ -139,11 +135,10 @@ const DashboardCoursesView = () => {
           "fee",
         ]}
         rowsPerPage={coursesData.numberOfElements}
-        menuItems={getMenuItem()}
         count={coursesData.totalPages}
         totalElements={coursesData.totalElements}
         onSelectMenuItem={({ menu, course }) => {
-          if (menu === "Publish") {
+          if (menu === "Publish" || menu === "Hide") {
             console.log("Publish");
             createCourseData({ ...course, publish: true });
           } else {

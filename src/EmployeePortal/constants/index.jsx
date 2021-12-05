@@ -277,7 +277,7 @@ export const HR_JOB_APPLICATION = {
   experience: "experience",
   contractType: "contractType",
   contractDuration: "contractDuration",
-  location: "contractDuration",
+  location: "location",
 };
 
 export const QUARTER_CYCLES = {
