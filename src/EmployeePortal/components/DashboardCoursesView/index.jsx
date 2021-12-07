@@ -4,28 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import { makeStyles } from "@material-ui/core/styles";
 
-import MainContainer from "../../components/MainContainer";
-
 import Table from "../../../CommonComponents/Table";
 import Modal from "../../../CommonComponents/Modal";
 import PrimaryButton from "../../../CommonComponents/PrimaryButton";
 
 import { getDashboardPageCoursesList } from "../../store/employeeStore/actions";
-import colors from "../../themes/colors";
 
 import CourseApplicationForm from "../CourseApplicationForm";
 import { createCourse } from "../../services/ApiService/actions";
-
-export const Container = styled.div`
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  box-shadow: none !important;
-  margin-bottom: unset !important;
-`;
+import { Container } from "../DashboardContainer";
+import AlertDialog from "../../../CommonComponents/AlertDialog";
 
 const useStyles = makeStyles({
   root: {
@@ -44,16 +32,15 @@ const useStyles = makeStyles({
 const DashboardCoursesView = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [loader, setLoader] = useState(true);
   const [menuItem, setMenuItem] = useState(null);
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const coursesData = get(store, "coursesData", {});
+  const loader = get(store, "loader", false);
+
   useEffect(() => {
-    setLoader(true);
     dispatch(getDashboardPageCoursesList());
-    setLoader(false);
   }, []);
 
   const resetModal = () => {
@@ -107,55 +94,80 @@ const DashboardCoursesView = () => {
     await dispatch(getDashboardPageCoursesList());
   };
 
-  return (
-    <Container>
-      <Modal open={!!(menuItem || selectedCourse)} handleClose={() => {}}>
-        {getModalContent()}
-      </Modal>
-      <div
-        style={{
-          width: "90%",
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "20px 0",
-        }}
-      >
-        <PrimaryButton
-          className={classes.root}
-          handleClick={() => {
-            setMenuItem("Add");
-            setSelectedCourse({});
+  const renderDeleteAlert = () => {
+    if (menuItem === "Delete") {
+      return (
+        <AlertDialog
+          handleAgreeClick={() => {
+            resetModal();
           }}
-          label="Add"
+          handleDisagreeClick={() => {
+            resetModal();
+          }}
+          text="Are you sure, You want to delete this course?"
         />
-      </div>
-      <Table
-        data={coursesData.content}
-        dashboard
-        columnKeys={[
-          "courseName",
-          "courseCode",
-          "type",
-          "duration",
-          "regEndDate",
-          "fee",
-        ]}
-        rowsPerPage={coursesData.numberOfElements}
-        count={coursesData.totalPages}
-        totalElements={coursesData.totalElements}
-        onSelectMenuItem={({ menu, course }) => {
-          if (menu === "Publish" || menu === "Hide") {
-            console.log("Publish");
-            updateCourse({ ...course, publish: course.publish });
-          } else {
-            setMenuItem(menu);
-            setSelectedCourse(course);
-          }
-        }}
-        onSelectTableRow={(row) => {
-          setSelectedCourse(row);
-        }}
-      />
+      );
+    }
+  };
+
+  const showModal = () => {
+    return menuItem === null || menuItem === "Edit" || menuItem === "Add";
+  };
+
+  return (
+    <Container loader={loader}>
+      <>
+        {renderDeleteAlert()}
+        {showModal() && (
+          <Modal open={!!(menuItem || selectedCourse)} handleClose={() => {}}>
+            {getModalContent()}
+          </Modal>
+        )}
+        <div
+          style={{
+            width: "90%",
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "20px 0",
+          }}
+        >
+          <PrimaryButton
+            className={classes.root}
+            handleClick={() => {
+              setMenuItem("Add");
+              setSelectedCourse({});
+            }}
+            label="Add"
+          />
+        </div>
+        <Table
+          data={coursesData.content}
+          dashboard
+          columnKeys={[
+            { id: "courseCode", label: "Course code" },
+            { id: "courseName", label: "Course name" },
+            { id: "trainer", label: "Trainer" },
+            { id: "type", label: "Type" },
+            { id: "startDate", label: "Start date" },
+            { id: "fee", label: "Fee" },
+            { id: "count", label: "Count" },
+          ]}
+          rowsPerPage={coursesData.numberOfElements}
+          count={coursesData.totalPages}
+          totalElements={coursesData.totalElements}
+          onSelectMenuItem={({ menu, course }) => {
+            if (menu === "Publish" || menu === "Hide") {
+              updateCourse({ ...course, publish: course.publish });
+            } else {
+              setMenuItem(menu);
+              setSelectedCourse(course);
+            }
+          }}
+          onSelectTableRow={(row) => {
+            setSelectedCourse(row);
+          }}
+        />
+      </>
     </Container>
   );
 };

@@ -22,22 +22,20 @@ export const Container = styled.div`
 
 const CoursesPage = () => {
   const dispatch = useDispatch();
-  const [loader, setLoader] = useState(true);
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const coursesData = get(store, "coursesData", {});
+  const loader = get(store, "loader", false);
 
   const getCourses = async () => {
     await dispatch(getHomePageCoursesList());
   };
 
   useEffect(() => {
-    setLoader(true);
     getCourses();
-    setLoader(false);
   }, []);
 
   return (
-    <MainContainer isDashboard={false} loadingStatus={200}>
+    <MainContainer isDashboard={false} loadingStatus={loader ? 100 : 200}>
       <Container>
         <div style={{ width: "90%", display: "flex" }}>
           <h1

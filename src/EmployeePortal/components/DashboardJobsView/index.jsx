@@ -16,17 +16,8 @@ import HRJobApplicationForm from "../HRJobApplicationForm";
 import JobDetailsApplicationForm from "../JobDetailsApplicationForm";
 
 import { createJob } from "../../services/ApiService/actions";
-
-export const Container = styled.div`
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  box-shadow: none !important;
-  margin-bottom: unset !important;
-`;
+import { Container } from "../DashboardContainer";
+import AlertDialog from "../../../CommonComponents/AlertDialog";
 
 const useStyles = makeStyles({
   root: {
@@ -45,16 +36,15 @@ const useStyles = makeStyles({
 const DashboardJobsView = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [loader, setLoader] = useState(true);
   const [menuItem, setMenuItem] = useState(null);
   const [selectedJob, setSelectedJob] = useState(null);
 
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const jobsData = get(store, "jobsData", {});
+  const loader = get(store, "loader", false);
+
   useEffect(() => {
-    setLoader(true);
     dispatch(getDashboardPageJobsList());
-    setLoader(false);
   }, []);
 
   const resetModal = () => {
@@ -117,62 +107,85 @@ const DashboardJobsView = () => {
     await dispatch(getDashboardPageJobsList());
   };
 
-  return (
-    <Container>
-      <Modal
-        open={!!(menuItem || selectedJob)}
-        handleClose={() => {
-          resetModal();
-        }}
-      >
-        {getModalContent()}
-      </Modal>
-      <div
-        style={{
-          width: "90%",
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "20px 0",
-        }}
-      >
-        <PrimaryButton
-          className={classes.root}
-          handleClick={() => {
-            setMenuItem("Add");
-            setSelectedJob({});
+  const renderDeleteAlert = () => {
+    if (menuItem === "Delete") {
+      return (
+        <AlertDialog
+          handleAgreeClick={() => {
+            resetModal();
           }}
-          label="Add"
+          handleDisagreeClick={() => {
+            resetModal();
+          }}
+          text="Are you sure, You want to delete this job?"
         />
-      </div>
-      <Table
-        dashboard
-        data={jobsData.content}
-        columnKeys={[
-          "ref",
-          "title",
-          "experience",
-          "experienceLevel",
-          "location",
-          "postedOn",
-          "primarySkill",
-        ]}
-        rowsPerPage={jobsData.numberOfElements}
-        count={jobsData.totalPages}
-        totalElements={jobsData.totalElements}
-        onSelectMenuItem={({ menu, job }) => {
-          if (menu === "Publish" || menu === "Hide") {
-            console.log("Publish");
-            updateJob({ ...job, publish: !job.publish });
-          } else {
-            setMenuItem(menu);
-            setSelectedJob(job);
-          }
-        }}
-        onSelectTableRow={(row) => {
-          console.log("oooo", row);
-          setSelectedJob(row);
-        }}
-      />
+      );
+    }
+  };
+
+  const showModal = () => {
+    return menuItem === null || menuItem === "Edit" || menuItem === "Add";
+  };
+
+  return (
+    <Container loader={loader}>
+      <>
+        {renderDeleteAlert()}
+        {showModal() && (
+          <Modal
+            open={!!(menuItem || selectedJob)}
+            handleClose={() => {
+              resetModal();
+            }}
+          >
+            {getModalContent()}
+          </Modal>
+        )}
+        <div
+          style={{
+            width: "90%",
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "20px 0",
+          }}
+        >
+          <PrimaryButton
+            className={classes.root}
+            handleClick={() => {
+              setMenuItem("Add");
+              setSelectedJob({});
+            }}
+            label="Add"
+          />
+        </div>
+        <Table
+          dashboard
+          data={jobsData.content}
+          columnKeys={[
+            { id: "ref", label: "Job code" },
+            { id: "title", label: "Title" },
+            { id: "experience", label: "Experience" },
+            { id: "location", label: "Location" },
+            { id: "contractType", label: "Contract type" },
+            { id: "primarySkill", label: "Primary skill" },
+            { id: "count", label: "Count" },
+          ]}
+          rowsPerPage={jobsData.numberOfElements}
+          count={jobsData.totalPages}
+          totalElements={jobsData.totalElements}
+          onSelectMenuItem={({ menu, job }) => {
+            if (menu === "Publish" || menu === "Hide") {
+              updateJob({ ...job, publish: !job.publish });
+            } else {
+              setMenuItem(menu);
+              setSelectedJob(job);
+            }
+          }}
+          onSelectTableRow={(row) => {
+            setSelectedJob(row);
+          }}
+        />
+      </>
     </Container>
   );
 };

@@ -25,19 +25,17 @@ export const Container = styled.div`
 
 const JobsPage = () => {
   const dispatch = useDispatch();
-  const [loader, setLoader] = useState(true);
   const [selected, setSelected] = useState(null);
 
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const jobsData = get(store, "jobsData", {});
+  const loader = get(store, "loader", false);
 
   const getJobs = async () => {
     await dispatch(getHomePageJobsList());
   };
   useEffect(() => {
-    setLoader(true);
     getJobs();
-    setLoader(false);
   }, []);
 
   const onJobSelected = () => {};
@@ -56,7 +54,7 @@ const JobsPage = () => {
   };
 
   return (
-    <MainContainer isDashboard={false} loadingStatus={200}>
+    <MainContainer isDashboard={false} loadingStatus={loader ? 100 : 200}>
       <Modal open={!!selected} handleClose={() => {}}>
         {selected && getModalContent()}
       </Modal>
@@ -75,12 +73,12 @@ const JobsPage = () => {
         <Table
           data={jobsData.content}
           columnKeys={[
-            "title",
-            "experience",
-            "experienceLevel",
-            "location",
-            "postedOn",
-            "primarySkill",
+            { id: "title", label: "Title" },
+            { id: "experience", label: "Experience" },
+            { id: "experienceLevel", label: "Experience level" },
+            { id: "location", label: "Location" },
+            { id: "contractType", label: "Contract type" },
+            { id: "primarySkill", label: "Primary skill" },
           ]}
           rowsPerPage={jobsData.numberOfElements}
           count={jobsData.totalPages}

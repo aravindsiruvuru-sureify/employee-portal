@@ -1,9 +1,9 @@
 import api from "./api";
 import { API_FAILED, API_FETCHING, API_SUCCESS } from "../APIConstants";
 
-import apiEndpoints from "../APIEndpoints";
+// import apiEndpoints from "../APIEndpoints";
 
-const localApiEndpoints = {
+const apiEndpoints = {
   home_page_jobs: "https://prasanth-277.github.io/jobs.json",
   hr_page_jobs: "https://prasanth-277.github.io/jobs.json",
   home_page_courses: "https://prasanth-277.github.io/courses.json",

@@ -9,8 +9,13 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import Checkbox from "@mui/material/Checkbox";
+import check from "../../assets/svgs/check.png";
+import checked from "../../assets/svgs/checked.png";
 
 import "./style.css";
+
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const useStyles = makeStyles((theme) => ({
   selectLabel: {
@@ -33,17 +38,20 @@ const Table = ({
   const [page, setPage] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
-  const columns = [
+  let columns = dashboard
+    ? [{ id: "publish", label: "", align: "center" }]
+    : [];
+  columns = [
+    ...columns,
     ...columnKeys.map((ck) => {
       return {
-        id: ck,
-        label: ck,
+        ...ck,
         align: "center",
       };
     }),
     ...(dashboard ? [{ id: "more", label: "", align: "center" }] : []),
   ];
-
+  console.log("----", columns);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -107,6 +115,17 @@ const Table = ({
 
   const getColumnValue = ({ row, column }) => {
     const value = row[column.id];
+    if (column.id === "publish") {
+      return (
+        <Checkbox
+          {...label}
+          checked={row.publish}
+          color="success"
+          disableTouchRipple
+          disableFocusRipple
+        />
+      );
+    }
     if (column.id === "more") {
       return (
         <>
