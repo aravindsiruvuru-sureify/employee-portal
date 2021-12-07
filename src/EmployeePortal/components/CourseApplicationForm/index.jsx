@@ -10,13 +10,15 @@ import {
   courseApplicationConstants,
   COURSE_APPLICATION_IDS,
 } from "../../constants";
-import { Fields, YourReferralText } from "./styles";
+import { YourReferralText } from "./styles";
 import {
   TextInput,
   PrimaryButton,
   UploadButton,
+  DatePicker,
 } from "../../../CommonComponents";
 import colors from "../../themes/colors";
+import { Fields, ModalInputsWrapper } from "../index";
 
 const useStyles = makeStyles({
   field: {
@@ -99,92 +101,92 @@ const CourseApplicationForm = ({
   };
 
   return (
-    <Fields>
+    <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
       <YourReferralText>Fill your course application</YourReferralText>
-      <TextInput
-        id={courseName}
-        label={courseApplicationConstants.courseName}
-        onChange={handleChange}
-        error={error[courseName]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={courseContent}
-        label={courseApplicationConstants.courseContent}
-        onChange={handleChange}
-        error={error[courseContent]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={courseCode}
-        label={courseApplicationConstants.courseCode}
-        onChange={handleChange}
-        error={error[courseCode]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={trainer}
-        label={courseApplicationConstants.trainer}
-        onChange={handleChange}
-        error={error[trainer]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={type}
-        label={courseApplicationConstants.type}
-        onChange={handleChange}
-        error={error[type]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={mode}
-        label={courseApplicationConstants.mode}
-        onChange={handleChange}
-        error={error[mode]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={startDate}
-        label={courseApplicationConstants.startDate}
-        onChange={handleChange}
-        error={error[startDate]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={regEndDate}
-        label={courseApplicationConstants.regEndDate}
-        onChange={handleChange}
-        error={error[regEndDate]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={timings}
-        label={courseApplicationConstants.timings}
-        onChange={handleChange}
-        error={error[timings]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={duration}
-        label={courseApplicationConstants.duration}
-        onChange={handleChange}
-        error={error[duration]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={fee}
-        label={courseApplicationConstants.fee}
-        onChange={handleChange}
-        error={error[fee]}
-        cssClass={classes.field}
-      />
+      <Fields>
+        <TextInput
+          id={courseName}
+          label={courseApplicationConstants.courseName}
+          onChange={handleChange}
+          error={error[courseName]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={courseContent}
+          label={courseApplicationConstants.courseContent}
+          onChange={handleChange}
+          error={error[courseContent]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={courseCode}
+          label={courseApplicationConstants.courseCode}
+          onChange={handleChange}
+          error={error[courseCode]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={trainer}
+          label={courseApplicationConstants.trainer}
+          onChange={handleChange}
+          error={error[trainer]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={type}
+          label={courseApplicationConstants.type}
+          onChange={handleChange}
+          error={error[type]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={mode}
+          label={courseApplicationConstants.mode}
+          onChange={handleChange}
+          error={error[mode]}
+          cssClass={classes.field}
+        />
+        <DatePicker
+          handleChange={handleChange}
+          id={startDate}
+          label={courseApplicationConstants.startDate}
+          cssClass={classes.datePicker}
+        />
+        <DatePicker
+          handleChange={handleChange}
+          id={regEndDate}
+          label={courseApplicationConstants.regEndDate}
+          cssClass={classes.datePicker}
+        />
+        <TextInput
+          id={timings}
+          label={courseApplicationConstants.timings}
+          onChange={handleChange}
+          error={error[timings]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={duration}
+          label={courseApplicationConstants.duration}
+          onChange={handleChange}
+          error={error[duration]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={fee}
+          label={courseApplicationConstants.fee}
+          onChange={handleChange}
+          error={error[fee]}
+          cssClass={classes.field}
+        />
+      </Fields>
       <PrimaryButton
         handleClick={handleClick}
         cssClass={classes.button}
         label="Submit"
       />
-    </Fields>
+    </ModalInputsWrapper>
   );
 };
 

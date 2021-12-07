@@ -13,13 +13,15 @@ import {
   JOB_APPLICATION_IDS,
   UploadTypes,
 } from "../../constants";
-import { Fields, YourReferralText } from "./styles";
+import { YourReferralText } from "./styles";
 import {
   TextInput,
   PrimaryButton,
   UploadButton,
+  DatePicker,
 } from "../../../CommonComponents";
 import colors from "../../themes/colors";
+import { ModalInputsWrapper, Fields } from "..";
 
 const useStyles = makeStyles({
   field: {
@@ -97,61 +99,64 @@ const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
   };
 
   return (
-    <Fields>
+    <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
       <YourReferralText>Fill your job application</YourReferralText>
-      <TextInput
-        id={firstName}
-        label={jobApplicationConstants.firstName}
-        onChange={handleChange}
-        error={error[firstName]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={lastName}
-        label={jobApplicationConstants.lastName}
-        onChange={handleChange}
-        error={error[lastName]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={emailId}
-        label={jobApplicationConstants.email}
-        onChange={handleChange}
-        error={error[emailId]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={phoneNo}
-        label={jobApplicationConstants.number}
-        onChange={handleChange}
-        error={error[phoneNo]}
-        cssClass={classes.field}
-      />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <UploadButton
-          label="Upload Resume"
-          setUrl={setUrl}
-          dir="referral"
-          type={UploadTypes.file}
-          prevUrl={resumeUrl}
+      <Fields>
+        <TextInput
+          id={firstName}
+          label={jobApplicationConstants.firstName}
+          onChange={handleChange}
+          error={error[firstName]}
+          cssClass={classes.field}
         />
-        {resumeUrl && (
-          <PrimaryButton
-            handleClick={() => {
-              window.open(resumeUrl);
-            }}
-            label="View"
+        <TextInput
+          id={lastName}
+          label={jobApplicationConstants.lastName}
+          onChange={handleChange}
+          error={error[lastName]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={emailId}
+          label={jobApplicationConstants.email}
+          onChange={handleChange}
+          error={error[emailId]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={phoneNo}
+          label={jobApplicationConstants.number}
+          onChange={handleChange}
+          error={error[phoneNo]}
+          cssClass={classes.field}
+        />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <UploadButton
+            label="Upload Resume"
+            setUrl={setUrl}
+            dir="referral"
+            type={UploadTypes.file}
+            prevUrl={resumeUrl}
           />
-        )}
-      </div>
+          {resumeUrl && (
+            <PrimaryButton
+              handleClick={() => {
+                window.open(resumeUrl);
+              }}
+              label="View"
+            />
+          )}
+        </div>
+      </Fields>
+
       <PrimaryButton
         handleClick={handleClick}
         cssClass={classes.button}
         label="Submit"
         isDisabled={isDisabled}
       />
-    </Fields>
+    </ModalInputsWrapper>
   );
 };
 

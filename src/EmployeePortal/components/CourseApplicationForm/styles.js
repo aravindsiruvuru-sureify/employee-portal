@@ -10,7 +10,8 @@ const Fields = styled.div`
 `;
 
 const YourReferralText = styled(font22PrimaryRobotoMedium)`
-  margin: 20px 0px;
+  margin: 10px 0 20px 0px;
+  display: block;
 `;
 
 export { Fields, YourReferralText };

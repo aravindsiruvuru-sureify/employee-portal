@@ -5,6 +5,8 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import { PropTypes } from "prop-types";
 import colors from "../../EmployeePortal/themes/colors";
+import {InputWrapper, InputTitle} from "../InputWrapper";
+
 
 const useStyles = makeStyles((theme) => ({
   field: {
@@ -57,44 +59,47 @@ const TextInput = ({
   const classes = useStyles();
 
   return (
-    <TextField
-      id={id}
-      key={id}
-      disabled={isDisabled}
-      type={type}
-      className={`${classes.field} ${cssClass} ${classes.animatedItem} ${
-        isMultiline && classes.multiline
-      }`}
-      label={label}
-      variant="filled"
-      defaultValue={defaultValue}
-      value={value}
-      onChange={(e) => {
-        onChange(e);
-      }}
-      onBlur={onBlur}
-      multiline={isMultiline}
-      rows={isMultiline ? 4 : 0}
-      InputLabelProps={{
-        classes: {
-          focused: classes.inputLabel,
-        },
-      }}
-      onKeyPress={onKeyDown}
-      error={error}
-      helperText={error ? helperText : ""}
-      fullWidth={fullWidth}
-      InputProps={
-        hasIcon && {
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon style={{ marginBottom: "12px" }} />
-            </InputAdornment>
-          ),
+    <InputWrapper>
+      <InputTitle>{label}</InputTitle>
+      <TextField
+        id={id}
+        key={id}
+        disabled={isDisabled}
+        type={type}
+        className={`${classes.field} ${cssClass} ${classes.animatedItem} ${
+          isMultiline && classes.multiline
+        }`}
+        label={""}
+        variant="filled"
+        defaultValue={defaultValue}
+        value={value}
+        onChange={(e) => {
+          onChange(e);
+        }}
+        onBlur={onBlur}
+        multiline={isMultiline}
+        rows={isMultiline ? 4 : 0}
+        InputLabelProps={{
+          classes: {
+            focused: classes.inputLabel,
+          },
+        }}
+        onKeyPress={onKeyDown}
+        error={error}
+        helperText={error ? helperText : ""}
+        fullWidth={fullWidth}
+        InputProps={
+          hasIcon && {
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon style={{ marginBottom: "12px" }} />
+              </InputAdornment>
+            ),
+          }
         }
-      }
-      placeholder={placeholder}
-    />
+        placeholder={placeholder}
+      />
+    </InputWrapper>
   );
 };
 

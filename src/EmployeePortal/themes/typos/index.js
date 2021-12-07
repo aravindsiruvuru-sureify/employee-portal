@@ -109,7 +109,7 @@ export const font16PrimaryRobotoBold = styled(fontRobotoMedium)`
 
 export const font16PrimaryLightRoboto = styled(fontRobotoNormal)`
   font-size: 16px;
-  color: rgba(24, 59, 86, 0.6);
+  color: black;
 `;
 
 export const font22PrimaryRobotoBold = styled(fontRobotoNormal)`

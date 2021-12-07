@@ -11,15 +11,17 @@ import { handleButtonIsDisabled, handleHasError } from "../../utils/formUtils";
 import {
   hrJobApplicationConstants,
   HR_JOB_APPLICATION,
+  EXPERIANCE_LEVELS,
   MIN10CHARS_ERROR_TEXT,
 } from "../../constants";
-import { Fields, YourReferralText } from "./styles";
+import { YourReferralText } from "./styles";
 import {
   TextInput,
   PrimaryButton,
   UploadButton,
   Dropdown,
 } from "../../../CommonComponents";
+import { Fields, ModalInputsWrapper } from "../index";
 import colors from "../../themes/colors";
 import { TimeToLeave } from "@material-ui/icons";
 
@@ -41,7 +43,7 @@ const useStyles = makeStyles({
     },
   },
   root: {
-    top: "20px",
+    top: "0px",
     right: "10px",
     position: "absolute",
     cursor: "pointer",
@@ -106,91 +108,100 @@ const HRJobApplicationForm = ({
   };
 
   return (
-    <Fields>
-      <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
+    <ModalInputsWrapper>
       <YourReferralText>
         {isEmpty(applicationData)
           ? "Fill your job application"
           : "Edit job application"}
       </YourReferralText>
-      <TextInput
-        id={title}
-        label={hrJobApplicationConstants.title}
-        onChange={handleChange}
-        error={error[title]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={description}
-        label={hrJobApplicationConstants.description}
-        onChange={handleChange}
-        error={error[description]}
-        helperText={MIN10CHARS_ERROR_TEXT}
-        cssClass={classes.field}
-        isMultiline
-      />
-      <TextInput
-        id={salary}
-        label={hrJobApplicationConstants.salary}
-        onChange={handleChange}
-        error={error[salary]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={experienceLevel}
-        label={hrJobApplicationConstants.experienceLevel}
-        onChange={handleChange}
-        error={error[experienceLevel]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={primarySkill}
-        label={hrJobApplicationConstants.primarySkill}
-        onChange={handleChange}
-        error={error[primarySkill]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={secondarySkill}
-        label={hrJobApplicationConstants.secondarySkill}
-        onChange={handleChange}
-        error={error[experienceLevel]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={experience}
-        label={hrJobApplicationConstants.experience}
-        onChange={handleChange}
-        error={error[experience]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={contractType}
-        label={hrJobApplicationConstants.contractType}
-        onChange={handleChange}
-        error={error[contractType]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={contractDuration}
-        label={hrJobApplicationConstants.contractDuration}
-        onChange={handleChange}
-        error={error[contractDuration]}
-        cssClass={classes.field}
-      />
-      <TextInput
-        id={location}
-        label={hrJobApplicationConstants.location}
-        onChange={handleChange}
-        error={error[location]}
-        cssClass={classes.field}
-      />
+      <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
+      <Fields>
+        <TextInput
+          id={title}
+          label={hrJobApplicationConstants.title}
+          onChange={handleChange}
+          error={error[title]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={description}
+          label={hrJobApplicationConstants.description}
+          onChange={handleChange}
+          error={error[description]}
+          helperText={MIN10CHARS_ERROR_TEXT}
+          cssClass={classes.field}
+          isMultiline
+        />
+        <TextInput
+          id={salary}
+          label={hrJobApplicationConstants.salary}
+          onChange={handleChange}
+          error={error[salary]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={experienceLevel}
+          label={hrJobApplicationConstants.experienceLevel}
+          onChange={handleChange}
+          error={error[experienceLevel]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={primarySkill}
+          label={hrJobApplicationConstants.primarySkill}
+          onChange={handleChange}
+          error={error[primarySkill]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={secondarySkill}
+          label={hrJobApplicationConstants.secondarySkill}
+          onChange={handleChange}
+          error={error[experienceLevel]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={experience}
+          label={hrJobApplicationConstants.experience}
+          onChange={handleChange}
+          error={error[experience]}
+          cssClass={classes.field}
+        />
+        <Dropdown
+          inputLabel={experience}
+          name={hrJobApplicationConstants.experience}
+          onChange={handleChange}
+          menuItems={EXPERIANCE_LEVELS}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={contractType}
+          label={hrJobApplicationConstants.contractType}
+          onChange={handleChange}
+          error={error[contractType]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={contractDuration}
+          label={hrJobApplicationConstants.contractDuration}
+          onChange={handleChange}
+          error={error[contractDuration]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={location}
+          label={hrJobApplicationConstants.location}
+          onChange={handleChange}
+          error={error[location]}
+          cssClass={classes.field}
+        />
+      </Fields>
       <PrimaryButton
         handleClick={handleClick}
         cssClass={classes.button}
         label="Submit"
       />
-    </Fields>
+    </ModalInputsWrapper>
   );
 };
 

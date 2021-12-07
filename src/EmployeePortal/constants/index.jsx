@@ -103,7 +103,7 @@ export const ROLES = [
   "Human Resource",
 ];
 
-export const GENDERS = ["Male", "Female", "Others"];
+export const EXPERIENCE_LEVEL = ["Experienced", "Fresher"];
 
 export const personalDetails = {
   value: "PERSONAL_DETAILS",
@@ -242,6 +242,7 @@ export const jobApplicationConstants = {
   email: "Email",
   number: "Contact Number",
   link: "Resume Link",
+  experienceLevel: "Experience level",
 };
 
 export const hrJobApplicationConstants = {
@@ -264,6 +265,7 @@ export const JOB_APPLICATION_IDS = {
   emailId: "emailId",
   phoneNo: "phoneNo",
   link: "resume_url",
+  experienceLevel: "experience_level",
 };
 
 export const HR_JOB_APPLICATION = {
@@ -311,3 +313,5 @@ export const REFERRAL_FEEDBACK_FIELDS = {
     label: "Feedback By",
   },
 };
+
+export const EXPERIANCE_LEVELS = ['Experianced', 'Fresher']

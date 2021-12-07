@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: colors.white,
     color: '#000000',
     minWidth: '90px',
-    minHeight: '40px',
+    maxHeight: '40px',
     padding: '5px 8px',
     borderRadius: 5,
     boxShadow: '1px 1px 2px 1px #ccc',

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { FormControl, MenuItem, Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import colors from '../../EmployeePortal/themes/colors';
+import {InputWrapper, InputTitle } from '../InputWrapper';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -15,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     '&:focus-within > label': {
       color: `${colors.primary} !important`,
     },
+  },
+  menuItems: {
+    fontSize: '15px'
   },
   animatedItem: {
     animation: `$myEffect 3000ms easeInOut`,
@@ -55,25 +59,26 @@ const Dropdown = (props) => {
   const getMenu = () => {
     if (labelValueItems.length > 0) {
       return labelValueItems.map((el) => (
-        <MenuItem key={el.value} value={el.value}>
+        <MenuItem className={classes.menuItems} key={el.value} value={el.value}>
           {el.label}
         </MenuItem>
       ));
     }
     return menuItems.map((el) => {
       return (
-        <MenuItem key={el} value={el}>
+        <MenuItem className={classes.menuItems} key={el} value={el}>
           {el}
         </MenuItem>
       );
     });
   };
   return (
-    <FormControl
+    <InputWrapper>
+      <InputTitle>{name}</InputTitle>
+     <FormControl
       variant={variant}
       className={`${classes.formControl} ${cssClass}`}
     >
-      <InputLabel id="demo-simple-select-filled-label">{inputLabel}</InputLabel>
       <Select
         labelId="demo-simple-select-filled-label"
         key={`${name}_dropdown`}
@@ -84,6 +89,7 @@ const Dropdown = (props) => {
         {getMenu()}
       </Select>
     </FormControl>
+    </InputWrapper>
   );
 };
 
