@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     },
   },
   root: {
-    top: "20px",
+    top: "0px",
     right: "10px",
     position: "absolute",
     cursor: "pointer",
