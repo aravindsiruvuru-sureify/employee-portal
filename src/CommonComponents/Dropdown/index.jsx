@@ -1,33 +1,33 @@
-import React, { useState } from 'react';
-import { PropTypes } from 'prop-types';
-import { FormControl, MenuItem, Select } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import colors from '../../EmployeePortal/themes/colors';
-import {InputWrapper, InputTitle } from '../InputWrapper';
+import React, { useState } from "react";
+import { PropTypes } from "prop-types";
+import { FormControl, MenuItem, Select } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import colors from "../../EmployeePortal/themes/colors";
+import { InputWrapper, InputTitle } from "../InputWrapper";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 150,
-    width: '100%',
+    width: "100%",
     animation: `$myEffect 1500ms ${theme.transitions.easing.easeInOut}`,
-    '&:focus-within > div:after': {
+    "&:focus-within > div:after": {
       borderColor: `${colors.primary} !important`,
     },
-    '&:focus-within > label': {
+    "&:focus-within > label": {
       color: `${colors.primary} !important`,
     },
   },
   menuItems: {
-    fontSize: '15px'
+    fontSize: "15px",
   },
   animatedItem: {
     animation: `$myEffect 3000ms easeInOut`,
   },
-  '@keyframes myEffect': {
-    '0%': {
+  "@keyframes myEffect": {
+    "0%": {
       opacity: 0,
     },
-    '100%': {
+    "100%": {
       opacity: 1,
     },
   },
@@ -40,9 +40,9 @@ const Dropdown = (props) => {
     onChange,
     labelValueItems = [],
     menuItems = [],
-    cssClass = '',
-    defaultValue = '',
-    variant = 'filled',
+    cssClass = "",
+    defaultValue = "",
+    variant = "filled",
   } = props;
   const classes = useStyles();
   const [value, setvalue] = useState(defaultValue);
@@ -74,21 +74,21 @@ const Dropdown = (props) => {
   };
   return (
     <InputWrapper>
-      <InputTitle>{name}</InputTitle>
-     <FormControl
-      variant={variant}
-      className={`${classes.formControl} ${cssClass}`}
-    >
-      <Select
-        labelId="demo-simple-select-filled-label"
-        key={`${name}_dropdown`}
-        name={name}
-        onChange={handleChange}
-        value={value}
+      <InputTitle>{inputLabel}</InputTitle>
+      <FormControl
+        variant={variant}
+        className={`${classes.formControl} ${cssClass}`}
       >
-        {getMenu()}
-      </Select>
-    </FormControl>
+        <Select
+          labelId="demo-simple-select-filled-label"
+          key={`${name}_dropdown`}
+          name={name}
+          onChange={handleChange}
+          value={value}
+        >
+          {getMenu()}
+        </Select>
+      </FormControl>
     </InputWrapper>
   );
 };

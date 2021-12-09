@@ -4,18 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import { makeStyles } from "@material-ui/core/styles";
 
-import MainContainer from "../../components/MainContainer";
-
 import Table from "../../../CommonComponents/Table";
 import Modal from "../../../CommonComponents/Modal";
 import PrimaryButton from "../../../CommonComponents/PrimaryButton";
 
-import { getDashboardPageJobsList } from "../../store/employeeStore/actions";
-import HRJobApplicationForm from "../HRJobApplicationForm";
+import { getDashboardPageCoursesList } from "../../store/employeeStore/actions";
 
-import JobDetailsApplicationForm from "../JobDetailsApplicationForm";
-
-import { createJob } from "../../services/ApiService/actions";
+import CourseApplicationForm from "../CourseApplicationForm";
+import { createCourse } from "../../services/ApiService/actions";
 import { Container } from "../DashboardContainer";
 import AlertDialog from "../../../CommonComponents/AlertDialog";
 
@@ -33,23 +29,23 @@ const useStyles = makeStyles({
   },
 });
 
-const DashboardJobsView = () => {
+const DashboardEmployeesView = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [menuItem, setMenuItem] = useState(null);
-  const [selectedJob, setSelectedJob] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
-  const jobsData = get(store, "jobsData", {});
+  const coursesData = get(store, "coursesData", {});
   const loader = get(store, "loader", false);
 
   useEffect(() => {
-    dispatch(getDashboardPageJobsList());
+    dispatch(getDashboardPageCoursesList());
   }, []);
 
   const resetModal = () => {
     setMenuItem(null);
-    setSelectedJob(null);
+    setSelectedCourse(null);
   };
 
   const getMenuModalContent = () => {
@@ -57,17 +53,15 @@ const DashboardJobsView = () => {
       case "Edit":
       case "Add":
         return (
-          <HRJobApplicationForm
+          <CourseApplicationForm
+            onClickSubmitButton={(data) => {
+              console.log(data);
+              createCourseData({ ...data, publish: false, empId: "1" });
+            }}
             onClickCrossIcon={() => {
               resetModal();
             }}
-            onClickSubmitButton={(data) => {
-              console.log(data);
-              createJobData({ ...data, publish: false, empId: "1" });
-              dispatch(getDashboardPageJobsList());
-              resetModal();
-            }}
-            applicationData={selectedJob}
+            course={selectedCourse}
           />
         );
       default:
@@ -76,35 +70,29 @@ const DashboardJobsView = () => {
     return <h1>{menuItem}</h1>;
   };
 
-  const getJobDetailsModalContent = () => {
-    return (
-      <JobDetailsApplicationForm
-        jobDetails={selectedJob}
-        onClickCrossIcon={() => {
-          resetModal();
-        }}
-        dashboard
-      />
-    );
+  const getCourseDetailsModalContent = () => {
+    return <h1>Course details</h1>;
   };
 
   const getModalContent = () => {
-    if (menuItem && selectedJob) {
+    console.log(menuItem, selectedCourse);
+    if (menuItem && selectedCourse) {
       return getMenuModalContent();
     }
-    if (selectedJob) {
-      return getJobDetailsModalContent();
+    if (selectedCourse) {
+      return getCourseDetailsModalContent();
     }
     return null;
   };
 
-  const createJobData = async (data) => {
-    await createJob(data);
+  const createCourseData = async (data) => {
+    await createCourse(data);
+    await dispatch(getDashboardPageCoursesList());
   };
 
-  const updateJob = async (job) => {
-    await createJobData({ ...job });
-    await dispatch(getDashboardPageJobsList());
+  const updateCourse = async (course) => {
+    await createCourseData({ ...course });
+    await dispatch(getDashboardPageCoursesList());
   };
 
   const renderDeleteAlert = () => {
@@ -117,7 +105,7 @@ const DashboardJobsView = () => {
           handleDisagreeClick={() => {
             resetModal();
           }}
-          text="Are you sure, You want to delete this job?"
+          text="Are you sure, You want to delete this course?"
         />
       );
     }
@@ -132,12 +120,7 @@ const DashboardJobsView = () => {
       <>
         {renderDeleteAlert()}
         {showModal() && (
-          <Modal
-            open={!!(menuItem || selectedJob)}
-            handleClose={() => {
-              resetModal();
-            }}
-          >
+          <Modal open={!!(menuItem || selectedCourse)} handleClose={() => {}}>
             {getModalContent()}
           </Modal>
         )}
@@ -153,35 +136,35 @@ const DashboardJobsView = () => {
             className={classes.root}
             handleClick={() => {
               setMenuItem("Add");
-              setSelectedJob({});
+              setSelectedCourse({});
             }}
             label="Add"
           />
         </div>
         <Table
+          data={coursesData.content}
           dashboard
-          data={jobsData.content}
           columnKeys={[
-            { id: "ref", label: "Job code" },
-            { id: "title", label: "Title" },
-            { id: "experience", label: "Experience" },
-            { id: "location", label: "Location" },
-            { id: "contractType", label: "Contract type" },
-            { id: "primarySkill", label: "Primary skill" },
+            { id: "courseCode", label: "Course code" },
+            { id: "courseName", label: "Course name" },
+            { id: "trainer", label: "Trainer" },
+            { id: "type", label: "Type" },
+            { id: "startDate", label: "Start date" },
+            { id: "fee", label: "Fee" },
           ]}
-          rowsPerPage={jobsData.numberOfElements}
-          count={jobsData.totalPages}
-          totalElements={jobsData.totalElements}
-          onSelectMenuItem={({ menu, job }) => {
+          rowsPerPage={coursesData.numberOfElements}
+          count={coursesData.totalPages}
+          totalElements={coursesData.totalElements}
+          onSelectMenuItem={({ menu, course }) => {
             if (menu === "Publish" || menu === "Unpublish") {
-              updateJob({ ...job, publish: !job.publish });
+              updateCourse({ ...course, publish: course.publish });
             } else {
               setMenuItem(menu);
-              setSelectedJob(job);
+              setSelectedCourse(course);
             }
           }}
           onSelectTableRow={(row) => {
-            setSelectedJob(row);
+            setSelectedCourse(row);
           }}
         />
       </>
@@ -189,4 +172,4 @@ const DashboardJobsView = () => {
   );
 };
 
-export default DashboardJobsView;
+export default DashboardEmployeesView;

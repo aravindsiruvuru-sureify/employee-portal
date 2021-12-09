@@ -9,6 +9,7 @@ import { handleButtonIsDisabled, handleHasError } from "../../utils/formUtils";
 import {
   courseApplicationConstants,
   COURSE_APPLICATION_IDS,
+  MIN10CHARS_ERROR_TEXT,
 } from "../../constants";
 import { YourReferralText } from "./styles";
 import {
@@ -16,6 +17,7 @@ import {
   PrimaryButton,
   UploadButton,
   DatePicker,
+  Dropdown,
 } from "../../../CommonComponents";
 import colors from "../../themes/colors";
 import { Fields, ModalInputsWrapper } from "../index";
@@ -65,10 +67,11 @@ const {
 const CourseApplicationForm = ({
   onClickCrossIcon,
   onClickSubmitButton = () => {},
+  course = {},
 }) => {
   const classes = useStyles();
   const [error, setError] = useState({});
-  const [data, setData] = useState({});
+  const [data, setData] = useState(course);
   const [isDisabled, setIsDisabled] = useState(true);
   const [resumeUrl, setResumeUrl] = useState("");
 
@@ -113,39 +116,27 @@ const CourseApplicationForm = ({
           cssClass={classes.field}
         />
         <TextInput
-          id={courseContent}
-          label={courseApplicationConstants.courseContent}
-          onChange={handleChange}
-          error={error[courseContent]}
-          cssClass={classes.field}
-        />
-        <TextInput
-          id={courseCode}
-          label={courseApplicationConstants.courseCode}
-          onChange={handleChange}
-          error={error[courseCode]}
-          cssClass={classes.field}
-        />
-        <TextInput
           id={trainer}
           label={courseApplicationConstants.trainer}
           onChange={handleChange}
           error={error[trainer]}
           cssClass={classes.field}
         />
-        <TextInput
-          id={type}
-          label={courseApplicationConstants.type}
+        <Dropdown
+          inputLabel={courseApplicationConstants.type}
+          name={type}
           onChange={handleChange}
-          error={error[type]}
+          menuItems={["Regular"]}
           cssClass={classes.field}
+          // defaultValue={data.contractType}
         />
-        <TextInput
-          id={mode}
-          label={courseApplicationConstants.mode}
+        <Dropdown
+          inputLabel={courseApplicationConstants.mode}
+          name={mode}
           onChange={handleChange}
-          error={error[mode]}
+          menuItems={["CLASS_ROOMS"]}
           cssClass={classes.field}
+          // defaultValue={data.contractType}
         />
         <DatePicker
           handleChange={handleChange}
@@ -179,6 +170,16 @@ const CourseApplicationForm = ({
           onChange={handleChange}
           error={error[fee]}
           cssClass={classes.field}
+        />
+        <TextInput
+          id={courseContent}
+          label={courseApplicationConstants.courseContent}
+          onChange={handleChange}
+          error={error[courseContent]}
+          cssClass={classes.field}
+          helperText={MIN10CHARS_ERROR_TEXT}
+          defaultValue={data.description}
+          isMultiline
         />
       </Fields>
       <PrimaryButton

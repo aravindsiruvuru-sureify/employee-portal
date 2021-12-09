@@ -7,7 +7,7 @@ import MainContainer from "../../components/MainContainer";
 
 import Table from "../../../CommonComponents/Table";
 
-import { getHomePageCoursesList } from "../../store/actions";
+import { getHomePageEmployeesList } from "../../store/actions";
 
 export const Container = styled.div`
   padding: 40px 0;
@@ -20,18 +20,18 @@ export const Container = styled.div`
   margin-bottom: unset !important;
 `;
 
-const CoursesPage = () => {
+const EmployeeListPage = () => {
   const dispatch = useDispatch();
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
-  const coursesData = get(store, "coursesData", {});
+  const employees = get(store, "employees", {});
   const loader = get(store, "loader", false);
 
-  const getCourses = async () => {
-    await dispatch(getHomePageCoursesList());
+  const getEmployees = async () => {
+    await dispatch(getHomePageEmployeesList());
   };
 
   useEffect(() => {
-    getCourses();
+    getEmployees();
   }, []);
 
   return (
@@ -45,26 +45,27 @@ const CoursesPage = () => {
               fontFamily: "Roboto",
             }}
           >
-            Courses
+            Employees List
           </h1>
         </div>
         <Table
-          data={coursesData.content}
+          data={employees.content}
+          rowsPerPage={employees.numberOfElements}
+          count={employees.totalPages}
+          totalElements={employees.totalElements}
+          onRowClick={() => {}}
           columnKeys={[
-            { id: "courseName", label: "Course name" },
-            { id: "trainer", label: "Trainer" },
-            { id: "type", label: "Type" },
-            { id: "startDate", label: "Start date" },
-            { id: "duration", label: "Duration" },
-            { id: "fee", label: "Fee" },
+            { id: "emailId", label: "Email Id" },
+            { id: "firstName", label: "First Name" },
+            { id: "lastName", label: "Last Name" },
+            { id: "designation", label: "Designation" },
+            { id: "skills", label: "Skills" },
+            { id: "panNumber", label: "Pan Number" },
           ]}
-          rowsPerPage={coursesData.numberOfElements}
-          count={coursesData.totalPages}
-          totalElements={coursesData.totalElements}
         />
       </Container>
     </MainContainer>
   );
 };
 
-export default CoursesPage;
+export default EmployeeListPage;

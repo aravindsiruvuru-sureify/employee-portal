@@ -11,8 +11,9 @@ import { handleButtonIsDisabled, handleHasError } from "../../utils/formUtils";
 import {
   hrJobApplicationConstants,
   HR_JOB_APPLICATION,
-  EXPERIANCE_LEVELS,
   MIN10CHARS_ERROR_TEXT,
+  EXPERIENCE_LEVELS,
+  CONTRACT_TYPES,
 } from "../../constants";
 import { YourReferralText } from "./styles";
 import {
@@ -20,6 +21,7 @@ import {
   PrimaryButton,
   UploadButton,
   Dropdown,
+  DatePicker,
 } from "../../../CommonComponents";
 import { Fields, ModalInputsWrapper } from "../index";
 import colors from "../../themes/colors";
@@ -67,6 +69,7 @@ const {
   contractType,
   contractDuration,
   location,
+  endDate,
 } = HR_JOB_APPLICATION;
 
 const HRJobApplicationForm = ({
@@ -76,7 +79,7 @@ const HRJobApplicationForm = ({
 }) => {
   const classes = useStyles();
   const [error, setError] = useState({});
-  const [data, setData] = useState({});
+  const [data, setData] = useState(applicationData);
   const [isDisabled, setIsDisabled] = useState(true);
 
   const handleError = (id, value) => {
@@ -107,6 +110,10 @@ const HRJobApplicationForm = ({
     onClickSubmitButton({ ...data, publish: false, endDate: "2022-01-29" });
   };
 
+  const isExperienced = () => data.experienceLevel === "Experienced";
+
+  const isContractTypedJob = () => data.contractType === "Contract";
+
   return (
     <ModalInputsWrapper>
       <YourReferralText>
@@ -122,6 +129,80 @@ const HRJobApplicationForm = ({
           onChange={handleChange}
           error={error[title]}
           cssClass={classes.field}
+          defaultValue={data.title}
+        />
+        <Dropdown
+          name={experienceLevel}
+          inputLabel={hrJobApplicationConstants.experienceLevel}
+          onChange={handleChange}
+          menuItems={EXPERIENCE_LEVELS}
+          cssClass={classes.field}
+          defaultValue={data.experienceLevel}
+        />
+        <TextInput
+          id={experience}
+          label={hrJobApplicationConstants.experience}
+          onChange={handleChange}
+          error={error[experience]}
+          cssClass={classes.field}
+          isDisabled={!isExperienced()}
+          defaultValue={data.experience}
+        />
+        <Dropdown
+          inputLabel={hrJobApplicationConstants.contractType}
+          name={contractType}
+          onChange={handleChange}
+          menuItems={CONTRACT_TYPES}
+          cssClass={classes.field}
+          defaultValue={data.contractType}
+        />
+        <TextInput
+          id={contractDuration}
+          label={hrJobApplicationConstants.contractDuration}
+          onChange={handleChange}
+          error={error[contractDuration]}
+          cssClass={classes.field}
+          isDisabled={!isContractTypedJob()}
+          defaultValue={data.contractDuration}
+        />
+        <TextInput
+          id={salary}
+          label={hrJobApplicationConstants.salary}
+          onChange={handleChange}
+          error={error[salary]}
+          cssClass={classes.field}
+          defaultValue={data.salary}
+        />
+        <TextInput
+          id={primarySkill}
+          label={hrJobApplicationConstants.primarySkill}
+          onChange={handleChange}
+          error={error[primarySkill]}
+          cssClass={classes.field}
+          defaultValue={data.primarySkill}
+        />
+        <TextInput
+          id={secondarySkill}
+          label={hrJobApplicationConstants.secondarySkill}
+          onChange={handleChange}
+          error={error[experienceLevel]}
+          cssClass={classes.field}
+          defaultValue={data.secondarySkill}
+        />
+        <TextInput
+          id={location}
+          label={hrJobApplicationConstants.location}
+          onChange={handleChange}
+          error={error[location]}
+          cssClass={classes.field}
+          defaultValue={data.location}
+        />
+        <DatePicker
+          handleChange={handleChange}
+          id={endDate}
+          label={hrJobApplicationConstants.endDate}
+          cssClass={classes.datePicker}
+          defaultValue={data.endDate}
         />
         <TextInput
           id={description}
@@ -130,70 +211,8 @@ const HRJobApplicationForm = ({
           error={error[description]}
           helperText={MIN10CHARS_ERROR_TEXT}
           cssClass={classes.field}
+          defaultValue={data.description}
           isMultiline
-        />
-        <TextInput
-          id={salary}
-          label={hrJobApplicationConstants.salary}
-          onChange={handleChange}
-          error={error[salary]}
-          cssClass={classes.field}
-        />
-        <TextInput
-          id={experienceLevel}
-          label={hrJobApplicationConstants.experienceLevel}
-          onChange={handleChange}
-          error={error[experienceLevel]}
-          cssClass={classes.field}
-        />
-        <TextInput
-          id={primarySkill}
-          label={hrJobApplicationConstants.primarySkill}
-          onChange={handleChange}
-          error={error[primarySkill]}
-          cssClass={classes.field}
-        />
-        <TextInput
-          id={secondarySkill}
-          label={hrJobApplicationConstants.secondarySkill}
-          onChange={handleChange}
-          error={error[experienceLevel]}
-          cssClass={classes.field}
-        />
-        <TextInput
-          id={experience}
-          label={hrJobApplicationConstants.experience}
-          onChange={handleChange}
-          error={error[experience]}
-          cssClass={classes.field}
-        />
-        <Dropdown
-          inputLabel={experience}
-          name={hrJobApplicationConstants.experience}
-          onChange={handleChange}
-          menuItems={EXPERIANCE_LEVELS}
-          cssClass={classes.field}
-        />
-        <TextInput
-          id={contractType}
-          label={hrJobApplicationConstants.contractType}
-          onChange={handleChange}
-          error={error[contractType]}
-          cssClass={classes.field}
-        />
-        <TextInput
-          id={contractDuration}
-          label={hrJobApplicationConstants.contractDuration}
-          onChange={handleChange}
-          error={error[contractDuration]}
-          cssClass={classes.field}
-        />
-        <TextInput
-          id={location}
-          label={hrJobApplicationConstants.location}
-          onChange={handleChange}
-          error={error[location]}
-          cssClass={classes.field}
         />
       </Fields>
       <PrimaryButton

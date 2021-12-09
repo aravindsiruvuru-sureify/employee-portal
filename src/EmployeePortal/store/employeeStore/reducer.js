@@ -1,11 +1,19 @@
 import { API_INITIAL } from "../../services/APIConstants";
 
-import { SET_JOBS, SET_COURSES, SET_LOADER } from "./actions";
+import {
+  SET_JOBS,
+  SET_COURSES,
+  SET_LOADER,
+  SET_EMPLOYEES,
+  SET_API_ERROR,
+} from "./actions";
 
 const initialState = {
   jobsData: {},
   coursesData: {},
   loader: false,
+  apiError: null,
+  employees: {},
 };
 
 export default function employeePortalStore(state = initialState, action) {
@@ -14,6 +22,11 @@ export default function employeePortalStore(state = initialState, action) {
       return {
         ...state,
         loader: action.payload,
+      };
+    case SET_API_ERROR:
+      return {
+        ...state,
+        apiError: action.payload,
       };
     case SET_JOBS:
       return {
@@ -24,6 +37,11 @@ export default function employeePortalStore(state = initialState, action) {
       return {
         ...state,
         coursesData: action.payload,
+      };
+    case SET_EMPLOYEES:
+      return {
+        ...state,
+        employees: action.payload,
       };
     default:
       return state;

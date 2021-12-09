@@ -9,13 +9,10 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Checkbox from "@mui/material/Checkbox";
-import check from "../../assets/svgs/check.png";
-import checked from "../../assets/svgs/checked.png";
+import CircleChecked from "@material-ui/icons/CheckCircleOutline";
+import Brightness1OutlinedIcon from "@material-ui/icons/Brightness1Outlined";
 
 import "./style.css";
-
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const useStyles = makeStyles((theme) => ({
   selectLabel: {
@@ -39,19 +36,21 @@ const Table = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
   let columns = dashboard
-    ? [{ id: "publish", label: "", align: "center" }]
+    ? [
+        { id: "publish", label: "Published", align: "center" },
+        { id: "count", label: "Count" },
+      ]
     : [];
   columns = [
-    ...columns,
     ...columnKeys.map((ck) => {
       return {
         ...ck,
         align: "center",
       };
     }),
+    ...columns,
     ...(dashboard ? [{ id: "more", label: "", align: "center" }] : []),
   ];
-  console.log("----", columns);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -75,13 +74,8 @@ const Table = ({
   };
 
   const renderMenu = ({ job }) => {
-    let menuItems = [];
-
-    if (job.publish) {
-      menuItems = ["Edit", "Delete", "Hide"];
-    } else {
-      menuItems = ["Edit", "Delete", "Publish"];
-    }
+    const publishMenuItem = job.publish ? "Unpublish" : "Publish";
+    console.log("----", publishMenuItem);
     return (
       <Menu
         id="simple-menu"
@@ -94,21 +88,42 @@ const Table = ({
           handleClose(e);
         }}
       >
-        {menuItems.map((item) => {
-          return (
-            <MenuItem
-              onClick={(e) => {
-                e && e.stopPropagation();
-                e && e.preventDefault();
-                onSelectMenuItem({ menu: item, job });
-                handleClose(e);
-              }}
-              className={classes.menuItem}
-            >
-              {item}
-            </MenuItem>
-          );
-        })}
+        <MenuItem
+          onClick={(e) => {
+            e && e.stopPropagation();
+            e && e.preventDefault();
+            onSelectMenuItem({ menu: "Edit", job });
+            handleClose(e);
+          }}
+          className={classes.menuItem}
+        >
+          Edit
+        </MenuItem>
+        <MenuItem
+          onClick={(e) => {
+            e && e.stopPropagation();
+            e && e.preventDefault();
+            onSelectMenuItem({ menu: "Delete", job });
+            handleClose(e);
+          }}
+          className={classes.menuItem}
+        >
+          Delete
+        </MenuItem>
+        <MenuItem
+          onClick={(e) => {
+            e && e.stopPropagation();
+            e && e.preventDefault();
+            onSelectMenuItem({
+              menu: publishMenuItem,
+              job,
+            });
+            handleClose(e);
+          }}
+          className={classes.menuItem}
+        >
+          {publishMenuItem}
+        </MenuItem>
       </Menu>
     );
   };
@@ -116,14 +131,10 @@ const Table = ({
   const getColumnValue = ({ row, column }) => {
     const value = row[column.id];
     if (column.id === "publish") {
-      return (
-        <Checkbox
-          {...label}
-          checked={row.publish}
-          color="success"
-          disableTouchRipple
-          disableFocusRipple
-        />
+      return row.publish ? (
+        <CircleChecked style={{ color: "green" }} />
+      ) : (
+        <Brightness1OutlinedIcon />
       );
     }
     if (column.id === "more") {
@@ -198,10 +209,10 @@ const Table = ({
           </MuiTable>
         </TableContainer>
         <TablePagination
-          // rowsPerPageOptions={[10, 25, 100]}
+          rowsPerPageOptions={[]}
           component="div"
-          count={count}
-          rowsPerPage={rowsPerPage}
+          count={count || 1}
+          rowsPerPage={rowsPerPage || 1}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}

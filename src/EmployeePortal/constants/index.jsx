@@ -253,10 +253,11 @@ export const hrJobApplicationConstants = {
   salary: "Salary",
   ref: "Job code",
   experienceLevel: "Experience level",
-  experience: "Experience",
+  experience: "Experience (in years)",
   contractType: "Contract type",
-  contractDuration: "Contract duration",
+  contractDuration: "Contract duration (in hours)",
   location: "Location",
+  endDate: "Last date to apply",
 };
 
 export const JOB_APPLICATION_IDS = {
@@ -280,6 +281,7 @@ export const HR_JOB_APPLICATION = {
   contractType: "contractType",
   contractDuration: "contractDuration",
   location: "location",
+  endDate: "endDate",
 };
 
 export const QUARTER_CYCLES = {
@@ -314,4 +316,5 @@ export const REFERRAL_FEEDBACK_FIELDS = {
   },
 };
 
-export const EXPERIANCE_LEVELS = ['Experianced', 'Fresher']
+export const EXPERIENCE_LEVELS = ["Experienced", "Fresher"];
+export const CONTRACT_TYPES = ["Permanent", "Contract"];

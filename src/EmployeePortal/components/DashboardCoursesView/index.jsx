@@ -61,6 +61,7 @@ const DashboardCoursesView = () => {
             onClickCrossIcon={() => {
               resetModal();
             }}
+            course={selectedCourse}
           />
         );
       default:
@@ -150,13 +151,12 @@ const DashboardCoursesView = () => {
             { id: "type", label: "Type" },
             { id: "startDate", label: "Start date" },
             { id: "fee", label: "Fee" },
-            { id: "count", label: "Count" },
           ]}
           rowsPerPage={coursesData.numberOfElements}
           count={coursesData.totalPages}
           totalElements={coursesData.totalElements}
           onSelectMenuItem={({ menu, course }) => {
-            if (menu === "Publish" || menu === "Hide") {
+            if (menu === "Publish" || menu === "Unpublish") {
               updateCourse({ ...course, publish: course.publish });
             } else {
               setMenuItem(menu);

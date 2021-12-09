@@ -10,6 +10,7 @@ import Dashboard from "./Dashboard";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
+import EmployeeListPage from "./EmployeeListPage";
 
 const Router = ({ children = null }) => {
   return (
@@ -18,6 +19,7 @@ const Router = ({ children = null }) => {
         <Route exact path={"/"} component={HomePage} />
         <Route exact path={"/jobs"} component={JobsPage} />
         <Route exact path={"/courses"} component={CoursesPage} />
+        <Route exact path={"/employees"} component={EmployeeListPage} />
         <Route exact path={"/dashboard"} component={Dashboard} />
         {children}
       </Switch>
