@@ -22,6 +22,8 @@ import {
   ContentWrapper,
 } from "./styles";
 
+import { DetailsList } from "./shared";
+
 const useStyles = makeStyles({
   field: {
     margin: "15px 0",
@@ -34,8 +36,8 @@ const useStyles = makeStyles({
     },
   },
   root: {
-    top: "20px",
-    right: "10px",
+    top: "30px",
+    right: "30px",
     position: "absolute",
     cursor: "pointer",
   },
@@ -55,43 +57,39 @@ const useStyles = makeStyles({
   },
 });
 
-const CoursesDetails = (props) => {
+const CoursesDetails = ({
+  courseDetails,
+  onClickCrossIcon,
+  isDashboard = false,
+}) => {
   const dispatch = useDispatch();
 
-  const { courseDetails, onClickCrossIcon } = props;
   const classes = useStyles();
   const [loader, setLoader] = useState(false);
   const [showApplication, setShowApplication] = useState(false);
   const [successAPI, setSuccessAPI] = useState(false);
 
-
   const getCourseDetails = () => {
     const description = courseDetails.courseContent
-    .split("|")
-    .filter((item) => item.length);
+      .split("|")
+      .filter((item) => item.length);
 
     const getPropertyCards = (courseDetails) => {
       const requiredProperties = [
-        "courseCode",
-        "duration",
-        "fee",
-        "mode",
-        "regEndDate",
-        "startDate",
-        "timings",
-        "trainer",
-        "type",
+        { id: "courseCode", label: "Course code" },
+        { id: "duration", label: "Duration" },
+        { id: "fee", label: "Fee" },
+        { id: "mode", label: "Mode" },
+        { id: "regEndDate", label: "Registration end date" },
+        { id: "startDate", label: "Start date" },
+        { id: "timings", label: "Timings" },
+        { id: "trainer", label: "Trainer" },
+        { id: "type", label: "Type" },
       ];
-      return requiredProperties.map((el) => {
-        return (
-          <div
-            style={{ marginBottom: "12px", padding: "7px", minWidth: "200px" }}
-          >
-            <LabelBold>{el}: </LabelBold>
-            <Label>{courseDetails[el]}</Label>
-          </div>
-        );
-      });
+
+      return (
+        <DetailsList details={courseDetails} properties={requiredProperties} />
+      );
     };
 
     return (
@@ -99,9 +97,23 @@ const CoursesDetails = (props) => {
         <CloseOutlinedIcon
           className={classes.root}
           onClick={onClickCrossIcon}
+          style={{ color: "white" }}
         />
 
-        <Heading>{courseDetails.courseName}</Heading>
+        <div
+          style={{
+            height: "120px",
+            backgroundColor: "#183B56",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            borderTopLeftRadius: "20px",
+            borderTopRightRadius: "20px",
+          }}
+        >
+          <Heading>{courseDetails.courseName}</Heading>
+        </div>
         <ContentWrapper>
           <RowContainer>
             <HeadingOne>About</HeadingOne>
@@ -112,29 +124,31 @@ const CoursesDetails = (props) => {
                 </li>
               ))}
             </ul>
+            {!isDashboard && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  marginTop: "24px",
+                }}
+              >
+                <PrimaryButton
+                  handleClick={() => {
+                    setShowApplication(true);
+                  }}
+                  label="Apply"
+                  cssClass={classes.applyButton}
+                />
+                <i>*click here to apply</i>
+              </div>
+            )}
           </RowContainer>
           <RightCard>{getPropertyCards(courseDetails)}</RightCard>
         </ContentWrapper>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-          }}
-        >
-          <PrimaryButton
-            handleClick={() => {
-              setShowApplication(true);
-            }}
-            label="Apply"
-            cssClass={classes.applyButton}
-          />
-          <i>*click here to apply</i>
-        </div>
       </Container>
     );
   };
-
 
   return (
     <>

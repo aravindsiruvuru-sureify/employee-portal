@@ -45,8 +45,8 @@ const useStyles = makeStyles({
     },
   },
   root: {
-    top: "0px",
-    right: "10px",
+    top: "30px",
+    right: "30px",
     position: "absolute",
     cursor: "pointer",
   },

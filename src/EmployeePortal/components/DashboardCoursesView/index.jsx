@@ -16,6 +16,8 @@ import { Container } from "../DashboardContainer";
 import AlertDialog from "../../../CommonComponents/AlertDialog";
 import SearchBarComponent from "../SearchBarComponent";
 
+import CoursesDetails from "../CoursesDetails";
+
 const useStyles = makeStyles({
   root: {
     fontSize: "14px",
@@ -72,7 +74,15 @@ const DashboardCoursesView = () => {
   };
 
   const getCourseDetailsModalContent = () => {
-    return <h1>Course details</h1>;
+    return (
+      <CoursesDetails
+        courseDetails={selectedCourse}
+        onClickCrossIcon={() => {
+          resetModal();
+        }}
+        isDashboard={true}
+      />
+    );
   };
 
   const getModalContent = () => {
@@ -134,7 +144,10 @@ const DashboardCoursesView = () => {
             padding: "20px 0",
           }}
         >
-          <SearchBarComponent />
+          <SearchBarComponent
+            onCancelSearch={() => {}}
+            onRequestSearch={() => {}}
+          />
           <PrimaryButton
             className={classes.root}
             handleClick={() => {

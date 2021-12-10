@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 import {
   font20PrimaryRobotoBold,
   fontH2PrimaryRoboto,
   font16PrimaryRoboto400,
   font16PrimaryParaRoboto,
-} from '../../themes/typos';
+} from "../../themes/typos";
 
-import colors from '../../themes/colors';
+import colors from "../../themes/colors";
 
 // import ProfileTextView from '../ProfileTextView';
 
@@ -22,17 +22,17 @@ import colors from '../../themes/colors';
 export const Container = styled.div`
   position: relative;
   background: ${colors.white};
-  padding: 40px 40px 40px 40px;
+  /* padding: 40px 40px 40px 40px; */
   border-radius: 20px;
   @media (max-width: 768px) {
-    padding: 40px 0px;
+    /* padding: 40px 0px; */
   }
 `;
 
 export const BasicDetails = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom:16px;
+  margin-bottom: 16px;
 `;
 
 export const ProfileImage = styled.img`
@@ -53,9 +53,7 @@ export const HeadingOne = styled(font20PrimaryRobotoBold)`
 export const Heading = styled(fontH2PrimaryRoboto)`
   margin-bottom: 30px;
   margin-top: 0;
-  background-color: #f8f9fa;
-  padding: 10px;
-  border-radius: 10px;
+  color: white;
 `;
 
 export const RightCard = styled.div`
@@ -77,12 +75,11 @@ export const LabelBold = styled(font16PrimaryRoboto400)`
 `;
 
 export const RowContainer = styled.div`
-  padding: 0 10px;
+  padding: 30px;
   @media (max-width: 768px) {
     margin-top: 15px;
   }
 `;
-
 
 export const ContentWrapper = styled.div`
   display: flex;
@@ -91,7 +88,6 @@ export const ContentWrapper = styled.div`
     flex-direction: column-reverse;
   }
 `;
-
 
 export const AboutMeText = styled(font16PrimaryParaRoboto)`
   line-height: 1.5;

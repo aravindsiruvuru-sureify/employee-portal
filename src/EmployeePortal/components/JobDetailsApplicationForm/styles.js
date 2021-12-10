@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 import {
   font20PrimaryRobotoBold,
   fontH2PrimaryRoboto,
   font16PrimaryRoboto400,
   font16PrimaryParaRoboto,
-} from '../../themes/typos';
+} from "../../themes/typos";
 
-import colors from '../../themes/colors';
+import colors from "../../themes/colors";
 
 // import ProfileTextView from '../ProfileTextView';
 
@@ -22,7 +22,7 @@ import colors from '../../themes/colors';
 export const Container = styled.div`
   position: relative;
   background: ${colors.white};
-  padding: 40px 40px 40px 40px;
+  /* padding: 40px 40px 40px 40px; */
   border-radius: 20px;
 
   @media (max-width: 768px) {
@@ -33,7 +33,7 @@ export const Container = styled.div`
 export const BasicDetails = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom:16px;
+  margin-bottom: 16px;
 `;
 
 export const ProfileImage = styled.img`
@@ -54,13 +54,16 @@ export const HeadingOne = styled(font20PrimaryRobotoBold)`
 export const Heading = styled(fontH2PrimaryRoboto)`
   margin-bottom: 12px;
   margin-top: 0;
+  color: white;
 `;
 
 export const Label = styled(font16PrimaryRoboto400)`
   margin-bottom: 10px;
 `;
 
-export const RowContainer = styled.div``;
+export const RowContainer = styled.div`
+  padding: 30px;
+`;
 
 export const AboutMeText = styled(font16PrimaryParaRoboto)`
   line-height: 1.5;

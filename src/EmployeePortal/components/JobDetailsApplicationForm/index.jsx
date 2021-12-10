@@ -24,6 +24,8 @@ import {
   //   PlaceholderText,
 } from "./styles";
 
+import { DetailsList } from "../CoursesDetails/shared";
+
 const useStyles = makeStyles({
   field: {
     margin: "15px 0",
@@ -36,8 +38,8 @@ const useStyles = makeStyles({
     },
   },
   root: {
-    top: "20px",
-    right: "10px",
+    top: "30px",
+    right: "30px",
     position: "absolute",
     cursor: "pointer",
   },
@@ -71,47 +73,104 @@ const JobDetailsJobApplicationForm = (props) => {
     .filter((item) => item.length);
 
   const getJobDetails = () => {
+    let properties = [
+      { id: "ref", label: "Ref" },
+      { id: "primarySkill", label: "Primary skill" },
+      { id: "secondarySkill", label: "Secondary skill" },
+      { id: "salary", label: "Salary" },
+      { id: "role", label: "Role" },
+      { id: "postedOn", label: "Posted on" },
+      { id: "location", label: "Location" },
+    ];
+
+    if (jobDetails.experienceLevel === "Experienced") {
+      properties = [
+        ...properties,
+        { id: "experienceLevel", label: "Experience level" },
+        { id: "experience", label: "Experience" },
+      ];
+    } else {
+      properties = [
+        ...properties,
+        { id: "experienceLevel", label: "Experience level" },
+      ];
+    }
+
+    if (jobDetails.contractType === "Contract") {
+      properties = [
+        ...properties,
+        { id: "contractType", label: "Contract type" },
+        { id: "contractDuration", label: "Contract duration" },
+      ];
+    } else {
+      properties = [
+        ...properties,
+        { id: "contractType", label: "Contract type" },
+      ];
+    }
+
     return (
       <Container>
         <CloseOutlinedIcon
           className={classes.root}
           onClick={onClickCrossIcon}
+          style={{ color: "white" }}
         />
+        <div
+          style={{
+            height: "120px",
+            backgroundColor: "#183B56",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            borderTopLeftRadius: "20px",
+            borderTopRightRadius: "20px",
+          }}
+        >
+          <Heading>{jobDetails.title}</Heading>
+        </div>
 
-        <Heading>{jobDetails.title}</Heading>
-        <BasicDetails>
-          <ProfileDetails>
-            <JobDetailsShort job={jobDetails} />
-          </ProfileDetails>
-        </BasicDetails>
-        <RowContainer>
-          <HeadingOne>About</HeadingOne>
-          <ul>
-            {description.map((item) => (
-              <li style={{ marginBottom: "12px" }}>
-                <Label key={item}>{item}</Label>
-              </li>
-            ))}
-          </ul>
-        </RowContainer>
-        {!props.dashboard && (
+        <div style={{ display: "flex" }}>
+          <RowContainer style={{ width: "75%" }}>
+            <HeadingOne>About</HeadingOne>
+            <ul>
+              {description.map((item) => (
+                <li style={{ marginBottom: "12px" }}>
+                  <Label key={item}>{item}</Label>
+                </li>
+              ))}
+            </ul>
+            {!props.dashboard && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  marginTop: "24px",
+                }}
+              >
+                <PrimaryButton
+                  handleClick={() => {
+                    setShowApplication(true);
+                  }}
+                  label="Apply"
+                  cssClass={classes.applyButton}
+                />
+                <i>*click here to apply</i>
+              </div>
+            )}
+          </RowContainer>
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
+              width: "25%",
+              backgroundColor: "#f8f9fa",
+              padding: "30px",
             }}
           >
-            <PrimaryButton
-              handleClick={() => {
-                setShowApplication(true);
-              }}
-              label="Apply"
-              cssClass={classes.applyButton}
-            />
-            <i>*click here to apply</i>
+            <DetailsList details={jobDetails} properties={properties} />
           </div>
-        )}
+        </div>
       </Container>
     );
   };
