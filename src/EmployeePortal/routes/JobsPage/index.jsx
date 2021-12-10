@@ -12,6 +12,8 @@ import { getHomePageJobsList } from "../../store/employeeStore/actions";
 
 import JobDetailsApplicationForm from "../../components/JobDetailsApplicationForm";
 
+import SearchBarComponent from "../../components/SearchBarComponent";
+
 export const Container = styled.div`
   padding: 40px 0;
   display: flex;
@@ -59,7 +61,15 @@ const JobsPage = () => {
         {selected && getModalContent()}
       </Modal>
       <Container>
-        <div style={{ width: "90%", display: "flex" }}>
+        <div
+          style={{
+            width: "90%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            textTransform: "none",
+          }}
+        >
           <h1
             style={{
               marginLeft: "18px",
@@ -69,6 +79,7 @@ const JobsPage = () => {
           >
             Jobs
           </h1>
+          <SearchBarComponent />
         </div>
         <Table
           data={jobsData.content}
@@ -80,10 +91,14 @@ const JobsPage = () => {
             { id: "contractType", label: "Contract type" },
             { id: "primarySkill", label: "Primary skill" },
           ]}
-          rowsPerPage={jobsData.numberOfElements}
-          count={jobsData.totalPages}
+          page={(jobsData.pageable && jobsData.pageable.pageNumber) || 0}
+          rowsPerPage={(jobsData.pageable && jobsData.pageable.pageSize) || 1}
+          count={jobsData.totalElements}
           totalElements={jobsData.totalElements}
           onRowClick={onJobSelected}
+          gotoNextPage={(val) => {
+            console.log("-----", val);
+          }}
           onSelectTableRow={(row) => {
             setSelected(row);
           }}

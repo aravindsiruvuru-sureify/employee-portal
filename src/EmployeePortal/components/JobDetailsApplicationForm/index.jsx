@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
 
 import { JobDetailsShort } from "../JobCard/shared";
 import JobApplicationForm from "../JobApplicationForm";
+
 import { PrimaryButton } from "../../../CommonComponents";
 import completed from "../../../assets/svgs/completed.svg";
-
 import FormLoader from "../../../CommonComponents/FormLoader";
-import { useDispatch } from "react-redux";
 
 import {
   Container,

@@ -27,12 +27,13 @@ const Table = ({
   data = [],
   columnKeys,
   rowsPerPage,
+  page = 0,
   count,
   dashboard = false,
   onSelectMenuItem,
   onSelectTableRow = () => {},
+  gotoNextPage = () => {},
 }) => {
-  const [page, setPage] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
   let columns = dashboard
@@ -52,12 +53,10 @@ const Table = ({
     ...(dashboard ? [{ id: "more", label: "", align: "center" }] : []),
   ];
   const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+    gotoNextPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setPage(0);
-  };
+  const handleChangeRowsPerPage = (event) => {};
 
   const handleRowClick = (row) => {
     onSelectTableRow(row);

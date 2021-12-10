@@ -19,6 +19,8 @@ import { createJob } from "../../services/ApiService/actions";
 import { Container } from "../DashboardContainer";
 import AlertDialog from "../../../CommonComponents/AlertDialog";
 
+import SearchBarComponent from "../SearchBarComponent";
+
 const useStyles = makeStyles({
   root: {
     fontSize: "14px",
@@ -145,10 +147,12 @@ const DashboardJobsView = () => {
           style={{
             width: "90%",
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
+            alignItems: "center",
             padding: "20px 0",
           }}
         >
+          <SearchBarComponent />
           <PrimaryButton
             className={classes.root}
             handleClick={() => {
