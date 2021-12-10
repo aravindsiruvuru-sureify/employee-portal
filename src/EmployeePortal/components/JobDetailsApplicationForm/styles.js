@@ -24,6 +24,10 @@ export const Container = styled.div`
   background: ${colors.white};
   padding: 40px 40px 40px 40px;
   border-radius: 20px;
+
+  @media (max-width: 768px) {
+    padding: 40px 0px;
+  }
 `;
 
 export const BasicDetails = styled.div`

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
-
+import Modal from "../../../CommonComponents/Modal";
+import CoursesDetails from "../../components/CoursesDetails";
 import MainContainer from "../../components/MainContainer";
 
 import Table from "../../../CommonComponents/Table";
@@ -23,6 +24,8 @@ export const Container = styled.div`
 
 const CoursesPage = () => {
   const dispatch = useDispatch();
+  const [selected, setSelected] = useState(null);
+
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const coursesData = get(store, "coursesData", {});
   const loader = get(store, "loader", false);
@@ -31,12 +34,29 @@ const CoursesPage = () => {
     await dispatch(getHomePageCoursesList());
   };
 
+
+  const getModalContent = () => {
+    return (
+      selected && (
+        <CoursesDetails
+          courseDetails={selected}
+          onClickCrossIcon={() => {
+            setSelected(null);
+          }}
+        />
+      )
+    );
+  };
+
   useEffect(() => {
     getCourses();
   }, []);
 
   return (
     <MainContainer isDashboard={false} loadingStatus={loader ? 100 : 200}>
+      <Modal open={!!selected} handleClose={() => {}}>
+        {selected && getModalContent()}
+      </Modal>
       <Container>
         <div
           style={{
@@ -71,6 +91,10 @@ const CoursesPage = () => {
           rowsPerPage={coursesData.numberOfElements}
           count={coursesData.totalPages}
           totalElements={coursesData.totalElements}
+          onRowClick={() => {}}
+          onSelectTableRow={(row) => {
+            setSelected(row);
+          }}
         />
       </Container>
     </MainContainer>

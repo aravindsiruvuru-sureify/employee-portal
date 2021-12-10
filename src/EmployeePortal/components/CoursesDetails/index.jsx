@@ -13,12 +13,13 @@ import { useDispatch } from "react-redux";
 
 import {
   Container,
-  BasicDetails,
-  ProfileDetails,
   HeadingOne,
   Label,
+  LabelBold,
   RowContainer,
   Heading,
+  RightCard,
+  ContentWrapper,
 } from "./styles";
 
 const useStyles = makeStyles({
@@ -54,21 +55,44 @@ const useStyles = makeStyles({
   },
 });
 
-const JobDetailsJobApplicationForm = (props) => {
+const CoursesDetails = (props) => {
   const dispatch = useDispatch();
 
-  const { jobDetails, onClickCrossIcon } = props;
+  const { courseDetails, onClickCrossIcon } = props;
   const classes = useStyles();
   const [loader, setLoader] = useState(false);
   const [showApplication, setShowApplication] = useState(false);
   const [successAPI, setSuccessAPI] = useState(false);
 
 
-
-  const getCourseDetails = ({courseDetails}) => {
+  const getCourseDetails = () => {
     const description = courseDetails.courseContent
     .split("|")
     .filter((item) => item.length);
+
+    const getPropertyCards = (courseDetails) => {
+      const requiredProperties = [
+        "courseCode",
+        "duration",
+        "fee",
+        "mode",
+        "regEndDate",
+        "startDate",
+        "timings",
+        "trainer",
+        "type",
+      ];
+      return requiredProperties.map((el) => {
+        return (
+          <div
+            style={{ marginBottom: "12px", padding: "7px", minWidth: "200px" }}
+          >
+            <LabelBold>{el}: </LabelBold>
+            <Label>{courseDetails[el]}</Label>
+          </div>
+        );
+      });
+    };
 
     return (
       <Container>
@@ -78,16 +102,19 @@ const JobDetailsJobApplicationForm = (props) => {
         />
 
         <Heading>{courseDetails.courseName}</Heading>
-        <RowContainer>
-          <HeadingOne>About</HeadingOne>
-          <ul>
-            {description.map((item) => (
-              <li style={{ marginBottom: "12px" }}>
-                <Label key={item}>{item}</Label>
-              </li>
-            ))}
-          </ul>
-        </RowContainer>
+        <ContentWrapper>
+          <RowContainer>
+            <HeadingOne>About</HeadingOne>
+            <ul>
+              {description.map((item) => (
+                <li style={{ marginBottom: "12px" }}>
+                  <Label key={item}>{item}</Label>
+                </li>
+              ))}
+            </ul>
+          </RowContainer>
+          <RightCard>{getPropertyCards(courseDetails)}</RightCard>
+        </ContentWrapper>
         <div
           style={{
             display: "flex",
@@ -117,4 +144,4 @@ const JobDetailsJobApplicationForm = (props) => {
   );
 };
 
-export default getCourseDetails;
+export default CoursesDetails;

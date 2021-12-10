@@ -24,6 +24,9 @@ export const Container = styled.div`
   background: ${colors.white};
   padding: 40px 40px 40px 40px;
   border-radius: 20px;
+  @media (max-width: 768px) {
+    padding: 40px 0px;
+  }
 `;
 
 export const BasicDetails = styled.div`
@@ -48,15 +51,47 @@ export const HeadingOne = styled(font20PrimaryRobotoBold)`
 `;
 
 export const Heading = styled(fontH2PrimaryRoboto)`
-  margin-bottom: 12px;
+  margin-bottom: 30px;
   margin-top: 0;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 10px;
+`;
+
+export const RightCard = styled.div`
+  display: flex;
+  background-color: #f8f9fa;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 10px;
 `;
 
 export const Label = styled(font16PrimaryRoboto400)`
   margin-bottom: 10px;
 `;
 
-export const RowContainer = styled.div``;
+export const LabelBold = styled(font16PrimaryRoboto400)`
+  margin-bottom: 10px;
+  font-weight: bold;
+`;
+
+export const RowContainer = styled.div`
+  padding: 0 10px;
+  @media (max-width: 768px) {
+    margin-top: 15px;
+  }
+`;
+
+
+export const ContentWrapper = styled.div`
+  display: flex;
+  margin-bottom: 15px;
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
+`;
+
 
 export const AboutMeText = styled(font16PrimaryParaRoboto)`
   line-height: 1.5;
