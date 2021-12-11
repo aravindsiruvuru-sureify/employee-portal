@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { JobDetailsShort } from "../JobCard/shared";
-import JobApplicationForm from "../JobApplicationForm";
+import CourseApplicationForm from "../CourseApplicationForm";
 import { PrimaryButton } from "../../../CommonComponents";
 import completed from "../../../assets/svgs/completed.svg";
-import { getJobsList } from "../../store/employeeStore/actions";
 
 import FormLoader from "../../../CommonComponents/FormLoader";
 import { useDispatch } from "react-redux";
@@ -15,7 +13,6 @@ import {
   Container,
   HeadingOne,
   Label,
-  LabelBold,
   RowContainer,
   Heading,
   RightCard,
@@ -68,6 +65,44 @@ const CoursesDetails = ({
   const [loader, setLoader] = useState(false);
   const [showApplication, setShowApplication] = useState(false);
   const [successAPI, setSuccessAPI] = useState(false);
+
+  const getCoursesApplicationForm = () => {
+    return successAPI ? (
+      <div
+        style={{
+          height: "450px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          position: "relative",
+        }}
+        onBlur={() => {
+          onClickCrossIcon();
+        }}
+      >
+        <CloseOutlinedIcon
+          className={classes.root}
+          onClick={onClickCrossIcon}
+        />
+        <img src={completed} alt="complete" style={{ height: "200px" }} />
+        <span style={{ marginTop: "14px", fontSize: "16px" }}>
+          You application has been successfully submitted
+        </span>
+      </div>
+    ) : (
+      <CourseApplicationForm
+        onClickCrossIcon={onClickCrossIcon}
+        onClickSubmitButton={() => {
+          setLoader(true);
+          setLoader(false);
+          setSuccessAPI(true);
+        }}
+        course={courseDetails}
+      />
+    );
+  };
+
 
   const getCourseDetails = () => {
     const description = courseDetails.courseContent
@@ -153,7 +188,8 @@ const CoursesDetails = ({
   return (
     <>
       {loader && <FormLoader />}
-      {getCourseDetails()}
+      {showApplication ? getCoursesApplicationForm() : getCourseDetails()}
+
     </>
   );
 };
