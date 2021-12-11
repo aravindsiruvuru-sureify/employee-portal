@@ -181,12 +181,12 @@ const DashboardJobsView = () => {
           rowsPerPage={jobsData.numberOfElements}
           count={jobsData.totalPages}
           totalElements={jobsData.totalElements}
-          onSelectMenuItem={({ menu, job }) => {
+          onSelectMenuItem={({ menu, row }) => {
             if (menu === "Publish" || menu === "Unpublish") {
-              updateJob({ ...job, publish: !job.publish });
+              updateJob({ ...row, publish: !row.publish });
             } else {
               setMenuItem(menu);
-              setSelectedJob(job);
+              setSelectedJob(row);
             }
           }}
           onSelectTableRow={(row) => {
