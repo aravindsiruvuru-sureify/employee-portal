@@ -152,7 +152,12 @@ const DashboardJobsView = () => {
             padding: "20px 0",
           }}
         >
-          <SearchBarComponent />
+          <SearchBarComponent
+            onCancelSearch={() => {}}
+            onRequestSearch={(val) => {
+              console.log(val);
+            }}
+          />
           <PrimaryButton
             className={classes.root}
             handleClick={() => {
