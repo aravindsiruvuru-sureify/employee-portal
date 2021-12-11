@@ -171,12 +171,12 @@ const DashboardCoursesView = () => {
           rowsPerPage={coursesData.numberOfElements}
           count={coursesData.totalPages}
           totalElements={coursesData.totalElements}
-          onSelectMenuItem={({ menu, course }) => {
+          onSelectMenuItem={({ menu, row }) => {
             if (menu === "Publish" || menu === "Unpublish") {
-              updateCourse({ ...course, publish: course.publish });
+              updateCourse({ ...row, publish: row.publish });
             } else {
               setMenuItem(menu);
-              setSelectedCourse(course);
+              setSelectedCourse(row);
             }
           }}
           onSelectTableRow={(row) => {

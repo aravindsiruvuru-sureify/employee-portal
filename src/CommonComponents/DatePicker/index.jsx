@@ -77,7 +77,6 @@ const DatePicker = ({
     setSelectedDate(date);
 
     const timestamp = Date.parse(date);
-
     if (!isNaN(timestamp)) {
       const formattedDate = format(new Date(date), "MMMM dd,yyyy");
       handleChange({
@@ -86,7 +85,14 @@ const DatePicker = ({
           value: formattedDate,
         },
       });
+      return
     }
+    handleChange({
+      target: {
+        id,
+        value: "Invalid Date",
+      },
+    });
   };
 
   const classes = useStyles();

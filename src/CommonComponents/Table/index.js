@@ -72,8 +72,8 @@ const Table = ({
     setAnchorEl(null);
   };
 
-  const renderMenu = ({ job }) => {
-    const publishMenuItem = job.publish ? "Unpublish" : "Publish";
+  const renderMenu = ({ row }) => {
+    const publishMenuItem = row.publish ? "Unpublish" : "Publish";
     console.log("----", publishMenuItem);
     return (
       <Menu
@@ -91,7 +91,7 @@ const Table = ({
           onClick={(e) => {
             e && e.stopPropagation();
             e && e.preventDefault();
-            onSelectMenuItem({ menu: "Edit", job });
+            onSelectMenuItem({ menu: "Edit", row });
             handleClose(e);
           }}
           className={classes.menuItem}
@@ -102,7 +102,7 @@ const Table = ({
           onClick={(e) => {
             e && e.stopPropagation();
             e && e.preventDefault();
-            onSelectMenuItem({ menu: "Delete", job });
+            onSelectMenuItem({ menu: "Delete", row });
             handleClose(e);
           }}
           className={classes.menuItem}
@@ -115,7 +115,7 @@ const Table = ({
             e && e.preventDefault();
             onSelectMenuItem({
               menu: publishMenuItem,
-              job,
+              row,
             });
             handleClose(e);
           }}
@@ -146,7 +146,7 @@ const Table = ({
               handleClick(e);
             }}
           />
-          {renderMenu({ job: row })}
+          {renderMenu({ row })}
         </>
       );
     }

@@ -1,52 +1,23 @@
 import {
-  PERSONAL_DETAILS,
-  REGISTERATION_FIELDS,
-  PROFESSIONAL_DETAILS,
-  BANK_DETAILS,
-  DOCUMENTS_DETAILS,
+  COURSE_APPLICATION_IDS,
   PERFORMANCE_REVIEW_FIELDS,
   JOB_APPLICATION_IDS,
   REFERRAL_FEEDBACK_FIELDS,
 } from "../constants";
 
 const {
-  firstName,
-  lastName,
-  country,
-  pincode,
-  aboutMe,
-  streetAddress,
-  hobbies,
-  linkedIn,
-  twitter,
-  personalEmail,
-  gender,
-  state,
-  dob,
-  city,
-  phone,
-  profilePicUrl,
-  slack,
-  emailId,
-} = PERSONAL_DETAILS;
-
-const { bankName, accountHolderName, accountNumber, branchName, ifscCode } =
-  BANK_DETAILS;
-
-const { aadhaarNum, panNumber, driveUrl } = DOCUMENTS_DETAILS;
-
-const { password, confirmPassword } = REGISTERATION_FIELDS;
-
-const {
-  email,
-  role,
-  totalExpirience,
-  githubUrl,
-  joiningDate,
-  skills,
-  projectsAssigned,
-  team,
-} = PROFESSIONAL_DETAILS;
+  courseName,
+  courseContent,
+  courseCode,
+  trainer,
+  type,
+  mode,
+  startDate,
+  regEndDate,
+  timings,
+  duration,
+  fee,
+} = COURSE_APPLICATION_IDS;
 
 const { result, factorsHelped, factorsHindered, selfRating } =
   PERFORMANCE_REVIEW_FIELDS.employee;
@@ -101,103 +72,31 @@ export const handleHasError = (id, value) => {
   let hasError;
   if (value === null) return true;
   switch (id) {
-    case firstName:
-    case lastName:
-    case country:
-    case city:
-    case pincode:
-    case ifscCode:
-    case bankName:
-    case accountHolderName:
-    case branchName:
-    case fullname:
-    case link:
-    case "profile_pic_url":
-    case profilePicUrl:
+    case courseName:
+    case courseContent:
+    case courseCode:
+    case trainer:
+    case timings:
+    case duration:
+    case fee:
       hasError = !verifyMinLength3(value);
       break;
-    case state:
-      hasError = !verifyMinLength2(value);
-      break;
-    case aboutMe:
-    case streetAddress:
-    case panNumber:
-    case aadhaarNum:
-    case driveUrl:
-    case accountNumber:
-    case "ff1":
-    case "ff2":
-    case "ff3":
-      hasError = !verifyMinLength10(value);
-      break;
-    case hobbies:
-    case skills:
-    case projectsAssigned:
-    case team:
-      hasError = !verifyArrayLength(value);
-      break;
-    case email:
-      hasError = !isSureifyEmail(value);
-      break;
-    case personalEmail:
-      hasError = !isEmail(value);
-      break;
-    case emailId:
-      hasError = !isEmail(value);
-      break;
-    case linkedIn:
-      hasError = !isLinkedinUrl(value);
-      break;
-    case slack:
-      hasError = !isSlackUrl(value);
-      break;
-    case twitter:
-      hasError = !isTwitterUrl(value);
-      break;
-    case githubUrl:
-      hasError = !isGithubUrl(value);
-      break;
-    case totalExpirience:
+    // case email:
+    //   hasError = !isEmail(value);
+    //   break;
     case experience:
       hasError = !checkExperiance(value);
       break;
-    case confirmPassword:
-    case password:
-      hasError = !verifyPassword(value);
-      break;
-    case dob:
-    case joiningDate:
+    case startDate:
+    case regEndDate:
       hasError = value.toString() === "Invalid Date";
       break;
-    case phone:
     case contactNumber:
       hasError = value.length !== 10;
       break;
-    case gender:
-    case role:
+    case type:
+    case mode:
       hasError = !value;
-      break;
-    case result.id:
-      break;
-    case factorsHelped.id:
-      break;
-    case factorsHindered.id:
-      break;
-    case selfRating.id:
-      break;
-    case managerName.id:
-      break;
-    case furtherObjectives.id:
-      break;
-    case howToImprove.id:
-      break;
-    case rating.id:
-      break;
-    case feedback.id:
-      break;
-    case feedbackBy.id:
-      break;
-    case feedbackRating.id:
       break;
     default:
   }

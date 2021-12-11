@@ -57,7 +57,6 @@ const TextInput = ({
   placeholder = "",
 }) => {
   const classes = useStyles();
-
   return (
     <InputWrapper>
       <InputTitle>{label}</InputTitle>

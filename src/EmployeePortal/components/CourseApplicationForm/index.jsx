@@ -9,7 +9,9 @@ import { handleButtonIsDisabled, handleHasError } from "../../utils/formUtils";
 import {
   courseApplicationConstants,
   COURSE_APPLICATION_IDS,
+  DROPDOWN_ERROR_TEXT,
   MIN10CHARS_ERROR_TEXT,
+  MIN3CHARS_ERROR_TEXT,
 } from "../../constants";
 import { YourReferralText } from "./styles";
 import {
@@ -96,13 +98,24 @@ const CourseApplicationForm = ({
   };
 
   useEffect(() => {
-    setIsDisabled(handleButtonIsDisabled(error, 3));
+    setIsDisabled(handleButtonIsDisabled(error, 9));
   }, [error]);
+
+  useEffect(() => {
+    Object.keys(course).forEach((key) => {
+      const e = {
+        target: {
+          id: key,
+          value: course[key],
+        },
+      };
+      handleChange(e);
+    });
+  }, [course]);
 
   const handleClick = () => {
     onClickSubmitButton({ ...data, publish: false });
   };
-
   return (
     <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
@@ -112,8 +125,10 @@ const CourseApplicationForm = ({
           id={courseName}
           label={courseApplicationConstants.courseName}
           onChange={handleChange}
-          error={error[courseName]}
+          error={error.courseName}
           cssClass={classes.field}
+          defaultValue={data.courseName}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={trainer}
@@ -121,6 +136,8 @@ const CourseApplicationForm = ({
           onChange={handleChange}
           error={error[trainer]}
           cssClass={classes.field}
+          defaultValue={data.trainer}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <Dropdown
           inputLabel={courseApplicationConstants.type}
@@ -128,34 +145,40 @@ const CourseApplicationForm = ({
           onChange={handleChange}
           menuItems={["Regular"]}
           cssClass={classes.field}
-          // defaultValue={data.contractType}
+          defaultValue={data.type}
+          helperText={DROPDOWN_ERROR_TEXT}
         />
         <Dropdown
-          inputLabel={courseApplicationConstants.mode}
+          inputLabel={mode}
           name={mode}
           onChange={handleChange}
           menuItems={["CLASS_ROOMS"]}
           cssClass={classes.field}
-          // defaultValue={data.contractType}
+          defaultValue={data.mode}
+          helperText={DROPDOWN_ERROR_TEXT}
         />
         <DatePicker
           handleChange={handleChange}
           id={startDate}
           label={courseApplicationConstants.startDate}
           cssClass={classes.datePicker}
+          defaultValue={data.startDate}
         />
-        <DatePicker
+        {/* <DatePicker
           handleChange={handleChange}
           id={regEndDate}
           label={courseApplicationConstants.regEndDate}
           cssClass={classes.datePicker}
-        />
+          defaultValue={data.regEndDate}
+        /> */}
         <TextInput
           id={timings}
           label={courseApplicationConstants.timings}
           onChange={handleChange}
           error={error[timings]}
           cssClass={classes.field}
+          defaultValue={data.timings}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={duration}
@@ -163,6 +186,8 @@ const CourseApplicationForm = ({
           onChange={handleChange}
           error={error[duration]}
           cssClass={classes.field}
+          defaultValue={data.duration}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={fee}
@@ -170,6 +195,9 @@ const CourseApplicationForm = ({
           onChange={handleChange}
           error={error[fee]}
           cssClass={classes.field}
+          defaultValue={data.fee}
+          helperText={MIN3CHARS_ERROR_TEXT}
+
         />
         <TextInput
           id={courseContent}
@@ -178,11 +206,12 @@ const CourseApplicationForm = ({
           error={error[courseContent]}
           cssClass={classes.field}
           helperText={MIN10CHARS_ERROR_TEXT}
-          defaultValue={data.description}
+          defaultValue={data.courseContent}
           isMultiline
         />
       </Fields>
       <PrimaryButton
+        isDisabled={isDisabled}
         handleClick={handleClick}
         cssClass={classes.button}
         label="Submit"
