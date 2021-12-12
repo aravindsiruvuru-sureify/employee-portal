@@ -21,6 +21,8 @@ import AlertDialog from "../../../CommonComponents/AlertDialog";
 
 import SearchBarComponent from "../SearchBarComponent";
 
+import { deleteJobById } from "../../services/ApiService/actions";
+
 const useStyles = makeStyles({
   root: {
     fontSize: "14px",
@@ -46,12 +48,22 @@ const DashboardJobsView = () => {
   const loader = get(store, "loader", false);
 
   useEffect(() => {
-    dispatch(getDashboardPageJobsList());
+    dispatch(getDashboardPageJobsList({ page: 0 }));
   }, []);
 
   const resetModal = () => {
     setMenuItem(null);
     setSelectedJob(null);
+  };
+
+  const createJobData = async (data) => {
+    await createJob(data);
+    await dispatch(getDashboardPageJobsList({ page: 0 }));
+  };
+
+  const updateJob = async (job) => {
+    await createJobData({ ...job });
+    await dispatch(getDashboardPageJobsList({ page: jobsData.number }));
   };
 
   const getMenuModalContent = () => {
@@ -64,9 +76,7 @@ const DashboardJobsView = () => {
               resetModal();
             }}
             onClickSubmitButton={(data) => {
-              console.log(data);
-              createJobData({ ...data, publish: false, empId: "1" });
-              dispatch(getDashboardPageJobsList());
+              createJobData({ ...data, empId: "1" });
               resetModal();
             }}
             applicationData={selectedJob}
@@ -100,20 +110,13 @@ const DashboardJobsView = () => {
     return null;
   };
 
-  const createJobData = async (data) => {
-    await createJob(data);
-  };
-
-  const updateJob = async (job) => {
-    await createJobData({ ...job });
-    await dispatch(getDashboardPageJobsList());
-  };
-
   const renderDeleteAlert = () => {
     if (menuItem === "Delete") {
       return (
         <AlertDialog
-          handleAgreeClick={() => {
+          handleAgreeClick={async () => {
+            await deleteJobById({ id: selectedJob.ref });
+            await dispatch(getDashboardPageJobsList({ page: 0 }));
             resetModal();
           }}
           handleDisagreeClick={() => {
@@ -169,6 +172,7 @@ const DashboardJobsView = () => {
         </div>
         <Table
           dashboard
+          page={jobsData.number}
           data={jobsData.content}
           columnKeys={[
             { id: "ref", label: "Job code" },
@@ -179,8 +183,7 @@ const DashboardJobsView = () => {
             { id: "primarySkill", label: "Primary skill" },
           ]}
           rowsPerPage={jobsData.numberOfElements}
-          count={jobsData.totalPages}
-          totalElements={jobsData.totalElements}
+          count={jobsData.totalElements}
           onSelectMenuItem={({ menu, row }) => {
             if (menu === "Publish" || menu === "Unpublish") {
               updateJob({ ...row, publish: !row.publish });
@@ -191,6 +194,9 @@ const DashboardJobsView = () => {
           }}
           onSelectTableRow={(row) => {
             setSelectedJob(row);
+          }}
+          gotoNextPage={(page) => {
+            dispatch(getDashboardPageJobsList({ page }));
           }}
         />
       </>

@@ -173,7 +173,7 @@ export const courseApplicationConstants = {
   type: "Type",
   mode: "Mode",
   startDate: "Start Date",
-  regEndDate: "Reg End Date",
+  regEndDate: "Registration End Date",
   timings: "Timings",
   duration: "Duration",
   fee: "Fee",

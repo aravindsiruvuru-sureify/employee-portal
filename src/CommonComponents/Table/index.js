@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MenuItem, Menu, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import Paper from "@mui/material/Paper";
 import { Table as MuiTable } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
@@ -12,6 +12,9 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CircleChecked from "@material-ui/icons/CheckCircleOutline";
 import Brightness1OutlinedIcon from "@material-ui/icons/Brightness1Outlined";
 
+import { Menu, MenuItem } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
 import "./style.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +38,7 @@ const Table = ({
   gotoNextPage = () => {},
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
   const classes = useStyles();
   let columns = dashboard
     ? [
@@ -74,52 +78,48 @@ const Table = ({
 
   const renderMenu = ({ row }) => {
     const publishMenuItem = row.publish ? "Unpublish" : "Publish";
-    console.log("----", publishMenuItem);
+
     return (
       <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          handleClose(e);
+        menuButton={
+          <MoreVertIcon
+            id="basic-button"
+            aria-controls="basic-menu"
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={(e) => {
+              e && e.stopPropagation();
+              e && e.preventDefault();
+            }}
+          />
+        }
+        transition
+        onClick={(e) => {
+          e && e.stopPropagation();
+          e && e.preventDefault();
         }}
       >
         <MenuItem
           onClick={(e) => {
-            e && e.stopPropagation();
-            e && e.preventDefault();
             onSelectMenuItem({ menu: "Edit", row });
-            handleClose(e);
           }}
-          className={classes.menuItem}
         >
           Edit
         </MenuItem>
         <MenuItem
           onClick={(e) => {
-            e && e.stopPropagation();
-            e && e.preventDefault();
             onSelectMenuItem({ menu: "Delete", row });
-            handleClose(e);
           }}
-          className={classes.menuItem}
         >
           Delete
         </MenuItem>
         <MenuItem
           onClick={(e) => {
-            e && e.stopPropagation();
-            e && e.preventDefault();
             onSelectMenuItem({
               menu: publishMenuItem,
               row,
             });
-            handleClose(e);
           }}
-          className={classes.menuItem}
         >
           {publishMenuItem}
         </MenuItem>
@@ -137,18 +137,7 @@ const Table = ({
       );
     }
     if (column.id === "more") {
-      return (
-        <>
-          <MoreVertIcon
-            onClick={(e) => {
-              e && e.stopPropagation();
-              e && e.preventDefault();
-              handleClick(e);
-            }}
-          />
-          {renderMenu({ row })}
-        </>
-      );
+      return renderMenu({ row });
     }
     return value === "number" ? column.format(value) : value;
   };
@@ -182,7 +171,7 @@ const Table = ({
                       hover
                       role="checkbox"
                       tabIndex={-1}
-                      key={row.ref}
+                      key={JSON.stringify(row)}
                       onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
@@ -193,7 +182,7 @@ const Table = ({
                       {columns.map((column) => {
                         return (
                           <TableCell
-                            key={column.id}
+                            key={JSON.stringify(column)}
                             align={column.align}
                             style={{ minWidth: 100, fontSize: 14 }}
                           >
@@ -211,10 +200,9 @@ const Table = ({
           rowsPerPageOptions={[]}
           component="div"
           count={count || 1}
-          rowsPerPage={rowsPerPage || 1}
+          rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
           className={classes.selectLabel}
         />
       </Paper>

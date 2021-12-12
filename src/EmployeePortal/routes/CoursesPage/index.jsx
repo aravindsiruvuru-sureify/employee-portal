@@ -31,9 +31,8 @@ const CoursesPage = () => {
   const loader = get(store, "loader", false);
 
   const getCourses = async () => {
-    await dispatch(getHomePageCoursesList());
+    await dispatch(getHomePageCoursesList({ page: 0 }));
   };
-
 
   const getModalContent = () => {
     return (
@@ -80,6 +79,7 @@ const CoursesPage = () => {
         </div>
         <Table
           data={coursesData.content}
+          page={coursesData.number}
           columnKeys={[
             { id: "courseName", label: "Course name" },
             { id: "trainer", label: "Trainer" },
@@ -89,11 +89,13 @@ const CoursesPage = () => {
             { id: "fee", label: "Fee" },
           ]}
           rowsPerPage={coursesData.numberOfElements}
-          count={coursesData.totalPages}
-          totalElements={coursesData.totalElements}
+          count={coursesData.totalElements}
           onRowClick={() => {}}
           onSelectTableRow={(row) => {
             setSelected(row);
+          }}
+          gotoNextPage={(page) => {
+            dispatch(getHomePageCoursesList({ page }));
           }}
         />
       </Container>

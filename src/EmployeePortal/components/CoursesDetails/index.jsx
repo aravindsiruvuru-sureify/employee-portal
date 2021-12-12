@@ -103,7 +103,6 @@ const CoursesDetails = ({
     );
   };
 
-
   const getCourseDetails = () => {
     const description = courseDetails.courseContent
       .split("|")
@@ -172,10 +171,10 @@ const CoursesDetails = ({
                   handleClick={() => {
                     setShowApplication(true);
                   }}
-                  label="Apply"
+                  label="Enroll"
                   cssClass={classes.applyButton}
                 />
-                <i>*click here to apply</i>
+                <i>*click here to enroll into the course</i>
               </div>
             )}
           </RowContainer>
@@ -189,7 +188,6 @@ const CoursesDetails = ({
     <>
       {loader && <FormLoader />}
       {showApplication ? getCoursesApplicationForm() : getCourseDetails()}
-
     </>
   );
 };

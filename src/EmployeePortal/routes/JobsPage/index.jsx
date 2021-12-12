@@ -34,7 +34,7 @@ const JobsPage = () => {
   const loader = get(store, "loader", false);
 
   const getJobs = async () => {
-    await dispatch(getHomePageJobsList());
+    await dispatch(getHomePageJobsList({ page: 0 }));
   };
   useEffect(() => {
     getJobs();
@@ -91,16 +91,15 @@ const JobsPage = () => {
             { id: "contractType", label: "Contract type" },
             { id: "primarySkill", label: "Primary skill" },
           ]}
-          page={(jobsData.pageable && jobsData.pageable.pageNumber) || 0}
-          rowsPerPage={(jobsData.pageable && jobsData.pageable.pageSize) || 1}
+          page={jobsData.number}
           count={jobsData.totalElements}
-          totalElements={jobsData.totalElements}
+          rowsPerPage={jobsData.numberOfElements}
           onRowClick={onJobSelected}
-          gotoNextPage={(val) => {
-            console.log("-----", val);
-          }}
           onSelectTableRow={(row) => {
             setSelected(row);
+          }}
+          gotoNextPage={(page) => {
+            dispatch(getHomePageJobsList({ page }));
           }}
         />
       </Container>

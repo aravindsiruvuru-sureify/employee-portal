@@ -106,8 +106,13 @@ const HRJobApplicationForm = ({
     setIsDisabled(handleButtonIsDisabled(error, 3));
   }, [error]);
 
+  const isNewApplication = () => !!!data.ref;
+
   const handleClick = () => {
-    onClickSubmitButton({ ...data, publish: false, endDate: "2022-01-29" });
+    onClickSubmitButton({
+      ...data,
+      ...(isNewApplication() ? { publish: false } : { publish: data.publish }),
+    });
   };
 
   const isExperienced = () => data.experienceLevel === "Experienced";

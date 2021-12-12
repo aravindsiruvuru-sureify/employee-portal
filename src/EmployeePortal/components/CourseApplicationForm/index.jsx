@@ -113,9 +113,15 @@ const CourseApplicationForm = ({
     });
   }, [course]);
 
+  const isNewApplication = () => !!!data.courseCode;
+
   const handleClick = () => {
-    onClickSubmitButton({ ...data, publish: false });
+    onClickSubmitButton({
+      ...data,
+      ...(isNewApplication() ? { publish: false } : { publish: data.publish }),
+    });
   };
+
   return (
     <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
@@ -164,13 +170,13 @@ const CourseApplicationForm = ({
           cssClass={classes.datePicker}
           defaultValue={data.startDate}
         />
-        {/* <DatePicker
+        <DatePicker
           handleChange={handleChange}
           id={regEndDate}
           label={courseApplicationConstants.regEndDate}
           cssClass={classes.datePicker}
           defaultValue={data.regEndDate}
-        /> */}
+        />
         <TextInput
           id={timings}
           label={courseApplicationConstants.timings}
@@ -197,7 +203,6 @@ const CourseApplicationForm = ({
           cssClass={classes.field}
           defaultValue={data.fee}
           helperText={MIN3CHARS_ERROR_TEXT}
-
         />
         <TextInput
           id={courseContent}
@@ -211,7 +216,7 @@ const CourseApplicationForm = ({
         />
       </Fields>
       <PrimaryButton
-        isDisabled={isDisabled}
+        // isDisabled={isDisabled}
         handleClick={handleClick}
         cssClass={classes.button}
         label="Submit"

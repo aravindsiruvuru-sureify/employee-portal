@@ -16,6 +16,8 @@ import { Container } from "../DashboardContainer";
 import AlertDialog from "../../../CommonComponents/AlertDialog";
 import SearchBarComponent from "../SearchBarComponent";
 
+import { deleteCourseById } from "../../services/ApiService/actions";
+
 import CoursesDetails from "../CoursesDetails";
 
 const useStyles = makeStyles({
@@ -43,7 +45,7 @@ const DashboardCoursesView = () => {
   const loader = get(store, "loader", false);
 
   useEffect(() => {
-    dispatch(getDashboardPageCoursesList());
+    dispatch(getDashboardPageCoursesList({ page: 0 }));
   }, []);
 
   const resetModal = () => {
@@ -59,7 +61,8 @@ const DashboardCoursesView = () => {
           <CourseApplicationForm
             onClickSubmitButton={(data) => {
               console.log(data);
-              createCourseData({ ...data, publish: false, empId: "1" });
+              createCourseData({ ...data, empId: "1" });
+              resetModal();
             }}
             onClickCrossIcon={() => {
               resetModal();
@@ -98,19 +101,22 @@ const DashboardCoursesView = () => {
 
   const createCourseData = async (data) => {
     await createCourse(data);
-    await dispatch(getDashboardPageCoursesList());
+    await dispatch(getDashboardPageCoursesList({ page: 0 }));
   };
 
   const updateCourse = async (course) => {
     await createCourseData({ ...course });
-    await dispatch(getDashboardPageCoursesList());
+    await dispatch(getDashboardPageCoursesList({ page: coursesData.number }));
   };
 
   const renderDeleteAlert = () => {
     if (menuItem === "Delete") {
       return (
         <AlertDialog
-          handleAgreeClick={() => {
+          handleAgreeClick={async () => {
+            console.log(selectedCourse);
+            await deleteCourseById({ id: selectedCourse.courseCode });
+            await dispatch(getDashboardPageCoursesList({ page: 0 }));
             resetModal();
           }}
           handleDisagreeClick={() => {
@@ -159,6 +165,7 @@ const DashboardCoursesView = () => {
         </div>
         <Table
           data={coursesData.content}
+          page={coursesData.number}
           dashboard
           columnKeys={[
             { id: "courseCode", label: "Course code" },
@@ -169,11 +176,10 @@ const DashboardCoursesView = () => {
             { id: "fee", label: "Fee" },
           ]}
           rowsPerPage={coursesData.numberOfElements}
-          count={coursesData.totalPages}
-          totalElements={coursesData.totalElements}
+          count={coursesData.totalElements}
           onSelectMenuItem={({ menu, row }) => {
             if (menu === "Publish" || menu === "Unpublish") {
-              updateCourse({ ...row, publish: row.publish });
+              updateCourse({ ...row, publish: !row.publish });
             } else {
               setMenuItem(menu);
               setSelectedCourse(row);
@@ -181,6 +187,9 @@ const DashboardCoursesView = () => {
           }}
           onSelectTableRow={(row) => {
             setSelectedCourse(row);
+          }}
+          gotoNextPage={(page) => {
+            dispatch(getDashboardPageCoursesList({ page }));
           }}
         />
       </>

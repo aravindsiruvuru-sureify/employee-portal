@@ -78,14 +78,14 @@ const DatePicker = ({
 
     const timestamp = Date.parse(date);
     if (!isNaN(timestamp)) {
-      const formattedDate = format(new Date(date), "MMMM dd,yyyy");
+      const formattedDate = format(new Date(date), "yyyy-MM-dd");
       handleChange({
         target: {
           id,
           value: formattedDate,
         },
       });
-      return
+      return;
     }
     handleChange({
       target: {
@@ -106,9 +106,9 @@ const DatePicker = ({
           id="date-picker-dialog"
           key={id}
           label={""}
-          format="MM/dd/yyyy"
+          format="yyyy-MM-dd"
           value={selectedDate}
-          placeholder="MM/DD/YYYY"
+          placeholder="YYYY-MM-DD"
           onChange={handleDateChange}
           KeyboardButtonProps={{
             "aria-label": "change date",

@@ -30,11 +30,11 @@ export const setEmployees = (value) => ({
   payload: value,
 });
 
-export const getHomePageJobsList = () => {
+export const getHomePageJobsList = ({ page }) => {
   return (dispatch) => {
     dispatch(setLoader(true));
     return serviceActions
-      .getHomePageJobsList()
+      .getHomePageJobsList({ page })
       .then((res) => {
         dispatch(setJobs(res));
         dispatch(setLoader(false));
@@ -47,11 +47,11 @@ export const getHomePageJobsList = () => {
   };
 };
 
-export const getDashboardPageJobsList = () => {
+export const getDashboardPageJobsList = ({ page }) => {
   return (dispatch) => {
     dispatch(setLoader(true));
     return serviceActions
-      .getDashboardPageJobsList()
+      .getDashboardPageJobsList({ page })
       .then((res) => {
         dispatch(setJobs(res));
         dispatch(setLoader(false));
@@ -64,11 +64,11 @@ export const getDashboardPageJobsList = () => {
   };
 };
 
-export const getHomePageCoursesList = () => {
+export const getHomePageCoursesList = ({ page }) => {
   return (dispatch) => {
     dispatch(setLoader(true));
     return serviceActions
-      .getHomePageCoursesList()
+      .getHomePageCoursesList({ page })
       .then((res) => {
         dispatch(setCourses(res));
         dispatch(setLoader(false));
@@ -81,11 +81,11 @@ export const getHomePageCoursesList = () => {
   };
 };
 
-export const getDashboardPageCoursesList = () => {
+export const getDashboardPageCoursesList = ({ page = 0 }) => {
   return (dispatch) => {
     dispatch(setLoader(true));
     return serviceActions
-      .getDashboardPageCoursesList()
+      .getDashboardPageCoursesList({ page })
       .then((res) => {
         dispatch(setCourses(res));
         dispatch(setLoader(false));

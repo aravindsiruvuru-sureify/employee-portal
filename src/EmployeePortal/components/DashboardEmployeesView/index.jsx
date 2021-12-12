@@ -8,7 +8,7 @@ import Table from "../../../CommonComponents/Table";
 import Modal from "../../../CommonComponents/Modal";
 import PrimaryButton from "../../../CommonComponents/PrimaryButton";
 
-import { getDashboardPageCoursesList } from "../../store/employeeStore/actions";
+import { getHomePageEmployeesList } from "../../store/employeeStore/actions";
 
 import CourseApplicationForm from "../CourseApplicationForm";
 import { createCourse } from "../../services/ApiService/actions";
