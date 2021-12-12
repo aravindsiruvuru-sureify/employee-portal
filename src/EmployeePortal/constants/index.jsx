@@ -243,6 +243,8 @@ export const jobApplicationConstants = {
   number: "Contact Number",
   link: "Resume Link",
   experienceLevel: "Experience level",
+  location: "Location",
+  country: "Country",
 };
 
 export const hrJobApplicationConstants = {
@@ -267,6 +269,8 @@ export const JOB_APPLICATION_IDS = {
   phoneNo: "phoneNo",
   link: "resume_url",
   experienceLevel: "experience_level",
+  location: "location",
+  country: "country",
 };
 
 export const HR_JOB_APPLICATION = {

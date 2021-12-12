@@ -39,8 +39,8 @@ const useStyles = makeStyles({
     },
   },
   root: {
-    top: "0px",
-    right: "10px",
+    top: "30px",
+    right: "30px",
     position: "absolute",
     cursor: "pointer",
   },
@@ -51,9 +51,14 @@ const useStyles = makeStyles({
   },
 });
 
-const { firstName, lastName, emailId, phoneNo, link } = JOB_APPLICATION_IDS;
+const { firstName, lastName, emailId, phoneNo, link, location, country } =
+  JOB_APPLICATION_IDS;
 
-const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
+const JobApplicationForm = ({
+  onClickCrossIcon,
+  onClickSubmitButton,
+  course = false,
+}) => {
   const classes = useStyles();
   const [error, setError] = useState({});
   const [data, setData] = useState({});
@@ -97,11 +102,12 @@ const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
   const handleClick = () => {
     onClickSubmitButton(data);
   };
-
   return (
     <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>Fill your job application</YourReferralText>
+      <YourReferralText>
+        {course ? "Fill you course enroll form" : "Fill your job application"}
+      </YourReferralText>
       <Fields>
         <TextInput
           id={firstName}
@@ -125,36 +131,52 @@ const JobApplicationForm = ({ onClickCrossIcon, onClickSubmitButton }) => {
           cssClass={classes.field}
         />
         <TextInput
+          id={location}
+          label={jobApplicationConstants.location}
+          onChange={handleChange}
+          error={error[location]}
+          cssClass={classes.field}
+        />
+        <TextInput
+          id={country}
+          label={jobApplicationConstants.country}
+          onChange={handleChange}
+          error={error[country]}
+          cssClass={classes.field}
+        />
+        <TextInput
           id={phoneNo}
           label={jobApplicationConstants.number}
           onChange={handleChange}
           error={error[phoneNo]}
           cssClass={classes.field}
         />
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <UploadButton
-            label="Upload Resume"
-            setUrl={setUrl}
-            dir="referral"
-            type={UploadTypes.file}
-            prevUrl={resumeUrl}
-          />
-          {resumeUrl && (
-            <PrimaryButton
-              handleClick={() => {
-                window.open(resumeUrl);
-              }}
-              label="View"
+        {!course && (
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <UploadButton
+              label="Upload Resume"
+              setUrl={setUrl}
+              dir="referral"
+              type={UploadTypes.file}
+              prevUrl={resumeUrl}
             />
-          )}
-        </div>
+            {!course && resumeUrl && (
+              <PrimaryButton
+                handleClick={() => {
+                  window.open(resumeUrl);
+                }}
+                label="View"
+              />
+            )}
+          </div>
+        )}
       </Fields>
 
       <PrimaryButton
         handleClick={handleClick}
         cssClass={classes.button}
         label="Submit"
-        isDisabled={isDisabled}
+        // isDisabled={isDisabled}
       />
     </ModalInputsWrapper>
   );

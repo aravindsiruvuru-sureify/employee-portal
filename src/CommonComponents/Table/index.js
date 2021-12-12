@@ -36,6 +36,7 @@ const Table = ({
   onSelectMenuItem,
   onSelectTableRow = () => {},
   gotoNextPage = () => {},
+  handleCountClick = () => {},
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -59,7 +60,7 @@ const Table = ({
   const handleChangePage = (event, newPage) => {
     gotoNextPage(newPage);
   };
-
+  console.log(data);
   const handleChangeRowsPerPage = (event) => {};
 
   const handleRowClick = (row) => {
@@ -138,6 +139,20 @@ const Table = ({
     }
     if (column.id === "more") {
       return renderMenu({ row });
+    }
+    if (column.id === "count") {
+      return (
+        <span
+          style={{ color: "blue" }}
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            handleCountClick({ row, menu: "count" });
+          }}
+        >
+          {value}
+        </span>
+      );
     }
     return value === "number" ? column.format(value) : value;
   };

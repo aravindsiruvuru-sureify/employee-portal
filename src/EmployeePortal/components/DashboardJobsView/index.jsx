@@ -23,6 +23,8 @@ import SearchBarComponent from "../SearchBarComponent";
 
 import { deleteJobById } from "../../services/ApiService/actions";
 
+import { DisplayUsers } from "./shared";
+
 const useStyles = makeStyles({
   root: {
     fontSize: "14px",
@@ -82,6 +84,15 @@ const DashboardJobsView = () => {
             applicationData={selectedJob}
           />
         );
+      case "count":
+        return (
+          <DisplayUsers
+            row={selectedJob}
+            onClickCrossIcon={() => {
+              resetModal();
+            }}
+          />
+        );
       default:
         break;
     }
@@ -129,7 +140,12 @@ const DashboardJobsView = () => {
   };
 
   const showModal = () => {
-    return menuItem === null || menuItem === "Edit" || menuItem === "Add";
+    return (
+      menuItem === null ||
+      menuItem === "Edit" ||
+      menuItem === "Add" ||
+      menuItem === "count"
+    );
   };
 
   return (
@@ -197,6 +213,10 @@ const DashboardJobsView = () => {
           }}
           gotoNextPage={(page) => {
             dispatch(getDashboardPageJobsList({ page }));
+          }}
+          handleCountClick={({ row, menu }) => {
+            setMenuItem(menu);
+            setSelectedJob(row);
           }}
         />
       </>

@@ -77,3 +77,33 @@ export const deleteCourseById = ({ id }) => {
       return;
     });
 };
+
+export const applyJob = ({ body, jobId }) => {
+  return api.put(apiEndpoints.apply_job({ jobId }), body).then((response) => {
+    return;
+  });
+};
+
+export const enrollCourse = ({ body, courseId }) => {
+  return api
+    .put(apiEndpoints.apply_course({ courseId }), body)
+    .then((response) => {
+      return;
+    });
+};
+
+export const getJobApplicants = ({ jobId, page = 0 }) => {
+  return api
+    .get(apiEndpoints.get_job_applications({ jobId, page }))
+    .then((res) => {
+      return res;
+    });
+};
+
+export const getCourseApplicants = ({ courseId, page = 0 }) => {
+  return api
+    .get(apiEndpoints.get_course_applications({ courseId, page }))
+    .then((res) => {
+      return res;
+    });
+};

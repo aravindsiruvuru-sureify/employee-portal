@@ -10,6 +10,8 @@ import { PrimaryButton } from "../../../CommonComponents";
 import completed from "../../../assets/svgs/completed.svg";
 import FormLoader from "../../../CommonComponents/FormLoader";
 
+import { applyJob } from "../../services/ApiService/actions";
+
 import {
   Container,
   BasicDetails,
@@ -202,8 +204,10 @@ const JobDetailsJobApplicationForm = (props) => {
     ) : (
       <JobApplicationForm
         onClickCrossIcon={onClickCrossIcon}
-        onClickSubmitButton={() => {
+        onClickSubmitButton={async (data) => {
+          console.log(data);
           setLoader(true);
+          await applyJob({ body: data, jobId: jobDetails.ref });
           setLoader(false);
           setSuccessAPI(true);
         }}

@@ -3,11 +3,15 @@ import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 
 import CourseApplicationForm from "../CourseApplicationForm";
+import JobApplicationForm from "../JobApplicationForm";
+
 import { PrimaryButton } from "../../../CommonComponents";
 import completed from "../../../assets/svgs/completed.svg";
 
 import FormLoader from "../../../CommonComponents/FormLoader";
 import { useDispatch } from "react-redux";
+
+import { enrollCourse } from "../../services/ApiService/actions";
 
 import {
   Container,
@@ -91,14 +95,18 @@ const CoursesDetails = ({
         </span>
       </div>
     ) : (
-      <CourseApplicationForm
+      <JobApplicationForm
+        course
         onClickCrossIcon={onClickCrossIcon}
-        onClickSubmitButton={() => {
+        onClickSubmitButton={async (data) => {
           setLoader(true);
+          await enrollCourse({
+            body: data,
+            courseId: courseDetails.courseCode,
+          });
           setLoader(false);
           setSuccessAPI(true);
         }}
-        course={courseDetails}
       />
     );
   };

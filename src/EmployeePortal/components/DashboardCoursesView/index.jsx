@@ -19,6 +19,7 @@ import SearchBarComponent from "../SearchBarComponent";
 import { deleteCourseById } from "../../services/ApiService/actions";
 
 import CoursesDetails from "../CoursesDetails";
+import { DisplayUsers } from "../DashboardJobsView/shared";
 
 const useStyles = makeStyles({
   root: {
@@ -68,6 +69,16 @@ const DashboardCoursesView = () => {
               resetModal();
             }}
             course={selectedCourse}
+          />
+        );
+      case "count":
+        return (
+          <DisplayUsers
+            row={selectedCourse}
+            isCourse
+            onClickCrossIcon={() => {
+              resetModal();
+            }}
           />
         );
       default:
@@ -129,7 +140,12 @@ const DashboardCoursesView = () => {
   };
 
   const showModal = () => {
-    return menuItem === null || menuItem === "Edit" || menuItem === "Add";
+    return (
+      menuItem === null ||
+      menuItem === "Edit" ||
+      menuItem === "Add" ||
+      menuItem === "count"
+    );
   };
 
   return (
@@ -190,6 +206,10 @@ const DashboardCoursesView = () => {
           }}
           gotoNextPage={(page) => {
             dispatch(getDashboardPageCoursesList({ page }));
+          }}
+          handleCountClick={({ row, menu }) => {
+            setMenuItem(menu);
+            setSelectedCourse(row);
           }}
         />
       </>
