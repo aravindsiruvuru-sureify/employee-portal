@@ -4,11 +4,11 @@ import { get } from "lodash";
 
 import empty from "../../../assets/svgs/empty.svg";
 
-import { Font25PrimaryRobotoMedium } from "../../themes/typos";
 import MainContainer from "../../components/MainContainer";
 
 import DashboardJobsView from "../../components/DashboardJobsView";
 import DashboardCoursesView from "../../components/DashboardCoursesView";
+import DashboardEmployeesView from "../../components/DashboardEmployeesView";
 
 import {
   RightContentContainer,
@@ -20,17 +20,18 @@ import {
   TabItemContainer,
 } from "./styles";
 
-const headers = [
-  { id: "profile-details", label: "Profile details" },
-  { id: "employee-list", label: "Employee List" },
-  { id: "job-details", label: "Job details" },
-  { id: "careers-details", label: "Careers Details" },
-  { id: "request-for-quote-details", label: "Request for Quote details" },
-];
+import {
+  headers,
+  PROFILE_TAB,
+  EMPLOYEES_TAB,
+  JOB_DETAILS_TAB,
+  CAREER_DETAILS_TAB,
+  QUOTE_DETAILS,
+} from "./shared";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const [selectedTab, setSelectedTab] = useState("job-details");
+  const [selectedTab, setSelectedTab] = useState(PROFILE_TAB.id);
 
   const renderEmptyView = () => {
     return (
@@ -43,13 +44,15 @@ const Dashboard = () => {
 
   const renderContent = () => {
     switch (selectedTab) {
-      case "job-details":
+      case JOB_DETAILS_TAB.id:
         return <DashboardJobsView />;
-      case "careers-details":
+      case CAREER_DETAILS_TAB.id:
         return <DashboardCoursesView />;
-      case "employee-list":
-      case "profile-details":
-      case "request-for-quote-details":
+      case EMPLOYEES_TAB.id:
+        return <DashboardEmployeesView />;
+      case PROFILE_TAB.id:
+        return <h1>Profile details</h1>;
+      case QUOTE_DETAILS.id:
         return renderEmptyView();
       default:
         return null;

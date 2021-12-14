@@ -133,7 +133,7 @@ const DashboardCoursesView = () => {
           handleDisagreeClick={() => {
             resetModal();
           }}
-          text="Are you sure, You want to delete this course?"
+          text="Are you sure, you want to delete this course?"
         />
       );
     }

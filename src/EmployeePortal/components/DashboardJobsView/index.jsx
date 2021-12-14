@@ -133,7 +133,7 @@ const DashboardJobsView = () => {
           handleDisagreeClick={() => {
             resetModal();
           }}
-          text="Are you sure, You want to delete this job?"
+          text="Are you sure, you want to delete this job?"
         />
       );
     }

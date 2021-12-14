@@ -8,23 +8,17 @@ import Table from "../../../CommonComponents/Table";
 import Modal from "../../../CommonComponents/Modal";
 import PrimaryButton from "../../../CommonComponents/PrimaryButton";
 
-import { getHomePageEmployeesList } from "../../store/employeeStore/actions";
+import { getEmployeesList } from "../../store/employeeStore/actions";
 
 import CourseApplicationForm from "../CourseApplicationForm";
 import { createCourse } from "../../services/ApiService/actions";
 import { Container } from "../DashboardContainer";
 import AlertDialog from "../../../CommonComponents/AlertDialog";
+import SearchBarComponent from "../SearchBarComponent";
 
 const useStyles = makeStyles({
   root: {
     fontSize: "14px",
-    // backgroundColor: colors.primary,
-    // "&:focus": {
-    //   backgroundColor: "#234e6e",
-    // },
-    // "&:hover": {
-    //   backgroundColor: "#1b496b",
-    // },
     textTransform: "none",
   },
 });
@@ -36,11 +30,11 @@ const DashboardEmployeesView = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
-  const coursesData = get(store, "coursesData", {});
+  const employees = get(store, "employees", {});
   const loader = get(store, "loader", false);
 
   useEffect(() => {
-    dispatch(getDashboardPageCoursesList());
+    dispatch(getEmployeesList({ page: 0 }));
   }, []);
 
   const resetModal = () => {
@@ -52,25 +46,14 @@ const DashboardEmployeesView = () => {
     switch (menuItem) {
       case "Edit":
       case "Add":
-        return (
-          <CourseApplicationForm
-            onClickSubmitButton={(data) => {
-              console.log(data);
-              createCourseData({ ...data, publish: false, empId: "1" });
-            }}
-            onClickCrossIcon={() => {
-              resetModal();
-            }}
-            course={selectedCourse}
-          />
-        );
+        return <h1>Add employee</h1>;
       default:
         break;
     }
     return <h1>{menuItem}</h1>;
   };
 
-  const getCourseDetailsModalContent = () => {
+  const getEmployeeDetailsModalContent = () => {
     return <h1>Course details</h1>;
   };
 
@@ -80,20 +63,20 @@ const DashboardEmployeesView = () => {
       return getMenuModalContent();
     }
     if (selectedCourse) {
-      return getCourseDetailsModalContent();
+      return getEmployeeDetailsModalContent();
     }
     return null;
   };
 
-  const createCourseData = async (data) => {
-    await createCourse(data);
-    await dispatch(getDashboardPageCoursesList());
-  };
+  // const createEmployeeData = async (data) => {
+  //   await createCourse(data);
+  //   await dispatch(getEmployeesList());
+  // };
 
-  const updateCourse = async (course) => {
-    await createCourseData({ ...course });
-    await dispatch(getDashboardPageCoursesList());
-  };
+  // const updateEmployee = async (course) => {
+  //   await createEmployeeData({ ...course });
+  //   await dispatch(getEmployeesList());
+  // };
 
   const renderDeleteAlert = () => {
     if (menuItem === "Delete") {
@@ -105,7 +88,7 @@ const DashboardEmployeesView = () => {
           handleDisagreeClick={() => {
             resetModal();
           }}
-          text="Are you sure, You want to delete this course?"
+          text="Are you sure, you want to delete this employee?"
         />
       );
     }
@@ -128,10 +111,15 @@ const DashboardEmployeesView = () => {
           style={{
             width: "90%",
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
+            alignItems: "center",
             padding: "20px 0",
           }}
         >
+          <SearchBarComponent
+            onCancelSearch={() => {}}
+            onRequestSearch={() => {}}
+          />
           <PrimaryButton
             className={classes.root}
             handleClick={() => {
@@ -142,22 +130,23 @@ const DashboardEmployeesView = () => {
           />
         </div>
         <Table
-          data={coursesData.content}
+          data={employees.content}
           dashboard
+          noCount={false}
           columnKeys={[
-            { id: "courseCode", label: "Course code" },
-            { id: "courseName", label: "Course name" },
-            { id: "trainer", label: "Trainer" },
-            { id: "type", label: "Type" },
-            { id: "startDate", label: "Start date" },
-            { id: "fee", label: "Fee" },
+            { id: "emailId", label: "Email Id" },
+            { id: "firstName", label: "First Name" },
+            { id: "lastName", label: "Last Name" },
+            { id: "designation", label: "Designation" },
+            { id: "skills", label: "Skills" },
+            { id: "location", label: "Location" },
           ]}
-          rowsPerPage={coursesData.numberOfElements}
-          count={coursesData.totalPages}
-          totalElements={coursesData.totalElements}
+          rowsPerPage={employees.numberOfElements}
+          count={employees.totalPages}
+          totalElements={employees.totalElements}
           onSelectMenuItem={({ menu, course }) => {
             if (menu === "Publish" || menu === "Unpublish") {
-              updateCourse({ ...course, publish: course.publish });
+              // updateCourse({ ...course, publish: course.publish });
             } else {
               setMenuItem(menu);
               setSelectedCourse(course);

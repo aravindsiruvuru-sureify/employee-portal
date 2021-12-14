@@ -60,7 +60,7 @@ const EmployeeListPage = () => {
             { id: "lastName", label: "Last Name" },
             { id: "designation", label: "Designation" },
             { id: "skills", label: "Skills" },
-            { id: "panNumber", label: "Pan Number" },
+            { id: "location", label: "Location" },
           ]}
         />
       </Container>

@@ -33,6 +33,7 @@ const Table = ({
   page = 0,
   count,
   dashboard = false,
+  noCount = true,
   onSelectMenuItem,
   onSelectTableRow = () => {},
   gotoNextPage = () => {},
@@ -41,12 +42,13 @@ const Table = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const classes = useStyles();
-  let columns = dashboard
-    ? [
-        { id: "publish", label: "Published", align: "center" },
-        { id: "count", label: "Count" },
-      ]
-    : [];
+  let columns =
+    noCount && dashboard
+      ? [
+          { id: "publish", label: "Published", align: "center" },
+          { id: "count", label: "Count" },
+        ]
+      : [];
   columns = [
     ...columnKeys.map((ck) => {
       return {
