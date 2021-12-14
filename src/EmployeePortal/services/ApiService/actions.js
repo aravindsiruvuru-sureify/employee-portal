@@ -40,8 +40,8 @@ export const getDashboardPageCoursesList = ({ page }) => {
   });
 };
 
-export const getEmployeesList = () => {
-  return api.get(apiEndpoints.home_employees).then((response) => {
+export const getEmployeesList = ({ page = 0 }) => {
+  return api.get(apiEndpoints.get_employees({ page })).then((response) => {
     return response.data;
   });
 };

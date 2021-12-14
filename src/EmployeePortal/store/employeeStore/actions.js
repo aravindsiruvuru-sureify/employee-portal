@@ -98,11 +98,11 @@ export const getDashboardPageCoursesList = ({ page = 0 }) => {
   };
 };
 
-export const getHomePageEmployeesList = () => {
+export const getEmployeesList = ({ page = 0 }) => {
   return (dispatch) => {
     dispatch(setLoader(true));
     return serviceActions
-      .getEmployeesList()
+      .getEmployeesList({ page })
       .then((res) => {
         dispatch(setEmployees(res));
         dispatch(setLoader(false));

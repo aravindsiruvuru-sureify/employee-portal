@@ -7,7 +7,7 @@ import MainContainer from "../../components/MainContainer";
 
 import Table from "../../../CommonComponents/Table";
 
-import { getHomePageEmployeesList } from "../../store/actions";
+import { getEmployeesList } from "../../store/actions";
 
 export const Container = styled.div`
   padding: 40px 0;
@@ -27,7 +27,7 @@ const EmployeeListPage = () => {
   const loader = get(store, "loader", false);
 
   const getEmployees = async () => {
-    await dispatch(getHomePageEmployeesList());
+    await dispatch(getEmployeesList({ page: 0 }));
   };
 
   useEffect(() => {

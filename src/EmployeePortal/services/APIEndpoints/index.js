@@ -11,7 +11,7 @@ const apiEndpoints = {
     `http://35.200.162.143:8080/api/course/spase/${page}/2/startDate`,
   hr_create_and_update_job: "http://35.200.162.143:8080/api/jobs/",
   hr_create_and_update_course: "http://35.200.162.143:8080/api/course",
-  hr_page_employees: "https://prasanth-277.github.io/employees.json",
+  get_employees: ({ page }) => `https://prasanth-277.github.io/employees.json`,
   hr_page_job_delete: "http://35.200.162.143:8080/api/jobs/",
   hr_page_course_delete: "http://35.200.162.143:8080/api/course/",
 
