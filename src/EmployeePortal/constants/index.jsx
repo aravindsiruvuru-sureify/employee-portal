@@ -322,3 +322,58 @@ export const REFERRAL_FEEDBACK_FIELDS = {
 
 export const EXPERIENCE_LEVELS = ["Experienced", "Fresher"];
 export const CONTRACT_TYPES = ["Permanent", "Contract"];
+
+export const EMPLOYEE_DETAILS = {
+  BASIC_INFORMATION_IDS : {
+    id: "id",
+    emailId:"emailId",
+    firstName:"firstName",
+    lastName:"lastName",
+    shortName:"shortName",
+    designation:"designation",
+    personalEmailId:"personalEmailId",
+    phoneNumber:"phoneNumber",
+    dateOfBirth:"dateOfBirth",
+    skills:"skills",
+    startDate:"startDate",
+    endDate:"endDate"
+  },
+  DOCUMENTS_IDS: {
+    panNumber: "panNumber",
+    aadharNumber: "aadharNumber",
+    passportNumber: "passportNumber",
+    pfAccountNumber: "pfAccountNumber",
+    uan: "uan",
+    panCardPath: "panCardPath",
+    aadharPath: "aadharPath",
+    passportPath: "passportPath",
+    photoPath: "photoPath",
+    hikeLetterPath: "hikeLetterPath",
+    promotionLatterPath: "promotionLatterPath",
+    resumePath: "resumePath"
+  },
+  BANK_DETAILS_IDS: {
+    bankName:"bankName",
+    accountNumber:"accountNumber",
+    ifscCode:"ifscCode",
+    branchName:"branchName",
+    location:"location"
+  },
+  PERMANENT_ADDRESS_IDS: {
+    street1:"street1",
+    street2:"street2",
+    landmark:"landmark",
+    city:"city",
+    provinceOrState:"provinceOrState",
+    country:"country",
+    postalCode:"postalCode",
+    phoneNumber:"phoneNumber",
+    email:"email",
+    type:"type"
+  },
+  EMERGENCY_CONTACT_IDS: {
+    name:"name",
+    relation:"relation",
+    phoneNumber:"phoneNumber"
+  }
+}

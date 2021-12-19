@@ -15,7 +15,6 @@ import {
   EmptyIconContainer,
   EmptyDescription,
   LeftContentContainer,
-  SelectEmployeeDesc,
   LeftContent,
   TabItemContainer,
 } from "./styles";
@@ -28,6 +27,7 @@ import {
   CAREER_DETAILS_TAB,
   QUOTE_DETAILS,
 } from "./shared";
+import EmployeeDetailsView from "../../components/EmployeeDetailsView";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ const Dashboard = () => {
       case EMPLOYEES_TAB.id:
         return <DashboardEmployeesView />;
       case PROFILE_TAB.id:
-        return <h1>Profile details</h1>;
+        return <EmployeeDetailsView />;
       case QUOTE_DETAILS.id:
         return renderEmptyView();
       default:
