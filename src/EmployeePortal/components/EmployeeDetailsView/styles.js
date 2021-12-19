@@ -3,7 +3,7 @@ import { font20PrimaryRobotoBold, font14BlackRobotoNormal } from "../../themes/t
 
 export const CardWrapper = styled.div`
     background-color: ${({moreStyles}) => moreStyles?.bColor || 'white'};
-    padding: ${({moreStyles}) => moreStyles?.padding || '20px'};
+    padding: ${({moreStyles}) => moreStyles?.padding || '25px'};
     margin: 10px;
     width: 70%;
     display: flex;
