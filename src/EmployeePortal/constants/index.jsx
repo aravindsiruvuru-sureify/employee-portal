@@ -103,6 +103,8 @@ export const ROLES = [
   "Human Resource",
 ];
 
+export const GENDERS = ["Male", "Female"];
+
 export const EXPERIENCE_LEVEL = ["Experienced", "Fresher"];
 
 export const personalDetails = {

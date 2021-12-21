@@ -5,8 +5,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import { PropTypes } from "prop-types";
 import colors from "../../EmployeePortal/themes/colors";
-import {InputWrapper, InputTitle} from "../InputWrapper";
-
+import { InputWrapper, InputTitle } from "../InputWrapper";
 
 const useStyles = makeStyles((theme) => ({
   field: {
@@ -17,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     animation: `$myEffect 1500ms ${theme.transitions.easing.easeInOut}`,
     "& .MuiFilledInput-root:after ": {
       borderColor: `${colors.primary} !important`,
+    },
+    "& .MuiInputBase-input": {
+      fontSize: "14px",
     },
   },
   multiline: {

@@ -11,6 +11,8 @@ import Dashboard from "./Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import EmployeeListPage from "./EmployeeListPage";
+import LoginPage from "./LoginPage";
+import RegistrationPage from "./RegistrationPage";
 
 const Router = ({ children = null }) => {
   return (
@@ -21,6 +23,9 @@ const Router = ({ children = null }) => {
         <Route exact path={"/courses"} component={CoursesPage} />
         <Route exact path={"/employees"} component={EmployeeListPage} />
         <Route exact path={"/dashboard"} component={Dashboard} />
+        <Route exact path={"/login"} component={LoginPage} />
+        <Route exact path={"/register"} component={RegistrationPage} />
+
         {children}
       </Switch>
     </BrowserRouter>
