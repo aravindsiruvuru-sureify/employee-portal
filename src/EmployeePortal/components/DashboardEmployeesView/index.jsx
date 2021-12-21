@@ -27,7 +27,7 @@ const DashboardEmployeesView = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [menuItem, setMenuItem] = useState(null);
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedEmployee, setselectedEmployee] = useState(null);
 
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const employees = get(store, "employees", {});
@@ -39,7 +39,7 @@ const DashboardEmployeesView = () => {
 
   const resetModal = () => {
     setMenuItem(null);
-    setSelectedCourse(null);
+    setselectedEmployee(null);
   };
 
   const getMenuModalContent = () => {
@@ -58,11 +58,10 @@ const DashboardEmployeesView = () => {
   };
 
   const getModalContent = () => {
-    console.log(menuItem, selectedCourse);
-    if (menuItem && selectedCourse) {
+    if (menuItem && selectedEmployee) {
       return getMenuModalContent();
     }
-    if (selectedCourse) {
+    if (selectedEmployee) {
       return getEmployeeDetailsModalContent();
     }
     return null;
@@ -103,7 +102,7 @@ const DashboardEmployeesView = () => {
       <>
         {renderDeleteAlert()}
         {showModal() && (
-          <Modal open={!!(menuItem || selectedCourse)} handleClose={() => {}}>
+          <Modal open={!!(menuItem || selectedEmployee)} handleClose={() => {}}>
             {getModalContent()}
           </Modal>
         )}
@@ -124,7 +123,7 @@ const DashboardEmployeesView = () => {
             className={classes.root}
             handleClick={() => {
               setMenuItem("Add");
-              setSelectedCourse({});
+              setselectedEmployee({});
             }}
             label="Add"
           />
@@ -149,11 +148,11 @@ const DashboardEmployeesView = () => {
               // updateCourse({ ...course, publish: course.publish });
             } else {
               setMenuItem(menu);
-              setSelectedCourse(course);
+              setselectedEmployee(course);
             }
           }}
           onSelectTableRow={(row) => {
-            setSelectedCourse(row);
+            setselectedEmployee(row);
           }}
         />
       </>
