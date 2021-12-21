@@ -10,100 +10,147 @@ import CurrentAddressForm from "../CurrentAddressForm";
 import EmergencyContactForm from "../EmergencyContactForm";
 import { PrimaryButton } from "../../../CommonComponents";
 
-const EmployeeDetailsView = ({employeeData}) => {
-  const [item, setItem] = useState('');
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+
+import {
+  BASIC_INFO,
+  DOCUMENTS,
+  PROJECTS_ASSIGNED,
+  BANK_DETAILS,
+  PERMANENT_ADDRESS,
+  CURRENT_ADDRESS,
+  EMERGENCY_CONTACT,
+  formTypes,
+} from "./shared";
+
+const EmployeeDetailsView = ({
+  employeeData = {},
+  handleBackButtonClick = () => {},
+}) => {
+  const [item, setItem] = useState("");
 
   const getModalContent = (data) => {
-    switch(item) {
-      case 'basic-info':
-        return <BasicInformationForm employeeData={employeeData}  onClickCrossIcon={()=> { setItem('') }} />;
-      case 'documents':
-        return <EmployeeDocumentsForm employeeData={employeeData}  onClickCrossIcon={()=> { setItem('') }} />;
-      case 'projects-assigned':
-        return <ProjectsAssignedForm employeeData={employeeData}  onClickCrossIcon={()=> { setItem('') }} />;
-      case 'bank-details':
-        return <BankDetailsForm employeeData={employeeData}  onClickCrossIcon={()=> { setItem('') }} />;
-      case 'permanent-address':
-        return <PermanentAddressForm employeeData={employeeData}  onClickCrossIcon={()=> { setItem('') }} />;
-      case 'current-address':
-        return <CurrentAddressForm employeeData={employeeData}  onClickCrossIcon={()=> { setItem('') }} />;
-      case 'emergency-contact':
-        return <EmergencyContactForm employeeData={employeeData}  onClickCrossIcon={()=> { setItem('') }} />;
+    switch (item) {
+      case BASIC_INFO.id:
+        return (
+          <BasicInformationForm
+            employeeData={employeeData}
+            onClickCrossIcon={() => {
+              setItem("");
+            }}
+          />
+        );
+      case DOCUMENTS.id:
+        return (
+          <EmployeeDocumentsForm
+            employeeData={employeeData}
+            onClickCrossIcon={() => {
+              setItem("");
+            }}
+          />
+        );
+      case PROJECTS_ASSIGNED.id:
+        return (
+          <ProjectsAssignedForm
+            employeeData={employeeData}
+            onClickCrossIcon={() => {
+              setItem("");
+            }}
+          />
+        );
+      case BANK_DETAILS.id:
+        return (
+          <BankDetailsForm
+            employeeData={employeeData}
+            onClickCrossIcon={() => {
+              setItem("");
+            }}
+          />
+        );
+      case PERMANENT_ADDRESS.id:
+        return (
+          <PermanentAddressForm
+            employeeData={employeeData}
+            onClickCrossIcon={() => {
+              setItem("");
+            }}
+          />
+        );
+      case CURRENT_ADDRESS.id:
+        return (
+          <CurrentAddressForm
+            employeeData={employeeData}
+            onClickCrossIcon={() => {
+              setItem("");
+            }}
+          />
+        );
+      case EMERGENCY_CONTACT.id:
+        return (
+          <EmergencyContactForm
+            employeeData={employeeData}
+            onClickCrossIcon={() => {
+              setItem("");
+            }}
+          />
+        );
       default:
         return null;
     }
   };
 
-
-//   const get
+  //   const get
 
   return (
-    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '50px'}}>
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        padding: "20px 40px",
+      }}
+    >
       <Modal
-        open={item !== ''}
+        open={item !== ""}
         handleClose={() => {
-          setItem('');
+          setItem("");
         }}
       >
         {getModalContent()}
       </Modal>
-      <CardWrapper moreStyles={{bColor:"transparent", padding: "0"}} >
+      <CardWrapper
+        moreStyles={{ bColor: "transparent", padding: "0" }}
+        onClick={handleBackButtonClick}
+      >
         <PrimaryButton label={"Back"} />
       </CardWrapper>
-      <CardWrapper>
-        <div>
-          <Heading>Basic Information</Heading>
-        </div>
-        <Actions onClick={() => setItem('basic-info')}>Edit</Actions>
-      </CardWrapper>
-      <CardWrapper>
-        <div>
-          <Heading>Documents</Heading>
-        </div>
-        <Actions onClick={() => setItem('documents')}>Edit</Actions>
-      </CardWrapper>
-      <CardWrapper>
-        <div>
-          <Heading>Projects Assigned</Heading>
-        </div>
-        <Actions onClick={() => setItem('projects-assigned')}>Edit</Actions>
-      </CardWrapper>
-      <CardWrapper>
-        <div>
-          <Heading>Bank Details</Heading>
-        </div>
-        <Actions onClick={() => setItem('bank-details')}>Edit</Actions>
-      </CardWrapper>
-      <CardWrapper>
-        <div>
-          <Heading>Previous Company</Heading>
-        </div>
-        <Actions onClick={() => setItem(true)}>Edit</Actions>
-      </CardWrapper>
-      <CardWrapper>
-        <div>
-          <Heading>Permanent Address</Heading>
-        </div>
-        <Actions onClick={() => setItem('permanent-address')}>Edit</Actions>
-      </CardWrapper>
-      <CardWrapper>
-        <div>
-          <Heading>Current Address</Heading>
-        </div>
-        <Actions onClick={() => setItem('current-address')}>Edit</Actions>
-      </CardWrapper>
-      <CardWrapper>
-        <div>
-          <Heading>Emergency Contact</Heading>
-        </div>
-        <Actions onClick={() => setItem('emergency-contact')}>Edit</Actions>
-      </CardWrapper>
-      <CardWrapper>
-        <div>
-          <Heading>Education</Heading>
-        </div>
-        <Actions onClick={() => setItem(true)}>Edit</Actions>
-      </CardWrapper>
+      <h2
+        style={{
+          marginLeft: "18px",
+          marginBottom: "18px",
+          fontFamily: "Roboto",
+          textTransform: "none",
+          color: "#173b56",
+        }}
+      >
+        Employee details
+      </h2>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {formTypes.map((type) => (
+          <CardWrapper key={type.id} onClick={() => setItem(type.id)}>
+            <div>
+              <Heading>{type.label}</Heading>
+            </div>
+            <FontAwesomeIcon
+              icon={faPlusCircle}
+              style={{ fontSize: "24px", color: "#173b56", cursor: "pointer" }}
+              onClick={() => setItem(type.id)}
+            />
+          </CardWrapper>
+        ))}
+      </div>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import MainContainer from "../../components/MainContainer";
 import DashboardJobsView from "../../components/DashboardJobsView";
 import DashboardCoursesView from "../../components/DashboardCoursesView";
 import DashboardEmployeesView from "../../components/DashboardEmployeesView";
+import DashboardProfileView from "../../components/DashboardProfileView";
 
 import {
   RightContentContainer,
@@ -27,7 +28,6 @@ import {
   CAREER_DETAILS_TAB,
   QUOTE_DETAILS,
 } from "./shared";
-import EmployeeDetailsView from "../../components/EmployeeDetailsView";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ const Dashboard = () => {
       case EMPLOYEES_TAB.id:
         return <DashboardEmployeesView />;
       case PROFILE_TAB.id:
-        return <EmployeeDetailsView />;
+        return <DashboardProfileView />;
       case QUOTE_DETAILS.id:
         return renderEmptyView();
       default:

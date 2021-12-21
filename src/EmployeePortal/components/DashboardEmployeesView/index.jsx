@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { get } from "lodash";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Table from "../../../CommonComponents/Table";
-import Modal from "../../../CommonComponents/Modal";
 import PrimaryButton from "../../../CommonComponents/PrimaryButton";
 
 import { getEmployeesList } from "../../store/employeeStore/actions";
 
-import CourseApplicationForm from "../CourseApplicationForm";
-import { createCourse } from "../../services/ApiService/actions";
 import { Container } from "../DashboardContainer";
 import AlertDialog from "../../../CommonComponents/AlertDialog";
 import SearchBarComponent from "../SearchBarComponent";
+import EmployeeDetailsView from "../../components/EmployeeDetailsView";
 
 const useStyles = makeStyles({
   root: {
@@ -40,31 +37,6 @@ const DashboardEmployeesView = () => {
   const resetModal = () => {
     setMenuItem(null);
     setselectedEmployee(null);
-  };
-
-  const getMenuModalContent = () => {
-    switch (menuItem) {
-      case "Edit":
-      case "Add":
-        return <h1>Add employee</h1>;
-      default:
-        break;
-    }
-    return <h1>{menuItem}</h1>;
-  };
-
-  const getEmployeeDetailsModalContent = () => {
-    return <h1>Course details</h1>;
-  };
-
-  const getModalContent = () => {
-    if (menuItem && selectedEmployee) {
-      return getMenuModalContent();
-    }
-    if (selectedEmployee) {
-      return getEmployeeDetailsModalContent();
-    }
-    return null;
   };
 
   // const createEmployeeData = async (data) => {
@@ -93,19 +65,28 @@ const DashboardEmployeesView = () => {
     }
   };
 
-  const showModal = () => {
-    return menuItem === null || menuItem === "Edit" || menuItem === "Add";
+  const renderContent = () => {
+    switch (menuItem) {
+      case "Edit":
+      case "Add":
+      case "View":
+        return (
+          <EmployeeDetailsView
+            employeeData={selectedEmployee}
+            handleBackButtonClick={() => {
+              resetModal();
+            }}
+          />
+        );
+      default:
+        return renderEmployeeList();
+    }
   };
 
-  return (
-    <Container loader={loader}>
+  const renderEmployeeList = () => {
+    return (
       <>
         {renderDeleteAlert()}
-        {showModal() && (
-          <Modal open={!!(menuItem || selectedEmployee)} handleClose={() => {}}>
-            {getModalContent()}
-          </Modal>
-        )}
         <div
           style={{
             width: "90%",
@@ -152,12 +133,15 @@ const DashboardEmployeesView = () => {
             }
           }}
           onSelectTableRow={(row) => {
+            setMenuItem("View");
             setselectedEmployee(row);
           }}
         />
       </>
-    </Container>
-  );
+    );
+  };
+
+  return <Container loader={loader}>{renderContent()}</Container>;
 };
 
 export default DashboardEmployeesView;
