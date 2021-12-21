@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiFilledInput-root:after ": {
       borderColor: `${colors.primary} !important`,
     },
+    "& .MuiFilledInput-root": {
+      background: "#ffff !important",
+    },
     "& .MuiInputBase-input": {
       fontSize: "14px",
     },
@@ -71,7 +74,7 @@ const TextInput = ({
           isMultiline && classes.multiline
         }`}
         label={""}
-        variant="filled"
+        variant="outlined"
         defaultValue={defaultValue}
         value={value}
         onChange={(e) => {

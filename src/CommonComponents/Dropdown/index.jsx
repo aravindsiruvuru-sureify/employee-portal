@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     "&:focus-within > label": {
       color: `${colors.primary} !important`,
     },
+    "& .MuiFilledInput-root": {
+      background: "#ffff !important",
+    },
   },
   menuItems: {
     fontSize: "15px",
@@ -42,7 +45,7 @@ const Dropdown = (props) => {
     menuItems = [],
     cssClass = "",
     defaultValue = "",
-    variant = "filled",
+    variant = "outlined",
   } = props;
   const classes = useStyles();
   const [value, setvalue] = useState(defaultValue);

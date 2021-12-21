@@ -28,7 +28,6 @@ import {
   CAREER_DETAILS_TAB,
   QUOTE_DETAILS,
 } from "./shared";
-import EmployeeDetailsView from "../../components/EmployeeDetailsView";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -53,7 +52,6 @@ const Dashboard = () => {
         return <DashboardEmployeesView />;
       case PROFILE_TAB.id:
         return <DashboardProfileView />;
-      // return <EmployeeDetailsView />;
       case QUOTE_DETAILS.id:
         return renderEmptyView();
       default:
