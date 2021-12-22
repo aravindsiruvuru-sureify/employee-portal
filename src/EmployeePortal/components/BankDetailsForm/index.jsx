@@ -12,6 +12,7 @@ import {
   ROLES,
   EMPLOYEE_DETAILS,
   UploadTypes,
+  MIN3CHARS_ERROR_TEXT,
 } from "../../constants";
 import { YourReferralText } from "./styles";
 import {
@@ -85,7 +86,7 @@ const BankDetailsForm = ({
   };
 
   useEffect(() => {
-    setIsDisabled(handleButtonIsDisabled(error, 3));
+    setIsDisabled(handleButtonIsDisabled(error, 5));
   }, [error]);
 
   const handleClick = () => {
@@ -94,7 +95,7 @@ const BankDetailsForm = ({
   return (
     <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>Fill Basic Information application</YourReferralText>
+      <YourReferralText>Bank Details</YourReferralText>
       <Fields>
         <TextInput
           id={bankName}
@@ -102,6 +103,7 @@ const BankDetailsForm = ({
           onChange={handleChange}
           error={error[bankName]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[bankName]}
         />
         <TextInput
@@ -110,6 +112,7 @@ const BankDetailsForm = ({
           onChange={handleChange}
           error={error[accountNumber]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[accountNumber]}
         />
         <TextInput
@@ -118,6 +121,7 @@ const BankDetailsForm = ({
           onChange={handleChange}
           error={error[ifscCode]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[ifscCode]}
         />
         <TextInput
@@ -126,6 +130,7 @@ const BankDetailsForm = ({
           onChange={handleChange}
           error={error[branchName]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[branchName]}
         />
         <TextInput
@@ -134,6 +139,7 @@ const BankDetailsForm = ({
           onChange={handleChange}
           error={error[location]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[location]}
         />
       </Fields>

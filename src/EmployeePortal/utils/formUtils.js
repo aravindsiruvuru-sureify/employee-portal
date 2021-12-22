@@ -2,6 +2,7 @@ import {
   COURSE_APPLICATION_IDS,
   PERFORMANCE_REVIEW_FIELDS,
   JOB_APPLICATION_IDS,
+  EMPLOYEE_DETAILS,
   REFERRAL_FEEDBACK_FIELDS,
 } from "../constants";
 
@@ -19,14 +20,54 @@ const {
   fee,
 } = COURSE_APPLICATION_IDS;
 
-const { result, factorsHelped, factorsHindered, selfRating } =
-  PERFORMANCE_REVIEW_FIELDS.employee;
+const {
+  id: basicInfoID,
+  emailId,
+  firstName,
+  lastName,
+  shortName,
+  designation,
+  personalEmailId,
+  phoneNumber,
+  dateOfBirth,
+  skills,
+  endDate,
+} = EMPLOYEE_DETAILS.BASIC_INFORMATION_IDS;
 
-const { managerName, howToImprove, furtherObjectives, rating } =
-  PERFORMANCE_REVIEW_FIELDS.manager;
-const { fullname, link, experience, contactNumber } = JOB_APPLICATION_IDS;
+const {
+  panNumber,
+  aadharNumber,
+  passportNumber,
+  pfAccountNumber,
+  uan,
+  panCardPath,
+  aadharPath,
+  passportPath,
+  photoPath,
+  hikeLetterPath,
+  promotionLatterPath,
+  resumePath,
+} = EMPLOYEE_DETAILS.DOCUMENTS_IDS;
 
-const { feedback, feedbackBy, feedbackRating } = REFERRAL_FEEDBACK_FIELDS;
+const { bankName, accountNumber, ifscCode, branchName, location } =
+  EMPLOYEE_DETAILS.BANK_DETAILS_IDS;
+
+const { phoneNo, link, country } = JOB_APPLICATION_IDS;
+
+const {
+  street1,
+  street2,
+  landmark,
+  city,
+  provinceOrState,
+  postalCode,
+  email,
+} = EMPLOYEE_DETAILS.PERMANENT_ADDRESS_IDS;
+
+const { name, relation } = EMPLOYEE_DETAILS.EMERGENCY_CONTACT_IDS;
+
+
+const { experience, contactNumber } = JOB_APPLICATION_IDS;
 
 export const isSureifyEmail = (value) => {
   return value.includes("@sureify.com") && value.length > 14;
@@ -54,6 +95,8 @@ export const verifyMinLength3 = (value) => value && value.length > 2;
 
 export const verifyMinLength2 = (value) => value && value.length > 1;
 
+export const verifyMinLength1 = (value) => value && value.length > 0;
+
 export const verifyMinLength10 = (value) => value && value.length > 9;
 
 export const verifyArrayLength = (value) => value && value.length > 0;
@@ -72,6 +115,9 @@ export const handleHasError = (id, value) => {
   let hasError;
   if (value === null) return true;
   switch (id) {
+    case basicInfoID:
+      hasError = !verifyMinLength1(value);
+      break;
     case courseName:
     case courseContent:
     case courseCode:
@@ -79,19 +125,51 @@ export const handleHasError = (id, value) => {
     case timings:
     case duration:
     case fee:
+    case firstName:
+    case lastName:
+    case shortName:
+    case designation:
+    case skills:
+    case link:
+    case location:
+    case country:
+    case panNumber:
+    case aadharNumber:
+    case passportNumber:
+    case pfAccountNumber:
+    case uan:
+    case panCardPath:
+    case bankName:
+    case accountNumber:
+    case ifscCode:
+    case branchName:
+    case street1:
+    case street2:
+    case landmark:
+    case city:
+    case provinceOrState:
+    case postalCode:
+    case name:
+    case relation:
       hasError = !verifyMinLength3(value);
       break;
-    // case email:
-    //   hasError = !isEmail(value);
-    //   break;
+    case emailId:
+    case email:
+    case personalEmailId:
+      hasError = !isEmail(value);
+      break;
     case experience:
       hasError = !checkExperiance(value);
       break;
     case startDate:
     case regEndDate:
+    case dateOfBirth:
+    case endDate:
       hasError = value.toString() === "Invalid Date";
       break;
     case contactNumber:
+    case phoneNumber:
+    case phoneNo:
       hasError = value.length !== 10;
       break;
     case type:

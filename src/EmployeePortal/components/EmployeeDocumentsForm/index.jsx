@@ -12,6 +12,7 @@ import {
   ROLES,
   EMPLOYEE_DETAILS,
   UploadTypes,
+  MIN3CHARS_ERROR_TEXT,
 } from "../../constants";
 import { YourReferralText } from "./styles";
 import {
@@ -98,7 +99,7 @@ const EmployeeDocumentsForm = ({
 
 
   useEffect(() => {
-    setIsDisabled(handleButtonIsDisabled(error, 3));
+    setIsDisabled(handleButtonIsDisabled(error, 6));
   }, [error]);
 
   const handleClick = () => {
@@ -107,7 +108,7 @@ const EmployeeDocumentsForm = ({
   return (
     <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>Fill Documents application</YourReferralText>
+      <YourReferralText>Documents Form</YourReferralText>
       <Fields>
         <TextInput
           id={panNumber}
@@ -115,6 +116,7 @@ const EmployeeDocumentsForm = ({
           onChange={handleChange}
           error={error[panNumber]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[panNumber]}
         />
         <TextInput
@@ -124,6 +126,7 @@ const EmployeeDocumentsForm = ({
           error={error[aadharNumber]}
           cssClass={classes.field}
           defaultValue={empData[aadharNumber]}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={passportNumber}
@@ -132,6 +135,7 @@ const EmployeeDocumentsForm = ({
           error={error[passportNumber]}
           cssClass={classes.field}
           defaultValue={empData[passportNumber]}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={pfAccountNumber}
@@ -140,6 +144,7 @@ const EmployeeDocumentsForm = ({
           error={error[pfAccountNumber]}
           cssClass={classes.field}
           defaultValue={empData[pfAccountNumber]}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={uan}
@@ -148,6 +153,7 @@ const EmployeeDocumentsForm = ({
           error={error[uan]}
           cssClass={classes.field}
           defaultValue={empData[uan]}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={panCardPath}
@@ -156,6 +162,7 @@ const EmployeeDocumentsForm = ({
           error={error[panCardPath]}
           cssClass={classes.field}
           defaultValue={empData[panCardPath]}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
       </Fields>
       <PrimaryButton

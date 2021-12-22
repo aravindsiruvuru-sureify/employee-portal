@@ -12,6 +12,10 @@ import {
   ROLES,
   EMPLOYEE_DETAILS,
   UploadTypes,
+  MIN3CHARS_ERROR_TEXT,
+  PHONENUMBER_ERROR_TEXT,
+  INVALID_DATE,
+  MIN1CHARS_ERROR_TEXT,
 } from "../../constants";
 import { YourReferralText } from "./styles";
 import {
@@ -95,7 +99,7 @@ const PermanentAddressForm = ({
   };
 
   useEffect(() => {
-    setIsDisabled(handleButtonIsDisabled(error, 3));
+    setIsDisabled(handleButtonIsDisabled(error, 10));
   }, [error]);
 
   const handleClick = () => {
@@ -104,7 +108,7 @@ const PermanentAddressForm = ({
   return (
     <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>Fill Basic Information application</YourReferralText>
+      <YourReferralText>Basic Information</YourReferralText>
       <Fields>
         <TextInput
           id={street1}
@@ -112,6 +116,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[street1]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[street1]}
         />
         <TextInput
@@ -120,6 +125,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[street2]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[street2]}
         />
         <TextInput
@@ -128,6 +134,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[landmark]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[landmark]}
         />
         <TextInput
@@ -136,6 +143,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[city]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[city]}
         />
         <TextInput
@@ -144,6 +152,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[provinceOrState]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[provinceOrState]}
         />
         <TextInput
@@ -152,6 +161,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[country]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[country]}
         />
         <TextInput
@@ -160,6 +170,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[postalCode]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[postalCode]}
         />
         <TextInput
@@ -168,6 +179,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[phoneNumber]}
           cssClass={classes.field}
+          helperText={PHONENUMBER_ERROR_TEXT}
           defaultValue={empData[phoneNumber]}
         />
         <TextInput
@@ -176,6 +188,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[email]}
           cssClass={classes.field}
+          helperText={INVALID_DATE}
           defaultValue={empData[email]}
         />
         <TextInput
@@ -184,6 +197,7 @@ const PermanentAddressForm = ({
           onChange={handleChange}
           error={error[type]}
           cssClass={classes.field}
+          helperText={MIN1CHARS_ERROR_TEXT}
           defaultValue={empData[type]}
         />
       </Fields>

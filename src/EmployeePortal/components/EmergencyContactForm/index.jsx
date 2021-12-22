@@ -12,6 +12,8 @@ import {
   ROLES,
   EMPLOYEE_DETAILS,
   UploadTypes,
+  MIN3CHARS_ERROR_TEXT,
+  PHONENUMBER_ERROR_TEXT,
 } from "../../constants";
 import { YourReferralText } from "./styles";
 import {
@@ -51,7 +53,7 @@ const useStyles = makeStyles({
   },
 });
 
-const { name, relation, phoneNumber } = EMPLOYEE_DETAILS.BANK_DETAILS_IDS;
+const { name, relation, phoneNumber } = EMPLOYEE_DETAILS.EMERGENCY_CONTACT_IDS;
 
 const EmergencyContactForm = ({
   onClickCrossIcon,
@@ -65,6 +67,7 @@ const EmergencyContactForm = ({
 
   const handleError = (id, value) => {
     const hasError = handleHasError(id, value);
+    console.log(error, hasError, id, value);
     setError((err) => {
       return {
         ...err,
@@ -93,7 +96,7 @@ const EmergencyContactForm = ({
   return (
     <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>Fill Emergency Contact application</YourReferralText>
+      <YourReferralText>Emergency Contact</YourReferralText>
       <Fields>
         <TextInput
           id={name}
@@ -101,6 +104,7 @@ const EmergencyContactForm = ({
           onChange={handleChange}
           error={error[name]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[name]}
         />
         <TextInput
@@ -109,6 +113,7 @@ const EmergencyContactForm = ({
           onChange={handleChange}
           error={error[relation]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
           defaultValue={empData[relation]}
         />
       <TextInput
@@ -117,6 +122,7 @@ const EmergencyContactForm = ({
           onChange={handleChange}
           error={error[phoneNumber]}
           cssClass={classes.field}
+          helperText={PHONENUMBER_ERROR_TEXT}
           defaultValue={empData[phoneNumber]}
         />
       </Fields>

@@ -21,7 +21,7 @@ export const PINCODE = "pincode";
 
 export const CURRENT_ONBOARDING_SECTION = "current_onboarding_section";
 
-export const EMAIL_ERROR_TEXT = "Email must be from sureify domain";
+export const EMAIL_ERROR_TEXT = "Enter valid email address";
 export const DROPDOWN_ERROR_TEXT = "Choose one above";
 
 export const PERSONAL_EMAIL_ERROR_TEXT = "Enter a valid email";
@@ -34,8 +34,10 @@ export const GITHUB_ERROR_TEXT = "Enter a valid Github URL";
 
 export const PASSWORD_ERROR_TEXT = "Password should be minimum 8 characters";
 export const MIN3CHARS_ERROR_TEXT = "Minimum 3 characters should be entered";
+export const MIN1CHARS_ERROR_TEXT = "Minimum 1 characters should be entered";
 export const MIN10CHARS_ERROR_TEXT = "Minimum 10 characters should be entered";
 export const EXPERIANCE_ERROR_TEXT = "Value must be in-between 0-50";
+export const INVALID_DATE = "Enter valid date";
 
 export const REGISTERATION_FIELDS = {
   password: "password",
