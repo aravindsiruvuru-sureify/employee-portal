@@ -36,14 +36,6 @@ export const BasicDetails = styled.div`
   align-items: center;
 `;
 
-export const PasswordBlock = styled.div`
-  position: relative;
-  background: ${colors.white};
-  margin: 30px;
-  padding: 30px;
-  border-radius: 20px;
-`;
-
 export const ProfileImage = styled.img`
   width: 180px;
   height: 180px;

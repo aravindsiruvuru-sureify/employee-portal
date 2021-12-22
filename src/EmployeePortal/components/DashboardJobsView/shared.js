@@ -17,6 +17,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
 });
+
 export const DisplayUsers = ({
   row,
   isCourse = false,
@@ -41,25 +42,55 @@ export const DisplayUsers = ({
   }, []);
 
   return (
-    <div style={{ padding: "40px 0", position: "relative" }}>
+    <div
+      style={{
+        padding: "20px",
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <CloseOutlinedIcon
         className={classes.root}
         onClick={onClickCrossIcon}
         style={{ color: "black" }}
       />
-      <Table
-        data={data.content || []}
-        columnKeys={[
-          { id: "firstName", label: "First Name" },
-          { id: "lastName", label: "Last Name" },
-          { id: "emailId", label: "Email Id" },
-          { id: "location", label: "Location" },
-          { id: "phoneNo", label: "Phone Number" },
-        ]}
-        page={data.number}
-        count={data.totalElements}
-        rowsPerPage={data.numberOfElements}
-      />
+      <h3 style={{ fontFamily: "Roboto", color: "#183B56" }}>
+        {isCourse ? "Course applicants" : "Job applicants"}
+      </h3>
+      {data.content && data.content.length ? (
+        <Table
+          data={data.content || []}
+          columnKeys={[
+            { id: "firstName", label: "First Name" },
+            { id: "lastName", label: "Last Name" },
+            { id: "emailId", label: "Email Id" },
+            { id: "location", label: "Location" },
+            { id: "phoneNo", label: "Phone Number" },
+          ]}
+          page={data.number}
+          count={data.totalElements}
+          rowsPerPage={data.numberOfElements}
+        />
+      ) : (
+        <div
+          style={{
+            padding: "40px",
+            width: "100%",
+            borderRadius: "4px",
+            fontSize: "20px",
+            textAlign: "center",
+            marginTop: "20px",
+            boxShadow: "0px 2px 5px #333333",
+            fontWeight: "bold",
+            fontFamily: "Roboto",
+          }}
+        >
+          No data found
+        </div>
+      )}
     </div>
   );
 };
