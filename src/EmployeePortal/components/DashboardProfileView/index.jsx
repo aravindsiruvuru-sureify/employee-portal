@@ -43,7 +43,6 @@ import {
   ExternalIcon,
   PlaceholderText,
   IconLabel,
-  PasswordBlock,
   SubHeading,
 } from "./styles";
 
@@ -144,32 +143,6 @@ const DashboardProfileView = (props) => {
           and improper Latin.
         </AboutMeText>
       </RowContainer>
-      {/* <PasswordBlock>
-        <Heading>Change password</Heading>
-        <div style={{ display: "flex", marginTop: "24px" }}>
-          <TextInput
-            id={"password"}
-            label={"Current password"}
-            onChange={() => {}}
-            //   error={error[fir÷stName]}
-            cssClass={classes.field}
-            type="password"
-          />
-          <TextInput
-            id={"password"}
-            label={"New password"}
-            onChange={() => {}}
-            //   error={error[fir÷stName]}
-            cssClass={classes.field}
-            type="password"
-          />
-        </div>
-        <PrimaryButton
-          handleClick={() => {}}
-          label="Update"
-          cssClass={classes.button}
-        />
-      </PasswordBlock> */}
       <RowContainer>
         <Heading>Projects</Heading>
         <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -201,6 +174,8 @@ const DashboardProfileView = (props) => {
             }}
           >
             <SubHeading>Account Number:</SubHeading>
+            {"  "}
+
             <span>04337487287372</span>
           </div>
           <div

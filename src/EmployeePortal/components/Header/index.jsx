@@ -12,6 +12,9 @@ import { useHistory } from "react-router-dom";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
+import Modal from "../../../CommonComponents/Modal";
+import { Password } from "./shared";
+
 const useStyles = makeStyles(() => ({
   label: {
     fontSize: "14px",
@@ -73,6 +76,8 @@ const headerLabels = [
 const Header = ({ isDashboard = false }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+
   const history = useHistory();
 
   const can_access_dashboard = true;
@@ -92,8 +97,16 @@ const Header = ({ isDashboard = false }) => {
       }}
       className={classes.popOver}
     >
-      <MenuItem className={classes.option}>Profile details</MenuItem>
-      <MenuItem className={classes.option}>option-2</MenuItem>
+      {/* <MenuItem className={classes.option}>Profile details</MenuItem> */}
+      <MenuItem
+        className={classes.option}
+        onClick={() => {
+          setAnchorEl(null);
+          setOpen(true);
+        }}
+      >
+        Forget password
+      </MenuItem>
       <MenuItem className={classes.option}>Logout</MenuItem>
     </Menu>
   );
@@ -140,6 +153,18 @@ const Header = ({ isDashboard = false }) => {
   return (
     <StyledButton position="static">
       {/* {isLoading && <FormLoader />} */}
+      <Modal
+        open={open}
+        handleClose={() => {
+          setOpen(false);
+        }}
+      >
+        <Password
+          onClickCrossIcon={() => {
+            setOpen(false);
+          }}
+        />
+      </Modal>
       <Toolbar variant="dense">
         <a class="navbar-brand logo-top page-scroll" href="#header">
           <i class="h4 fa fa-vk"></i>
