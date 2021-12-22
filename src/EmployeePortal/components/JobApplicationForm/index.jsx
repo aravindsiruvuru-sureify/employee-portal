@@ -12,6 +12,9 @@ import {
   ROLES,
   JOB_APPLICATION_IDS,
   UploadTypes,
+  MIN3CHARS_ERROR_TEXT,
+  EMAIL_ERROR_TEXT,
+  PHONENUMBER_ERROR_TEXT,
 } from "../../constants";
 import { YourReferralText } from "./styles";
 import {
@@ -94,9 +97,8 @@ const JobApplicationForm = ({
       },
     });
   };
-
   useEffect(() => {
-    setIsDisabled(handleButtonIsDisabled(error, 3));
+    setIsDisabled(handleButtonIsDisabled(error, 6));
   }, [error]);
 
   const handleClick = () => {
@@ -115,6 +117,7 @@ const JobApplicationForm = ({
           onChange={handleChange}
           error={error[firstName]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={lastName}
@@ -122,6 +125,7 @@ const JobApplicationForm = ({
           onChange={handleChange}
           error={error[lastName]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={emailId}
@@ -129,6 +133,7 @@ const JobApplicationForm = ({
           onChange={handleChange}
           error={error[emailId]}
           cssClass={classes.field}
+          helperText={EMAIL_ERROR_TEXT}
         />
         <TextInput
           id={location}
@@ -136,6 +141,7 @@ const JobApplicationForm = ({
           onChange={handleChange}
           error={error[location]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={country}
@@ -143,6 +149,7 @@ const JobApplicationForm = ({
           onChange={handleChange}
           error={error[country]}
           cssClass={classes.field}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={phoneNo}
@@ -150,6 +157,7 @@ const JobApplicationForm = ({
           onChange={handleChange}
           error={error[phoneNo]}
           cssClass={classes.field}
+          helperText={PHONENUMBER_ERROR_TEXT}
         />
         {!course && (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -176,7 +184,7 @@ const JobApplicationForm = ({
         handleClick={handleClick}
         cssClass={classes.button}
         label="Submit"
-        // isDisabled={isDisabled}
+        isDisabled={isDisabled}
       />
     </ModalInputsWrapper>
   );

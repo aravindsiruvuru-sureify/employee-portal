@@ -8,10 +8,12 @@ import { PropTypes } from "prop-types";
 import { handleButtonIsDisabled, handleHasError } from "../../utils/formUtils";
 import {
   jobApplicationConstants,
-  ROLE,
-  ROLES,
   EMPLOYEE_DETAILS,
-  UploadTypes,
+  EMAIL_ERROR_TEXT,
+  MIN3CHARS_ERROR_TEXT,
+  MIN1CHARS_ERROR_TEXT,
+  PHONENUMBER_ERROR_TEXT,
+  INVALID_DATE,
 } from "../../constants";
 import { YourReferralText } from "./styles";
 import {
@@ -98,7 +100,8 @@ const BasicInformationForm = ({
 
 
   useEffect(() => {
-    setIsDisabled(handleButtonIsDisabled(error, 3));
+    console.log(error)
+    setIsDisabled(handleButtonIsDisabled(error, 11));
   }, [error]);
 
   const handleClick = () => {
@@ -116,6 +119,7 @@ const BasicInformationForm = ({
           error={error[id]}
           cssClass={classes.field}
           defaultValue={empData.id}
+          helperText={MIN1CHARS_ERROR_TEXT}
         />
         <TextInput
           id={emailId}
@@ -123,6 +127,7 @@ const BasicInformationForm = ({
           onChange={handleChange}
           error={error[emailId]}
           cssClass={classes.field}
+          helperText={EMAIL_ERROR_TEXT}
           defaultValue={empData.emailId}
         />
         <TextInput
@@ -132,6 +137,7 @@ const BasicInformationForm = ({
           error={error[firstName]}
           cssClass={classes.field}
           defaultValue={empData.firstName}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={lastName}
@@ -140,6 +146,7 @@ const BasicInformationForm = ({
           error={error[lastName]}
           cssClass={classes.field}
           defaultValue={empData.lastName}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={shortName}
@@ -148,6 +155,7 @@ const BasicInformationForm = ({
           error={error[shortName]}
           cssClass={classes.field}
           defaultValue={empData.shortName}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={designation}
@@ -156,6 +164,7 @@ const BasicInformationForm = ({
           error={error[designation]}
           cssClass={classes.field}
           defaultValue={empData.designation}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
           id={personalEmailId}
@@ -164,6 +173,7 @@ const BasicInformationForm = ({
           error={error[personalEmailId]}
           cssClass={classes.field}
           defaultValue={empData.personalEmailId}
+          helperText={EMAIL_ERROR_TEXT}
         />
         <TextInput
           id={phoneNumber}
@@ -172,14 +182,15 @@ const BasicInformationForm = ({
           error={error[phoneNumber]}
           cssClass={classes.field}
           defaultValue={empData.phoneNumber}
+          helperText={PHONENUMBER_ERROR_TEXT}
         />
-        <TextInput
-          id={dateOfBirth}
-          label="Date Of Birth"
-          onChange={handleChange}
-          error={error[dateOfBirth]}
-          cssClass={classes.field}
-          defaultValue={empData.dateOfBirth}
+        <DatePicker
+          handleChange={handleChange}
+          id={startDate}
+          label="Start Date"
+          cssClass={classes.datePicker}
+          defaultValue={data.startDate}
+          helperText={INVALID_DATE}
         />
         <TextInput
           id={skills}
@@ -188,22 +199,23 @@ const BasicInformationForm = ({
           error={error[skills]}
           cssClass={classes.field}
           defaultValue={empData.skills}
+          helperText={MIN3CHARS_ERROR_TEXT}
         />
-        <TextInput
+        <DatePicker
+          handleChange={handleChange}
           id={startDate}
           label="Start Date"
-          onChange={handleChange}
-          error={error[startDate]}
-          cssClass={classes.field}
-          defaultValue={empData.startDate}
+          cssClass={classes.datePicker}
+          defaultValue={data.startDate}
+          helperText={INVALID_DATE}
         />
-        <TextInput
+        <DatePicker
+          handleChange={handleChange}
           id={endDate}
           label="End Date"
-          onChange={handleChange}
-          error={error[endDate]}
-          cssClass={classes.field}
-          defaultValue={empData.endDate}
+          cssClass={classes.datePicker}
+          defaultValue={data.endDate}
+          helperText={INVALID_DATE}
         />
       </Fields>
       <PrimaryButton
