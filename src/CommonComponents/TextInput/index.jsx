@@ -61,7 +61,7 @@ const TextInput = ({
   hasIcon = false,
   placeholder = "",
 }) => {
-  console.log(error)
+  console.log(error);
   const classes = useStyles();
   return (
     <InputWrapper>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 export const ViewContainer = styled.div`
-  padding: 40px 0;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
