@@ -1,0 +1,95 @@
+Login:
+/authenticate  ---- @PostMapping
+
+/refreshtoken  ---- @GetMapping
+
+Employee: 
+/api/employees/create  ---- @PostMapping
+/api/employees/{id}  ---- @GetMapping
+/api/employees  ---- @GetMapping
+/api/employees/update  ---- @PutMapping
+/api/employees/attachments  ---- @GetMapping
+/api/employees/sortandpagedesc/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/employees/sortandpageasc/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/employees/spEmpDeldesc/{isEmpDeleted}/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/employees/spEmpDelasc/{isEmpDeleted}/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/employees/delete/{id}  ---- @DeleteMapping
+/api/employees/searchEmpsByParam/{serachParam}/{offset}/{pageSize} ---- @GetMapping
+
+Address:
+/api/address/permanent/{empId}  ---- @PutMapping
+/api/address/current/{empId}  ---- @PutMapping
+/api/address/{empId}   ----  @GetMapping
+
+BankDetails:
+/api/bankdetails/update/{empId}  ---- @PutMapping
+/api/bankdetails/{empId}  ---- @GetMapping
+
+PreviousCompany:
+/api/previouscompany/update/{empId}  ---- @PutMapping
+/api/previouscompany/{empId}  ---- @GetMapping
+
+Project:
+/api/projects/create  ---- @PostMapping
+/api/projects/assign/{empId}/{projectId}  ---- @PutMapping
+/api/projects/{projectId}  ---- @GetMapping
+/api/projects  ---- @GetMapping
+/api/projects/{projectId}  ---- @DeleteMapping
+
+Course:
+/api/courses/create   ---- @PostMapping
+/api/courses/{id}  ---- @GetMapping
+/api/courses  ---- @GetMapping
+/api/courses/spdesc/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/courses/spase/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/courses/sppublishdesc/{publish}/{offset}/{pageSize}/{field}  ---- @GetMapping - Public Access
+/api/courses/sppublishasc/{publish}/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/courses/delete/{courseId}  ---- @DeleteMapping
+/api/courses/searchcoursehr/{serachParam}/{offset}/{pageSize}  ---- @GetMapping
+/api/courses/searchcourseByParam/{publish}/{serachParam}/{offset}/{pageSize}  ---- @GetMapping-Public Access
+
+StudentAcknowledgement:
+/api/studentack/create/{courseId}  ---- @PostMapping  --  Public Access
+/api/studentack  ---- @GetMapping
+/api/studentack/spStudentAckDesc/{studentId}/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/studentack/spStudentAckDesc/{studentId}/{offset}/{pageSize}  ---- @GetMapping
+/api/studentack/spStudentAckAsc/{studentId}/{offset}/{pageSize}/{field}
+/api/studentack/{id}  ---- @DeleteMapping
+
+Job:
+create job: /api/jobs/create  ---- @PutMapping 
+/api/jobs/{id}  ---- @GetMapping
+/api/jobs/spdesc/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/jobs/spase/{offset}/{pageSize}/{field}  ----@GetMapping
+/api/jobs/sppublishdesc/{publish}/{offset}/{pageSize}/{field}  ---- @GetMapping - Public Access
+/api/jobs/sppublishasc/{publish}/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/jobs/delete/{id}  ---- @DeleteMapping
+/api/jobs/searchjobshr/{searchparam}/{offset}/{pageSize}  ---- @GetMapping
+/api/jobs/searchJobsByParam/{publish}/{searchparam}/{offset}/{pageSize} ---- @GetMapping - Public Access
+
+JobAcknowledgement:
+/api/joback/create/{jobId}  ---- @PostMapping  --  Public Access  (Form data)
+/api/joback/spJobAckdesc/{jobId}/{offset}/{pageSize}/{field}  ---- @GetMapping
+/api/joback/spJobAckdesc/{jobId}/{offset}/{pageSize}  ---- @GetMapping
+/api/joback/spJobAckasc/{jobId}/{offset}/{pageSize}/{field}  ---- @GetMapping
+
+
+Storage:
+/file/upload/{empId}  ---- @PostMapping
+Form params= name, value, file (Name Should be drop-down)
+
+/file/download/{fileName}  ---- @GetMapping
+/file/delete/{fileName}  ---- @DeleteMapping
+
+
+ContactUs:
+api/contactus  ---- @GetMapping
+api/contactus/create  ---- @PostMapping  -- Public Access
+
+
+RequestQuot:
+/api/reqquot/create  ---- @PostMapping  -- Public Access
+/api/reqquot  ---- @GetMapping
+
+
+
