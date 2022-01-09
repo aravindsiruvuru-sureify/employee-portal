@@ -8,12 +8,14 @@ import {
   Menu,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { get } from "lodash";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 import Modal from "../../../CommonComponents/Modal";
 import { Password } from "./shared";
+import { getUserProfileDetails } from "../../store/employeeStore/actions";
 
 const useStyles = makeStyles(() => ({
   label: {
@@ -77,6 +79,13 @@ const Header = ({ isDashboard = false }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const store = useSelector((state) => get(state, ["employeeStore"], {}));
+  const profile = get(store, "profile", {});
+  const loader = get(store, "loader", false);
+  useEffect(() => {
+    dispatch(getUserProfileDetails());
+  }, []);
 
   const history = useHistory();
 
@@ -190,7 +199,7 @@ const Header = ({ isDashboard = false }) => {
                 style={{ height: "1em", width: "1em", borderRadius: "50%" }}
               />
               <Typography variant="subtitle1" className={classes.profile}>
-                user
+                {profile.firstName}
               </Typography>
             </>
           )}

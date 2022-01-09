@@ -158,7 +158,6 @@ export const TEAMS = {
 export const COURSE_APPLICATION_IDS = {
   courseName: "courseName",
   courseContent: "courseContent",
-  courseCode: "courseCode",
   trainer: "trainer",
   type: "type",
   mode: "mode",
@@ -167,12 +166,12 @@ export const COURSE_APPLICATION_IDS = {
   timings: "timings",
   duration: "duration",
   fee: "fee",
+  courseCode: "courseCode",
 };
 
 export const courseApplicationConstants = {
   courseName: "Course Name",
   courseContent: "Course Content",
-  courseCode: "Course Code",
   trainer: "Trainer",
   type: "Type",
   mode: "Mode",
@@ -181,6 +180,7 @@ export const courseApplicationConstants = {
   timings: "Timings",
   duration: "Duration",
   fee: "Fee",
+  courseCode: "Course code",
 };
 
 export const PERFORMANCE_REVIEW_FIELDS = {
@@ -328,19 +328,19 @@ export const EXPERIENCE_LEVELS = ["Experienced", "Fresher"];
 export const CONTRACT_TYPES = ["Permanent", "Contract"];
 
 export const EMPLOYEE_DETAILS = {
-  BASIC_INFORMATION_IDS : {
+  BASIC_INFORMATION_IDS: {
     id: "id",
-    emailId:"emailId",
-    firstName:"firstName",
-    lastName:"lastName",
-    shortName:"shortName",
-    designation:"designation",
-    personalEmailId:"personalEmailId",
-    phoneNumber:"phoneNumber",
-    dateOfBirth:"dateOfBirth",
-    skills:"skills",
-    startDate:"startDate",
-    endDate:"endDate"
+    emailId: "emailId",
+    firstName: "firstName",
+    lastName: "lastName",
+    shortName: "shortName",
+    designation: "designation",
+    personalEmailId: "personalEmailId",
+    phoneNumber: "phoneNumber",
+    dateOfBirth: "dateOfBirth",
+    skills: "skills",
+    startDate: "startDate",
+    endDate: "endDate",
   },
   DOCUMENTS_IDS: {
     panNumber: "panNumber",
@@ -354,30 +354,30 @@ export const EMPLOYEE_DETAILS = {
     photoPath: "photoPath",
     hikeLetterPath: "hikeLetterPath",
     promotionLatterPath: "promotionLatterPath",
-    resumePath: "resumePath"
+    resumePath: "resumePath",
   },
   BANK_DETAILS_IDS: {
-    bankName:"bankName",
-    accountNumber:"accountNumber",
-    ifscCode:"ifscCode",
-    branchName:"branchName",
-    location:"location"
+    bankName: "bankName",
+    accountNumber: "accountNumber",
+    ifscCode: "ifscCode",
+    branchName: "branchName",
+    location: "location",
   },
   PERMANENT_ADDRESS_IDS: {
-    street1:"street1",
-    street2:"street2",
-    landmark:"landmark",
-    city:"city",
-    provinceOrState:"provinceOrState",
-    country:"country",
-    postalCode:"postalCode",
-    phoneNumber:"phoneNumber",
-    email:"email",
-    type:"type"
+    street1: "street1",
+    street2: "street2",
+    landmark: "landmark",
+    city: "city",
+    provinceOrState: "provinceOrState",
+    country: "country",
+    postalCode: "postalCode",
+    phoneNumber: "phoneNumber",
+    email: "email",
+    type: "type",
   },
   EMERGENCY_CONTACT_IDS: {
-    name:"name",
-    relation:"relation",
-    phoneNumber:"phoneNumber"
-  }
-}
+    name: "name",
+    relation: "relation",
+    phoneNumber: "phoneNumber",
+  },
+};

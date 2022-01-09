@@ -4,6 +4,8 @@ import {
   SET_JOBS,
   SET_COURSES,
   SET_LOADER,
+  SET_USER_PROFILE,
+  SET_PROJECTS,
   SET_EMPLOYEES,
   SET_API_ERROR,
 } from "./actions";
@@ -11,9 +13,11 @@ import {
 const initialState = {
   jobsData: {},
   coursesData: {},
+  projects: [],
+  profile: {},
+  employees: {},
   loader: false,
   apiError: null,
-  employees: {},
 };
 
 export default function employeePortalStore(state = initialState, action) {
@@ -27,6 +31,11 @@ export default function employeePortalStore(state = initialState, action) {
       return {
         ...state,
         apiError: action.payload,
+      };
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        profile: action.payload,
       };
     case SET_JOBS:
       return {
@@ -42,6 +51,11 @@ export default function employeePortalStore(state = initialState, action) {
       return {
         ...state,
         employees: action.payload,
+      };
+    case SET_PROJECTS:
+      return {
+        ...state,
+        projects: action.payload,
       };
     default:
       return state;
