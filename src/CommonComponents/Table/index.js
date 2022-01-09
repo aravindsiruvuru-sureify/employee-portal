@@ -33,7 +33,7 @@ const Table = ({
   page = 0,
   count,
   dashboard = false,
-  noCount = true,
+  noCount = false,
   onSelectMenuItem,
   onSelectTableRow = () => {},
   gotoNextPage = () => {},
@@ -43,7 +43,7 @@ const Table = ({
   const open = Boolean(anchorEl);
   const classes = useStyles();
   let columns =
-    noCount && dashboard
+    !noCount && dashboard
       ? [
           { id: "publish", label: "Published", align: "center" },
           { id: "count", label: "Count" },
@@ -116,16 +116,18 @@ const Table = ({
         >
           Delete
         </MenuItem>
-        <MenuItem
-          onClick={(e) => {
-            onSelectMenuItem({
-              menu: publishMenuItem,
-              row,
-            });
-          }}
-        >
-          {publishMenuItem}
-        </MenuItem>
+        {!noCount && (
+          <MenuItem
+            onClick={(e) => {
+              onSelectMenuItem({
+                menu: publishMenuItem,
+                row,
+              });
+            }}
+          >
+            {publishMenuItem}
+          </MenuItem>
+        )}
       </Menu>
     );
   };

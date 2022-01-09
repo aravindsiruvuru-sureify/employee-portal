@@ -52,6 +52,30 @@ export const getEmployeesList = ({ page = 0 }) => {
   });
 };
 
+export const createEmployee = (body) => {
+  return api
+    .post(apiEndpoints.hr_create_and_update_job, body)
+    .then((response) => {
+      return;
+    });
+};
+
+export const updateEmployee = (body) => {
+  return api
+    .post(apiEndpoints.hr_create_and_update_job, body)
+    .then((response) => {
+      return;
+    });
+};
+
+export const deleteEmployeeById = ({ id }) => {
+  return api
+    .delete(`${apiEndpoints.employee_delete}/${id}/`)
+    .then((response) => {
+      return;
+    });
+};
+
 export const createJob = (body) => {
   return api
     .put(apiEndpoints.hr_create_and_update_job, body)
