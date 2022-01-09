@@ -24,7 +24,7 @@ const DashboardEmployeesView = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [menuItem, setMenuItem] = useState(null);
-  const [selectedEmployee, setselectedEmployee] = useState(null);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
   const employees = get(store, "employees", {});
@@ -36,7 +36,7 @@ const DashboardEmployeesView = () => {
 
   const resetModal = () => {
     setMenuItem(null);
-    setselectedEmployee(null);
+    setSelectedEmployee(null);
   };
 
   // const createEmployeeData = async (data) => {
@@ -59,7 +59,7 @@ const DashboardEmployeesView = () => {
           handleDisagreeClick={() => {
             resetModal();
           }}
-          text="Are you sure, you want to delete this employee?"
+          text="Are you sure, you want to delete this Employee?"
         />
       );
     }
@@ -104,7 +104,7 @@ const DashboardEmployeesView = () => {
             className={classes.root}
             handleClick={() => {
               setMenuItem("Add");
-              setselectedEmployee({});
+              setSelectedEmployee({});
             }}
             label="Add"
           />
@@ -112,29 +112,27 @@ const DashboardEmployeesView = () => {
         <Table
           data={employees.content}
           dashboard
-          noCount={false}
+          noCount
+          noPublish
           columnKeys={[
-            { id: "emailId", label: "Email Id" },
+            { id: "personalEmailId", label: "Email Id" },
             { id: "firstName", label: "First Name" },
             { id: "lastName", label: "Last Name" },
             { id: "designation", label: "Designation" },
             { id: "skills", label: "Skills" },
-            { id: "location", label: "Location" },
+            { id: "personalNumber", label: "Phone Number" },
           ]}
           rowsPerPage={employees.numberOfElements}
           count={employees.totalPages}
           totalElements={employees.totalElements}
-          onSelectMenuItem={({ menu, course }) => {
-            if (menu === "Publish" || menu === "Unpublish") {
-              // updateCourse({ ...course, publish: course.publish });
-            } else {
-              setMenuItem(menu);
-              setselectedEmployee(course);
-            }
+          onSelectMenuItem={({ menu, row }) => {
+            console.log(menu, row);
+            setMenuItem(menu);
+            setSelectedEmployee(row);
           }}
           onSelectTableRow={(row) => {
             setMenuItem("View");
-            setselectedEmployee(row);
+            setSelectedEmployee(row);
           }}
         />
       </>

@@ -169,6 +169,7 @@ const DashboardProjectsView = () => {
         </div>
         <Table
           dashboard
+          noCount
           page={projects.number}
           data={projects}
           columnKeys={[
