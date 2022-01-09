@@ -10,7 +10,10 @@ import Table from "../../../CommonComponents/Table";
 import Modal from "../../../CommonComponents/Modal";
 import PrimaryButton from "../../../CommonComponents/PrimaryButton";
 
-import { getDashboardPageJobsList } from "../../store/employeeStore/actions";
+import {
+  getDashboardPageJobsList,
+  getProjectsList,
+} from "../../store/employeeStore/actions";
 import HRJobApplicationForm from "../HRJobApplicationForm";
 
 import JobDetailsApplicationForm from "../JobDetailsApplicationForm";
@@ -44,11 +47,11 @@ const DashboardProjectsView = () => {
   const [selectedJob, setSelectedJob] = useState(null);
 
   const store = useSelector((state) => get(state, ["employeeStore"], {}));
-  const jobsData = get(store, "jobsData", {});
+  const projects = get(store, "projects", {});
   const loader = get(store, "loader", false);
 
   useEffect(() => {
-    dispatch(getDashboardPageJobsList({ page: 0 }));
+    dispatch(getProjectsList({ page: 0 }));
   }, []);
 
   const resetModal = () => {
@@ -63,7 +66,7 @@ const DashboardProjectsView = () => {
 
   const updateJob = async (job) => {
     await createJobData({ ...job });
-    await dispatch(getDashboardPageJobsList({ page: jobsData.number }));
+    await dispatch(getDashboardPageJobsList({ page: projects.number }));
   };
 
   const getMenuModalContent = () => {
@@ -125,7 +128,7 @@ const DashboardProjectsView = () => {
       menuItem === "count"
     );
   };
-
+  console.log(projects);
   return (
     <Container loader={loader}>
       <>
@@ -166,18 +169,17 @@ const DashboardProjectsView = () => {
         </div>
         <Table
           dashboard
-          page={jobsData.number}
-          data={jobsData.content}
+          page={projects.number}
+          data={projects}
           columnKeys={[
-            { id: "ref", label: "Job code" },
-            { id: "title", label: "Title" },
-            { id: "experience", label: "Experience" },
-            { id: "location", label: "Location" },
-            { id: "contractType", label: "Contract type" },
-            { id: "primarySkill", label: "Primary skill" },
+            { id: "projectName", label: "Project Name" },
+            { id: "client", label: "Client" },
+            { id: "clientLocation", label: "Location" },
+            { id: "startDate", label: "Start Date" },
+            { id: "endDate", label: "End Date" },
           ]}
-          rowsPerPage={jobsData.numberOfElements}
-          count={jobsData.totalElements}
+          rowsPerPage={projects.numberOfElements}
+          count={projects.totalElements}
           onSelectMenuItem={({ menu, row }) => {
             if (menu === "Publish" || menu === "Unpublish") {
               updateJob({ ...row, publish: !row.publish });

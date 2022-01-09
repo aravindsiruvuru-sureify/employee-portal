@@ -21,9 +21,10 @@ const apiEndpoints = {
   // get_employees: ({ page }) =>
   //   `/api/employees/sortandpagedesc/${page}/2/joinDate`,
 
-  get_employees: ({ page }) => `/api/employees`,
+  get_employees: ({ page }) =>
+    `/api/employees/sortandpageasc/${page}/2/joinDate`,
 
-  get_projects: ({ page }) => `/api/projects`,
+  get_projects: () => `/api/projects`,
 };
 
 export default apiEndpoints;

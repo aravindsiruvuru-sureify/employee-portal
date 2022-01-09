@@ -113,3 +113,9 @@ export const getCourseApplicants = ({ courseId, page = 0 }) => {
       return res;
     });
 };
+
+export const getProjectsList = () => {
+  return api.get(apiEndpoints.get_projects()).then((res) => {
+    return res.data;
+  });
+};

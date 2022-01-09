@@ -143,3 +143,20 @@ export const getEmployeesList = ({ page = 0 }) => {
       });
   };
 };
+
+export const getProjectsList = () => {
+  return (dispatch) => {
+    dispatch(setLoader(true));
+    return serviceActions
+      .getProjectsList()
+      .then((res) => {
+        dispatch(setProjects(res));
+        dispatch(setLoader(false));
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiError(err);
+      });
+  };
+};
