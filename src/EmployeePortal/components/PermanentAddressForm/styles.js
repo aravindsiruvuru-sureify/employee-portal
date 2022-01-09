@@ -8,10 +8,21 @@ const Fields = styled.div`
   width: 100%;
   position: relative;
 `;
-
-const YourReferralText = styled(font22PrimaryRobotoMedium)`
-  margin: 10px 0px 20px 0px;
-  display: block;
+const FieldsWrapper = styled.div`
+  padding: 25px 10px 10px 10px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  margin-top: 50px;
+  position: relative;
 `;
 
-export { Fields, YourReferralText };
+const YourReferralText = styled(font22PrimaryRobotoMedium)`
+  position: absolute;
+    background: white;
+    top: -17px;
+    border-radius: 5px;
+    left: 10px;
+    padding: 0px 5px;
+`;
+
+export { Fields, FieldsWrapper, YourReferralText };

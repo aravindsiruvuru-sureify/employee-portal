@@ -25,4 +25,4 @@ const YourReferralText = styled(font22PrimaryRobotoMedium)`
     padding: 0px 5px;
 `;
 
-export { Fields, FieldsWrapper, YourReferralText };
+export { Fields, YourReferralText, FieldsWrapper };

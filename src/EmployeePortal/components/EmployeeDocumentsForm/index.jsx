@@ -58,14 +58,10 @@ const {
   passportNumber,
   pfAccountNumber,
   uan,
-  panCardPath,
-  aadharPath,
-  passportPath,
-  photoPath,
-  hikeLetterPath,
-  promotionLatterPath,
-  resumePath
+  panCardPath
 } = EMPLOYEE_DETAILS.DOCUMENTS_IDS;
+
+const { designation } = EMPLOYEE_DETAILS.BASIC_INFORMATION_IDS;
 
 const EmployeeDocumentsForm = ({
   onClickCrossIcon,
@@ -156,12 +152,12 @@ const EmployeeDocumentsForm = ({
           helperText={MIN3CHARS_ERROR_TEXT}
         />
         <TextInput
-          id={panCardPath}
+          id={designation}
           label="Designation"
           onChange={handleChange}
           error={error[panCardPath]}
           cssClass={classes.field}
-          defaultValue={empData[panCardPath]}
+          defaultValue={empData[designation]}
           helperText={MIN3CHARS_ERROR_TEXT}
         />
       </Fields>
