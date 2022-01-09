@@ -55,16 +55,16 @@ const useStyles = makeStyles({
 
 const {
   id,
-  emailId,
+  officialEmailId,
   firstName,
   lastName,
   shortName,
   designation,
   personalEmailId,
-  phoneNumber,
+  personalNumber,
   dateOfBirth,
   skills,
-  startDate,
+  joinDate,
   endDate,
 } = EMPLOYEE_DETAILS.BASIC_INFORMATION_IDS;
 
@@ -80,12 +80,14 @@ const BasicInformationForm = ({
 
   const handleError = (id, value) => {
     const hasError = handleHasError(id, value);
+    
     setError((err) => {
       return {
         ...err,
         [id]: hasError,
       };
     });
+    console.log(error,id,value);
   };
 
   const handleChange = (e) => {
@@ -101,16 +103,17 @@ const BasicInformationForm = ({
 
   useEffect(() => {
     console.log(error)
-    setIsDisabled(handleButtonIsDisabled(error, 11));
+    setIsDisabled(handleButtonIsDisabled(error, 10));
   }, [error]);
 
   const handleClick = () => {
     onClickSubmitButton(data);
   };
+
   return (
     <ModalInputsWrapper>
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>Fill Basic Information application</YourReferralText>
+      <YourReferralText>Basic Information application</YourReferralText>
       <Fields>
         <TextInput
           id={id}
@@ -122,13 +125,13 @@ const BasicInformationForm = ({
           helperText={MIN1CHARS_ERROR_TEXT}
         />
         <TextInput
-          id={emailId}
-          label="Email Id"
+          id={officialEmailId}
+          label="Official Email Id"
           onChange={handleChange}
-          error={error[emailId]}
+          error={error[officialEmailId]}
           cssClass={classes.field}
           helperText={EMAIL_ERROR_TEXT}
-          defaultValue={empData.emailId}
+          defaultValue={empData.officialEmailId}
         />
         <TextInput
           id={firstName}
@@ -176,20 +179,20 @@ const BasicInformationForm = ({
           helperText={EMAIL_ERROR_TEXT}
         />
         <TextInput
-          id={phoneNumber}
+          id={personalNumber}
           label="Phone Number"
           onChange={handleChange}
-          error={error[phoneNumber]}
+          error={error[personalNumber]}
           cssClass={classes.field}
-          defaultValue={empData.phoneNumber}
+          defaultValue={empData.personalNumber}
           helperText={PHONENUMBER_ERROR_TEXT}
         />
         <DatePicker
           handleChange={handleChange}
-          id={startDate}
-          label="Start Date"
+          id={joinDate}
+          label="Join Date"
           cssClass={classes.datePicker}
-          defaultValue={data.startDate}
+          defaultValue={empData.joinDate}
           helperText={INVALID_DATE}
         />
         <TextInput
@@ -200,22 +203,6 @@ const BasicInformationForm = ({
           cssClass={classes.field}
           defaultValue={empData.skills}
           helperText={MIN3CHARS_ERROR_TEXT}
-        />
-        <DatePicker
-          handleChange={handleChange}
-          id={startDate}
-          label="Start Date"
-          cssClass={classes.datePicker}
-          defaultValue={data.startDate}
-          helperText={INVALID_DATE}
-        />
-        <DatePicker
-          handleChange={handleChange}
-          id={endDate}
-          label="End Date"
-          cssClass={classes.datePicker}
-          defaultValue={data.endDate}
-          helperText={INVALID_DATE}
         />
       </Fields>
       <PrimaryButton

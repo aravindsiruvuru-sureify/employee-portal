@@ -1,3 +1,4 @@
+import { employeeListDATA } from "../../constants";
 import * as serviceActions from "../../services/ApiService/actions";
 export const SET_JOBS = "SET_JOBS";
 export const SET_COURSES = "SET_COURSES";
@@ -101,16 +102,18 @@ export const getDashboardPageCoursesList = ({ page = 0 }) => {
 export const getEmployeesList = ({ page = 0 }) => {
   return (dispatch) => {
     dispatch(setLoader(true));
-    return serviceActions
-      .getEmployeesList({ page })
-      .then((res) => {
-        dispatch(setEmployees(res));
+    dispatch(setEmployees({content: employeeListDATA}));
         dispatch(setLoader(false));
-        return res;
-      })
-      .catch((err) => {
-        console.error(err);
-        setApiError(err);
-      });
+    // return serviceActions
+    //   .getEmployeesList({ page })
+    //   .then((res) => {
+    //     dispatch(setEmployees(res));
+    //     dispatch(setLoader(false));
+    //     return res;
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //     setApiError(err);
+    //   });
   };
 };

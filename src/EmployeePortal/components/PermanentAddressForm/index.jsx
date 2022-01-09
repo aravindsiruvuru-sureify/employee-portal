@@ -17,7 +17,7 @@ import {
   INVALID_DATE,
   MIN1CHARS_ERROR_TEXT,
 } from "../../constants";
-import { YourReferralText } from "./styles";
+import { YourReferralText, FieldsWrapper } from "./styles";
 import {
   TextInput,
   PrimaryButton,
@@ -69,7 +69,6 @@ const {
 } = EMPLOYEE_DETAILS.PERMANENT_ADDRESS_IDS;
 
 const PermanentAddressForm = ({
-  onClickCrossIcon,
   onClickSubmitButton,
   empData = {},
 }) => {
@@ -87,7 +86,7 @@ const PermanentAddressForm = ({
       };
     });
   };
-
+console.log(empData)
   const handleChange = (e) => {
     const { id, name, value } = e.target;
     const key = id || name;
@@ -106,9 +105,8 @@ const PermanentAddressForm = ({
     onClickSubmitButton(data);
   };
   return (
-    <ModalInputsWrapper>
-      <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>Basic Information</YourReferralText>
+      <FieldsWrapper>
+      <YourReferralText>Permanent Address Form</YourReferralText>
       <Fields>
         <TextInput
           id={street1}
@@ -196,8 +194,8 @@ const PermanentAddressForm = ({
           label="Type"
           onChange={handleChange}
           error={error[type]}
-          cssClass={classes.field}
           helperText={MIN1CHARS_ERROR_TEXT}
+          cssClass={classes.field}
           defaultValue={empData[type]}
         />
       </Fields>
@@ -207,7 +205,7 @@ const PermanentAddressForm = ({
         label="Submit"
         isDisabled={isDisabled}
       />
-    </ModalInputsWrapper>
+    </FieldsWrapper>
   );
 };
 

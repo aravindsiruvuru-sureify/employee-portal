@@ -5,7 +5,7 @@ import BasicInformationForm from "../BasicInformationForm";
 import EmployeeDocumentsForm from "../EmployeeDocumentsForm";
 import ProjectsAssignedForm from "../ProjectAssignedView";
 import BankDetailsForm from "../BankDetailsForm";
-import PermanentAddressForm from "../PermanentAddressForm";
+import AddressForm from "../AddressForm";
 import CurrentAddressForm from "../CurrentAddressForm";
 import EmergencyContactForm from "../EmergencyContactForm";
 import { PrimaryButton } from "../../../CommonComponents";
@@ -18,8 +18,7 @@ import {
   DOCUMENTS,
   PROJECTS_ASSIGNED,
   BANK_DETAILS,
-  PERMANENT_ADDRESS,
-  CURRENT_ADDRESS,
+  ADDRESS,
   EMERGENCY_CONTACT,
   formTypes,
 } from "./shared";
@@ -35,7 +34,7 @@ const EmployeeDetailsView = ({
       case BASIC_INFO.id:
         return (
           <BasicInformationForm
-            employeeData={employeeData}
+            empData={employeeData}
             onClickCrossIcon={() => {
               setItem("");
             }}
@@ -44,7 +43,7 @@ const EmployeeDetailsView = ({
       case DOCUMENTS.id:
         return (
           <EmployeeDocumentsForm
-            employeeData={employeeData}
+            empData={employeeData}
             onClickCrossIcon={() => {
               setItem("");
             }}
@@ -53,7 +52,7 @@ const EmployeeDetailsView = ({
       case PROJECTS_ASSIGNED.id:
         return (
           <ProjectsAssignedForm
-            employeeData={employeeData}
+            empData={employeeData}
             onClickCrossIcon={() => {
               setItem("");
             }}
@@ -62,25 +61,16 @@ const EmployeeDetailsView = ({
       case BANK_DETAILS.id:
         return (
           <BankDetailsForm
-            employeeData={employeeData}
+            empData={employeeData.bankDetails}
             onClickCrossIcon={() => {
               setItem("");
             }}
           />
         );
-      case PERMANENT_ADDRESS.id:
+      case ADDRESS.id:
         return (
-          <PermanentAddressForm
-            employeeData={employeeData}
-            onClickCrossIcon={() => {
-              setItem("");
-            }}
-          />
-        );
-      case CURRENT_ADDRESS.id:
-        return (
-          <CurrentAddressForm
-            employeeData={employeeData}
+          <AddressForm
+            empData={employeeData}
             onClickCrossIcon={() => {
               setItem("");
             }}
@@ -89,7 +79,7 @@ const EmployeeDetailsView = ({
       case EMERGENCY_CONTACT.id:
         return (
           <EmergencyContactForm
-            employeeData={employeeData}
+            empData={employeeData.emergencyContact}
             onClickCrossIcon={() => {
               setItem("");
             }}

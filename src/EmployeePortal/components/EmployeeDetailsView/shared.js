@@ -5,13 +5,9 @@ export const PROJECTS_ASSIGNED = {
   label: "Projects assigned",
 };
 export const BANK_DETAILS = { id: "bank-details", label: "Bank details" };
-export const PERMANENT_ADDRESS = {
-  id: "permanent-address",
-  label: "Permanent address",
-};
-export const CURRENT_ADDRESS = {
-  id: "current-address",
-  label: "Current address",
+export const ADDRESS = {
+  id: "address",
+  label: "Address",
 };
 export const EMERGENCY_CONTACT = {
   id: "emergency-contact",
@@ -28,8 +24,7 @@ export const formTypes = [
   DOCUMENTS,
   PROJECTS_ASSIGNED,
   BANK_DETAILS,
-  PERMANENT_ADDRESS,
-  CURRENT_ADDRESS,
+  ADDRESS,
   EMERGENCY_CONTACT,
   EDUCATION,
 ];

@@ -32,6 +32,9 @@ const {
   dateOfBirth,
   skills,
   endDate,
+  joinDate,
+  personalNumber,
+  officialEmailId,
 } = EMPLOYEE_DETAILS.BASIC_INFORMATION_IDS;
 
 const {
@@ -156,12 +159,14 @@ export const handleHasError = (id, value) => {
     case emailId:
     case email:
     case personalEmailId:
+    case officialEmailId:
       hasError = !isEmail(value);
       break;
     case experience:
       hasError = !checkExperiance(value);
       break;
     case startDate:
+    case joinDate:
     case regEndDate:
     case dateOfBirth:
     case endDate:
@@ -170,6 +175,7 @@ export const handleHasError = (id, value) => {
     case contactNumber:
     case phoneNumber:
     case phoneNo:
+    case personalNumber:
       hasError = value.length !== 10;
       break;
     case type:

@@ -17,7 +17,7 @@ import {
   INVALID_DATE,
   MIN1CHARS_ERROR_TEXT,
 } from "../../constants";
-import { YourReferralText } from "./styles";
+import { YourReferralText, FieldsWrapper } from "./styles";
 import {
   TextInput,
   PrimaryButton,
@@ -106,9 +106,8 @@ const CurrentAddressForm = ({
     onClickSubmitButton(data);
   };
   return (
-    <ModalInputsWrapper>
-      <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
-      <YourReferralText>Current Address</YourReferralText>
+      <FieldsWrapper>
+      <YourReferralText>Current Address Form</YourReferralText>
       <Fields>
         <TextInput
           id={street1}
@@ -207,7 +206,7 @@ const CurrentAddressForm = ({
         label="Submit"
         isDisabled={isDisabled}
       />
-    </ModalInputsWrapper>
+    </FieldsWrapper>
   );
 };
 
