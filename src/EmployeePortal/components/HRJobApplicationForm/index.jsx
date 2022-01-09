@@ -129,6 +129,14 @@ const HRJobApplicationForm = ({
       <CloseOutlinedIcon className={classes.root} onClick={onClickCrossIcon} />
       <Fields>
         <TextInput
+          id={ref}
+          label={hrJobApplicationConstants.ref}
+          onChange={handleChange}
+          error={error[ref]}
+          cssClass={classes.field}
+          defaultValue={data.ref}
+        />
+        <TextInput
           id={title}
           label={hrJobApplicationConstants.title}
           onChange={handleChange}

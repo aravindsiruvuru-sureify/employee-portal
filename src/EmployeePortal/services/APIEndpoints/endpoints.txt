@@ -1,14 +1,26 @@
+
 Login:
 /authenticate  ---- @PostMapping
-
 /refreshtoken  ---- @GetMapping
 
+any API for logout
+
+Profile:
+/api/employees/profile  ---- @GetMapping
+
 Employee: 
+
+Basic Info:
 /api/employees/create  ---- @PostMapping
+
 /api/employees/{id}  ---- @GetMapping
+
+without pagination
 /api/employees  ---- @GetMapping
 /api/employees/update  ---- @PutMapping
 /api/employees/attachments  ---- @GetMapping
+
+with pagination
 /api/employees/sortandpagedesc/{offset}/{pageSize}/{field}  ---- @GetMapping
 /api/employees/sortandpageasc/{offset}/{pageSize}/{field}  ---- @GetMapping
 /api/employees/spEmpDeldesc/{isEmpDeleted}/{offset}/{pageSize}/{field}  ---- @GetMapping
@@ -18,15 +30,19 @@ Employee:
 
 Address:
 /api/address/permanent/{empId}  ---- @PutMapping
+
 /api/address/current/{empId}  ---- @PutMapping
+
 /api/address/{empId}   ----  @GetMapping
 
 BankDetails:
 /api/bankdetails/update/{empId}  ---- @PutMapping
+
 /api/bankdetails/{empId}  ---- @GetMapping
 
 PreviousCompany:
 /api/previouscompany/update/{empId}  ---- @PutMapping
+
 /api/previouscompany/{empId}  ---- @GetMapping
 
 Project:
@@ -35,6 +51,8 @@ Project:
 /api/projects/{projectId}  ---- @GetMapping
 /api/projects  ---- @GetMapping
 /api/projects/{projectId}  ---- @DeleteMapping
+
+employee specific projects   /api/projects/emp/{empId}  GET method
 
 Course:
 /api/courses/create   ---- @PostMapping
@@ -57,7 +75,7 @@ StudentAcknowledgement:
 /api/studentack/{id}  ---- @DeleteMapping
 
 Job:
-create job: /api/jobs/create  ---- @PutMapping 
+/api/jobs/create  ---- @PutMapping 
 /api/jobs/{id}  ---- @GetMapping
 /api/jobs/spdesc/{offset}/{pageSize}/{field}  ---- @GetMapping
 /api/jobs/spase/{offset}/{pageSize}/{field}  ----@GetMapping
@@ -92,4 +110,8 @@ RequestQuot:
 /api/reqquot  ---- @GetMapping
 
 
+
+**************
+
+add ref field to the jobs Form and courses form
 

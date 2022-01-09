@@ -10,6 +10,7 @@ import DashboardJobsView from "../../components/DashboardJobsView";
 import DashboardCoursesView from "../../components/DashboardCoursesView";
 import DashboardEmployeesView from "../../components/DashboardEmployeesView";
 import DashboardProfileView from "../../components/DashboardProfileView";
+import DashboardProjectsView from "../../components/DashboardProjectsView";
 
 import {
   RightContentContainer,
@@ -26,6 +27,7 @@ import {
   EMPLOYEES_TAB,
   JOB_DETAILS_TAB,
   CAREER_DETAILS_TAB,
+  PROJECTS_TAB,
   QUOTE_DETAILS,
 } from "./shared";
 
@@ -52,6 +54,8 @@ const Dashboard = () => {
         return <DashboardEmployeesView />;
       case PROFILE_TAB.id:
         return <DashboardProfileView />;
+      case PROJECTS_TAB.id:
+        return <DashboardProjectsView />;
       case QUOTE_DETAILS.id:
         return renderEmptyView();
       default:

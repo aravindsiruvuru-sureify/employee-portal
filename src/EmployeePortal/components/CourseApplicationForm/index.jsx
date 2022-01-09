@@ -128,6 +128,15 @@ const CourseApplicationForm = ({
       <YourReferralText>Fill your course application</YourReferralText>
       <Fields>
         <TextInput
+          id={courseCode}
+          label={courseApplicationConstants.courseCode}
+          onChange={handleChange}
+          error={error.courseCode}
+          cssClass={classes.field}
+          defaultValue={data.courseCode}
+          helperText={MIN3CHARS_ERROR_TEXT}
+        />
+        <TextInput
           id={courseName}
           label={courseApplicationConstants.courseName}
           onChange={handleChange}
@@ -149,7 +158,7 @@ const CourseApplicationForm = ({
           inputLabel={courseApplicationConstants.type}
           name={type}
           onChange={handleChange}
-          menuItems={["Regular"]}
+          menuItems={["PERSONAL", "REGULAR", "FASTTRACK"]}
           cssClass={classes.field}
           defaultValue={data.type}
           helperText={DROPDOWN_ERROR_TEXT}
@@ -158,7 +167,7 @@ const CourseApplicationForm = ({
           inputLabel={mode}
           name={mode}
           onChange={handleChange}
-          menuItems={["CLASS_ROOMS"]}
+          menuItems={["CLASSROOM", "OFFLINE_RECORDS", "ONLINE"]}
           cssClass={classes.field}
           defaultValue={data.mode}
           helperText={DROPDOWN_ERROR_TEXT}

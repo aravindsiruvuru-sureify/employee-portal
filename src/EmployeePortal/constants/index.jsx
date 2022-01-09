@@ -158,7 +158,6 @@ export const TEAMS = {
 export const COURSE_APPLICATION_IDS = {
   courseName: "courseName",
   courseContent: "courseContent",
-  courseCode: "courseCode",
   trainer: "trainer",
   type: "type",
   mode: "mode",
@@ -167,12 +166,12 @@ export const COURSE_APPLICATION_IDS = {
   timings: "timings",
   duration: "duration",
   fee: "fee",
+  courseCode: "courseCode",
 };
 
 export const courseApplicationConstants = {
   courseName: "Course Name",
   courseContent: "Course Content",
-  courseCode: "Course Code",
   trainer: "Trainer",
   type: "Type",
   mode: "Mode",
@@ -181,6 +180,7 @@ export const courseApplicationConstants = {
   timings: "Timings",
   duration: "Duration",
   fee: "Fee",
+  courseCode: "Course code",
 };
 
 export const PERFORMANCE_REVIEW_FIELDS = {
