@@ -16,6 +16,12 @@ import apiEndpoints from "../APIEndpoints";
 //   hr_create_and_update_course: "https://localhost:8080/api/course",
 // };
 
+export const getUserProfileDetails = () => {
+  return api.get(apiEndpoints.profile).then((response) => {
+    return response.data;
+  });
+};
+
 export const getHomePageJobsList = ({ page }) => {
   return api.get(apiEndpoints.home_page_jobs({ page })).then((response) => {
     return response.data;
@@ -56,7 +62,7 @@ export const createJob = (body) => {
 
 export const createCourse = (body) => {
   return api
-    .put(apiEndpoints.hr_create_and_update_course, body)
+    .post(apiEndpoints.hr_create_and_update_course, body)
     .then((response) => {
       return;
     });
@@ -64,7 +70,7 @@ export const createCourse = (body) => {
 
 export const deleteJobById = ({ id }) => {
   return api
-    .delete(`${apiEndpoints.hr_page_job_delete}${id}/`)
+    .delete(`${apiEndpoints.hr_page_job_delete}/${id}/`)
     .then((response) => {
       return;
     });
@@ -72,7 +78,7 @@ export const deleteJobById = ({ id }) => {
 
 export const deleteCourseById = ({ id }) => {
   return api
-    .delete(`${apiEndpoints.hr_page_course_delete}${id}/`)
+    .delete(`${apiEndpoints.hr_page_course_delete}/${id}/`)
     .then((response) => {
       return;
     });
@@ -106,4 +112,10 @@ export const getCourseApplicants = ({ courseId, page = 0 }) => {
     .then((res) => {
       return res;
     });
+};
+
+export const getProjectsList = () => {
+  return api.get(apiEndpoints.get_projects()).then((res) => {
+    return res.data;
+  });
 };

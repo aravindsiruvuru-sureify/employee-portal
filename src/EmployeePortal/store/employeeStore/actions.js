@@ -4,6 +4,8 @@ export const SET_COURSES = "SET_COURSES";
 export const SET_LOADER = "SET_LOADER";
 export const SET_API_ERROR = "SET_API_ERROR";
 export const SET_EMPLOYEES = "SET_EMPLOYEES";
+export const SET_PROJECTS = "SET_PROJECTS";
+export const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 export const setJobs = (value) => ({
   type: SET_JOBS,
@@ -29,6 +31,33 @@ export const setEmployees = (value) => ({
   type: SET_EMPLOYEES,
   payload: value,
 });
+
+export const setProjects = (value) => ({
+  type: SET_PROJECTS,
+  payload: value,
+});
+
+export const setUserProfile = (value) => ({
+  type: SET_USER_PROFILE,
+  payload: value,
+});
+
+export const getUserProfileDetails = () => {
+  return (dispatch) => {
+    dispatch(setLoader(true));
+    return serviceActions
+      .getUserProfileDetails()
+      .then((res) => {
+        dispatch(setUserProfile(res));
+        dispatch(setLoader(false));
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiError(err);
+      });
+  };
+};
 
 export const getHomePageJobsList = ({ page }) => {
   return (dispatch) => {
@@ -105,6 +134,23 @@ export const getEmployeesList = ({ page = 0 }) => {
       .getEmployeesList({ page })
       .then((res) => {
         dispatch(setEmployees(res));
+        dispatch(setLoader(false));
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiError(err);
+      });
+  };
+};
+
+export const getProjectsList = () => {
+  return (dispatch) => {
+    dispatch(setLoader(true));
+    return serviceActions
+      .getProjectsList()
+      .then((res) => {
+        dispatch(setProjects(res));
         dispatch(setLoader(false));
         return res;
       })
