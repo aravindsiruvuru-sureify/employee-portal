@@ -77,6 +77,18 @@ const PermanentAddressForm = ({
   const [data, setData] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
 
+  const compareObjects = (oldData, newData, error) => {
+    let keys = Object.keys(oldData).filter((key) => {
+      return (
+        newData[key] !== undefined &&
+        newData[key] !== null &&
+        newData[key] !== oldData[key]
+      );
+    });
+    keys = keys.filter(key => !error[key]);
+    return keys.length === 0;
+  };
+
   const handleError = (id, value) => {
     const hasError = handleHasError(id, value);
     setError((err) => {
@@ -86,7 +98,6 @@ const PermanentAddressForm = ({
       };
     });
   };
-console.log(empData)
   const handleChange = (e) => {
     const { id, name, value } = e.target;
     const key = id || name;
@@ -98,8 +109,12 @@ console.log(empData)
   };
 
   useEffect(() => {
-    setIsDisabled(handleButtonIsDisabled(error, 10));
-  }, [error]);
+    if(Object.keys(empData).length > 0) {
+      setIsDisabled(compareObjects(empData, data, error));
+    } else {
+      setIsDisabled(handleButtonIsDisabled(error, 10));
+    }
+  }, [error, data, empData]);
 
   const handleClick = () => {
     onClickSubmitButton(data);
