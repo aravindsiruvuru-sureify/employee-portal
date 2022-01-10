@@ -56,31 +56,8 @@ const JobsPage = () => {
   };
 
   return (
-    <MainContainer isDashboard={false} loadingStatus={loader ? 100 : 200}>
-      <Modal open={!!selected} handleClose={() => {}}>
-        {selected && getModalContent()}
-      </Modal>
-      <Container>
-        <div
-          style={{
-            width: "90%",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            textTransform: "none",
-          }}
-        >
-          <h1
-            style={{
-              marginLeft: "18px",
-              marginBottom: "18px",
-              fontFamily: "Roboto",
-            }}
-          >
-            Jobs
-          </h1>
-          <SearchBarComponent />
-        </div>
+    <MainContainer loadingStatus={loader ? 100 : 200}>
+      <Container id="asdf">
         <Table
           data={jobsData.content}
           columnKeys={[

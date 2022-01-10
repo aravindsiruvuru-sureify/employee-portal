@@ -14,7 +14,6 @@ import headerBG2 from "./img/backgrounds/headerbg2.jpg";
 import JobCard from "../../components/JobCard";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import CorouselItem from "../../components/CorouselItem";
 
 const HomePage = () => {
   const history = useHistory();
@@ -227,12 +226,11 @@ const HomePage = () => {
               </h3>
             </div>
           </div>
-          <div>
-            <div class="center-container">
-              <JobCard job={job} />
-              <JobCard job={job} />
-            </div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+          <div class="center-container">
+            <JobCard job={job} />
+            <JobCard job={job} />
+            <JobCard job={job} />
+            <div class="pricing">
               <Link href="" class="btn btn-send" onClick={handleJobsShowMore}>
                 Show more
               </Link>
@@ -984,7 +982,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <Footer />
+      <Footer/>
       <div class="scroll-up">
         <a href="#header" class="page-scroll">
           <i class="fa fa-angle-up"></i>
