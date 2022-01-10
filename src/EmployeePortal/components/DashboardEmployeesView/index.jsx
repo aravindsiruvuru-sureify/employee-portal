@@ -110,7 +110,7 @@ const DashboardEmployeesView = () => {
           />
         </div>
         <Table
-          data={employees.content}
+          data={employees}
           dashboard
           noCount
           noPublish

@@ -53,19 +53,15 @@ export const getEmployeesList = ({ page = 0 }) => {
 };
 
 export const createEmployee = (body) => {
-  return api
-    .post(apiEndpoints.hr_create_and_update_job, body)
-    .then((response) => {
-      return;
-    });
+  return api.post(apiEndpoints.employee_create, body).then((response) => {
+    return;
+  });
 };
 
 export const updateEmployee = (body) => {
-  return api
-    .post(apiEndpoints.hr_create_and_update_job, body)
-    .then((response) => {
-      return;
-    });
+  return api.post(apiEndpoints.employee_update, body).then((response) => {
+    return;
+  });
 };
 
 export const deleteEmployeeById = ({ id }) => {

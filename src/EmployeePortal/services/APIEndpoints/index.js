@@ -22,8 +22,10 @@ const apiEndpoints = {
     `api/studentack/spStudentAckdesc/${courseId}/${page}/2`,
 
   //Employee APIS
-  get_employees: ({ page }) =>
-    `/api/employees/sortandpageasc/${page}/2/joinDate`,
+  // get_employees: ({ page }) =>
+  //   `/api/employees/sortandpageasc/${page}/2/joinDate`,
+
+  get_employees: ({ page }) => `/api/employees`,
   employee_create: "/api/employees/create",
   employee_delete: "/api/employees/delete/",
   employee_update: "/api/employees/update",

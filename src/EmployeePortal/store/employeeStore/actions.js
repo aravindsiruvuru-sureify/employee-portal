@@ -131,19 +131,19 @@ export const getDashboardPageCoursesList = ({ page = 0 }) => {
 export const getEmployeesList = ({ page = 0 }) => {
   return (dispatch) => {
     dispatch(setLoader(true));
-    dispatch(setEmployees({content: employeeListDATA}));
+    dispatch(setEmployees({ content: employeeListDATA }));
+    dispatch(setLoader(false));
+    return serviceActions
+      .getEmployeesList({ page })
+      .then((res) => {
+        dispatch(setEmployees(res));
         dispatch(setLoader(false));
-    // return serviceActions
-    //   .getEmployeesList({ page })
-    //   .then((res) => {
-    //     dispatch(setEmployees(res));
-    //     dispatch(setLoader(false));
-    //     return res;
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //     setApiError(err);
-    //   });
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+        setApiError(err);
+      });
   };
 };
 
